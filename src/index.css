@@ -63,3 +63,127 @@
     font-size: auto;
     padding: 30px;
 }
+
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  /* Estilos NAVBAR  */
+
+  .navbar {
+    background-color: white;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .navbar nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-logo a {
+    text-decoration: none;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: black;
+  }
+
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+
+  .navbar-links li a {
+    text-decoration: none;
+    color: black;
+    font-size: 1em;
+  }
+
+  .navbar-button button {
+    background-color:#00FFBE;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+
+.navbar-button button:hover {
+    background-color:#0b9270;
+  }
+
+
+    /* Estilos CONTENEDOR  */
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+    text-align: center;
+    padding: 100px;
+    box-sizing: border-box;
+  }
+  
+  
+  .highlight {
+    color: #00FFBE;
+  }
+  
+  /* Sección de búsqueda */
+  .buscador{
+    margin: 20px 0;
+  }
+  
+  /* Estilos de entrada de búsqueda */
+  .buscador input {
+    padding: 10px;
+    width: 300px;
+    margin-right: 10px;
+  }
+  
+  /* Estilos del botón de búsqueda */
+  .buscador button {
+    padding: 10px 20px;
+    background-color:#00FFBE;
+    color: black;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Botones de categorías */
+  .categorias button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 80px;
+    width: 200px;
+  }
+  
+  /* Footer con margen superior */
+  footer {
+    width: 100vw;
+    height: 20vh;
+    /* margin-top: 30px; */
+    background-color: #00FFBE;
+  }
+  
+  .container-text {
+  
+  font-size:40px ;
+  
+  }
+
