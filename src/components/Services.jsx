@@ -1,7 +1,11 @@
-import React from 'react'
+import {React} from "react";
 
-export function services () {
+export function Services () {
+
+
   return (
-    <div>Services</div>
+
+
+    <div></div>
   )
 }

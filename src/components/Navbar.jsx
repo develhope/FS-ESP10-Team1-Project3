@@ -1,6 +1,7 @@
 import {React} from "react";
+import { Link } from "react-router-dom";
 
-export function Navbar({ leftChildren, rightChildren }) {
+export function Navbar({ children }) {
   return (
     <div className="navbar">
       <nav>
@@ -9,10 +10,10 @@ export function Navbar({ leftChildren, rightChildren }) {
         </div>
         <ul className="navbar-links">
           <li>
-          {leftChildren}
+          <Link to="services">Solicitar Servicios</Link>
           </li>
           <li>
-          {rightChildren}
+          <Link to="busqueda">Buscar Proyectos</Link>
           </li>
         </ul>
         <div className="navbar-button">
