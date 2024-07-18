@@ -1,0 +1,247 @@
+.divLoginGeneral {
+    width: 55%;
+    height: 85vh;
+    margin: auto;
+    margin-top: 120px;
+    display: flex;
+    flex-direction: row;
+   border-radius: 15px;
+}
+.loginIzquierda {
+    background-color: #00a03d9f;
+    font-family: "Montserrat", sans-serif;
+    background-image: url('./src/assets/imagenLoginDiseño.jpeg');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    width: 50%;
+    border: 1px solid;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    font-size: 14px;
+}
+.loginIzquierda h1 {
+    font-size: 15px;
+    padding-left: 5%;
+}
+.loginDerecha {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    width: 50%;
+    border: 1px solid;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    font-family: "Montserrat", sans-serif;
+}
+.loginIzquierda ul {
+    padding-left: 20%;
+}
+#liSinCursor {
+    list-style-type: none;
+    font-size: 15px;
+}
+.google-correo {
+    cursor: pointer;
+    border: 1 px solid #e4e5e7;;
+    border-radius: 5px;
+    color: #222325;;
+    background-color: white;
+    justify-content: center;
+    width: auto;
+    height: max-content;
+    font-size: larger;
+    margin-top: 12px;
+}
+.terminos {
+    font-size: auto;
+    padding: 30px;
+}
+.loginParaMovil {
+    display: none;
+    font-family: "Montserrat", sans-serif;
+}
+@media (max-width: 1656px) {
+    #liSinCursor {
+        font-size: 12px;
+    }
+    .loginIzquierda ul li {
+        font-size: smaller;
+    }
+    .loginIzquierda {
+    font-size: 16px;
+    }
+    .loginIzquierda h1 {
+   font-size: 13px;
+    }
+    .loginIzquierda h1 svg {
+        width: min-content;
+        height: min-content;
+          }
+          .divLoginGeneral {
+            width: 65%;
+            margin: auto;
+            margin-top: 100px;
+        }
+}
+@media (max-width: 1252px) {
+    #liSinCursor {
+        font-size: 15px;
+    }
+    .loginIzquierda h1 svg {
+  width: 17px;
+  height: 17px;
+    }
+    .loginIzquierda {  
+        font-size: 15px;
+        }
+        .loginIzquierda h1 {
+       font-size: 17px;
+        }
+        .terminos {
+            font-size: 16px;
+            
+        }
+        .divLoginGeneral {
+            width: 75%;
+            margin: auto;
+            margin-top: 100px;
+        }
+}
+@media (max-width: 1011px) {
+    .divLoginGeneral {
+        width: 90%;
+        margin: auto;
+        margin-top: 100px;
+    }
+    .loginIzquierda h1 {
+        font-size: 14px;
+         }
+    .loginIzquierda {
+        font-size: 16px;
+        }
+        .terminos {
+            font-size: 14px;
+        }
+}
+@media (max-width: 881px) {
+    .divLoginGeneral {
+        width: 100%;
+        margin-top: 100px;
+    }
+}
+@media (max-width: 664px) {
+    .loginIzquierda {
+        display: none;
+    }
+    .loginDerecha {
+        display: none;
+    }
+    .loginParaMovil {
+        display: block;
+    }
+    .divLoginGeneral {
+        height: max-content;
+        width: 90%;
+        margin-top: 0;
+        border-radius: 10px;
+        border: 1px solid ;
+    }
+    .divMovil1 {
+        background-color: #00a03d9f;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    .divMovil1 ul li {
+        font-size: 20px;
+    }
+    .divMovil2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        font-size: 20px;
+    }
+    .google-correo {
+        font-size: 24px;
+    }
+    .terminos {
+        background-color: #00a03d9f;
+    
+    }
+}
+@media (max-width: 550px) {
+.divLoginGeneral {
+    width: 100%;
+    height: max-content;
+}
+.divMovil2 h1 {
+    font-size: 20px;
+}
+.divMovil2 p {
+    font-size: 16px;    
+    }
+}
+@media (max-width: 400px) {
+.divMovil2 p {
+font-size: 14px;    
+}
+.google-correo {
+    font-size: 20px;
+}
+}
+@media (min-height: 1000px) {
+    .divLoginGeneral {
+        height: 870px;
+    }
+    .loginIzquierda h1 {
+        font-size: 20px;
+    }
+    .loginIzquierda ul li {
+        font-size: 17px;
+    }
+    #liSinCursor {
+        font-size: 17px;
+    }
+}
+@media (min-height: 1300px) {
+    .divLoginGeneral {
+        height: 1150px;
+        width: 100%;
+    }
+    .loginIzquierda h1 {
+        font-size: 30px;
+    }
+    .loginIzquierda ul li {
+        font-size: 24px;
+    }
+    #liSinCursor {
+        font-size: 24px;
+    }
+    .loginIzquierda {
+        width: 65%;
+    }
+    .loginIzquierda h1 svg {
+        width: 30px;
+        height: 30px;
+}
+.loginDerecha p {
+    font-size: 20px;
+}
+.google-correo {
+    font-size: 26px;
+}
+.google-correo svg {
+    width: 20px;
+    height: 20px;
+}
+}
