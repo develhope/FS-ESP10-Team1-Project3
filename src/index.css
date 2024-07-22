@@ -5,54 +5,6 @@ html, body {
     width: 100vw;
   }
   
-  /* Estilos NAVBAR  */
-
-  .navbar {
-    background-color: white;
-    padding: 10px 20px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .navbar nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .navbar-logo a {
-    text-decoration: none;
-    font-size: 2.5em;
-    font-weight: bold;
-    color: black;
-  }
-
-  .navbar-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-
-  .navbar-links li a {
-    text-decoration: none;
-    color: black;
-    font-size: 1em;
-  }
-
-  .navbar-button button {
-    background-color:#00FFBE;
-    color: black;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-
-.navbar-button button:hover {
-    background-color:#0b9270;
-  }
-
-
     /* Estilos CONTENEDOR  */
 
   .container {
@@ -62,8 +14,11 @@ html, body {
     justify-content: space-between;
     min-height: 100vh;
     text-align: center;
-    padding: 100px;
+    /* padding: 100px; */
     box-sizing: border-box;
+
+   padding: 80px 20px; /* Asegura que el contenido no se superponga con la navbar */
+   margin-top: 60px; /* Ajusta este valor para asegurar que no se superponga con la navbar */
   }
   
   

@@ -12,9 +12,7 @@ export function App() {
    
     <div>
     
-    <Navbar>    
-    
-    </Navbar>
+    <Navbar/>
     <Routes>
     <Route path="services" element={<Services/>} />
     <Route path="busqueda" element={<Proyectos/>} />
