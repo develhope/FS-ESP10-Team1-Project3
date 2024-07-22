@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar'
 import { Route, Routes } from 'react-router-dom'
 import { Proyectos } from './components/Proyectos'
 import { Services } from './components/Services'
+import Login from './components/Login'
 
 export function App() {
 
@@ -17,6 +18,7 @@ export function App() {
     <Routes>
     <Route path="services" element={<Services/>} />
     <Route path="busqueda" element={<Proyectos/>} />
+    <Route path="/login" element={<Login/>} />
     </Routes>
   
    

@@ -1,7 +1,15 @@
 import {React} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Navbar({ children }) {
+
+  const navigate = useNavigate();
+
+  function handleClickButton() {
+    navigate('/login');
+  }
+
+
   return (
     <div className="navbar">
       <nav>
@@ -17,7 +25,7 @@ export function Navbar({ children }) {
           </li>
         </ul>
         <div className="navbar-button">
-        <button>Iniciar sesión</button>
+        <button onClick={handleClickButton}>Iniciar sesión</button>
         </div>
       </nav>
     </div>
