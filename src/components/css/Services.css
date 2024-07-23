@@ -1,0 +1,91 @@
+.container-general {
+    margin-top: 10%;
+}
+
+.bloque-verde {
+    background-color: #00FFBE;
+    width: 1169px;
+    height: 456px;
+    margin: 0 auto;
+    border-radius: 12px;
+    font-family: "Montserrat", sans-serif;
+    padding-bottom: 60px;
+}
+
+.bloque-verde h1 {
+    font-size: 54px;
+    font-weight: 600;
+    margin-left: 60px;
+    padding-top: 40px;
+    padding-bottom: 15px;
+}
+
+.bloque-verde h2 {
+    font-size: 48px;
+    font-weight: 600;
+    margin-left: 40%;
+    
+}
+
+.bloque-negro {
+    background-color: black;
+    color: white;
+    width: 1169px;
+    height: 456px;
+    margin: 0 auto;
+    border-radius: 12px;
+    margin-top: 5%;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* Necesario para el pseudo-elemento */
+    padding: 0 20px;
+}
+
+.parte-izquierda {
+    font-size: 20px;
+    max-width: 50%;
+    margin-left: 5%;
+}
+
+.parte-derecha {
+    display: flex;
+    flex-direction: column; /* Alinea los hijos en columna */
+    align-items: flex-start; /* Alinea los hijos al inicio del eje horizontal */
+    text-align: left; /* Mantiene el texto alineado a la izquierda dentro del div */
+    max-width: 50%;
+    margin-left: auto;
+    font-size: 36px;
+    font-weight: 650;
+    margin-right: 5%;
+    margin-bottom: 2%;
+}
+
+.bloque-negro::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 7%;
+    bottom: 7%;
+    width: 1px;
+    background-color: white;
+}
+
+.boton-iniciar-sesion {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    background-color: #00FFBE;
+    
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+}
+
+.boton-iniciar-sesion:hover {
+    background-color: #00E6A0; /* Un poco más oscuro para el efecto hover */
+}

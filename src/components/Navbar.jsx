@@ -15,7 +15,7 @@ export function Navbar({ children }) {
     <div className="navbar">
       <nav>
         <div className="navbar-logo">
-          <a href="">FreelanceHub</a>
+          <a href="">Freelance<span class="highlight">Hub</span></a>
         </div>
         <ul className="navbar-links">
           <li>
