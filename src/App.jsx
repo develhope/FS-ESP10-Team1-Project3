@@ -17,10 +17,8 @@ export function App() {
     <Route path="services" element={<Services/>} />
     <Route path="busqueda" element={<Proyectos/>} />
     <Route path="/login" element={<Login/>} />
+    <Route path="/" element={<Container/>} />
     </Routes>
-  
-   
-    <Container/>
   
     </div>
   );

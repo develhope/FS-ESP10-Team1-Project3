@@ -1,7 +1,28 @@
 import {React} from "react";
+import { useState } from "react";
 import './css/Login.css'
 
 function Login() {
+  const loginTitle = "iniciar sesión con tu cuenta";
+  const registerTitle = "crear una nueva cuenta";
+  const textoEnlace1 = "¿no tienes cuenta? pincha aqui para ";
+  const textoEnlace2 = "ya tienes cuenta? pincha aqui para ";
+  const enlaceContent1 = "registrarte";
+  const enlaceContent2 = "iniciar sesión";
+  const [h1Content, setH1Content] = useState(loginTitle);
+  const [p1Content, setP1Content] = useState(textoEnlace1);
+  const [aContent, setAcontent] = useState(enlaceContent1);
+  const cambiarLoginORegister = () => {
+    if (aContent ==="registrarte") {
+      setH1Content(registerTitle);
+      setP1Content(textoEnlace2);
+      setAcontent(enlaceContent2);
+    } else {
+      setH1Content(loginTitle);
+      setP1Content(textoEnlace1);
+      setAcontent(enlaceContent1);
+    }
+  }
   return (
     <div className="divLoginGeneral">
       <div className="loginIzquierda">
@@ -27,10 +48,10 @@ function Login() {
         </ul>
       </div>
       <div className="loginDerecha">
-        <h1>Crear una nueva cuenta</h1>
+        <h1>{h1Content}</h1>
         <p>
-          ¿ya tienes cuenta? pincha aqui para{" "}
-          <a href="#login">iniciar sesion</a>
+          {p1Content}
+          <a href="#register" onClick={cambiarLoginORegister}>{aContent}</a>
         </p>
         <div>
           <button className="google-correo">
@@ -101,10 +122,10 @@ function Login() {
           <li>Un monton de categorias entre las que puedes buscar u ofrecer trabajo</li>
           </ul></div>
           <div className="divMovil2">
-          <h1>Crear una nueva cuenta</h1>
+          <h1>{h1Content}</h1>
         <p>
-          ¿ya tienes cuenta? pincha aqui para{" "}
-          <a href="#login">iniciar sesion</a>
+          {p1Content}
+          <a href="#register">{aContent}</a>
         </p>
         <div>
           <button className="google-correo">
