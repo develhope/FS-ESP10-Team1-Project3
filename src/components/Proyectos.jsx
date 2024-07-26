@@ -1,7 +1,11 @@
 import React from 'react'
 import '../components/css/Proyectos.css'
+import { UseLogin } from './UseLogin'
 
 export function Proyectos() {
+
+  const {goToLogin} = UseLogin();
+
   return (
 
     <div className="container-general">
@@ -36,7 +40,7 @@ export function Proyectos() {
 
         <div className="parte-derecha">
         Empieza a trabajar en <br /> lo que amas. Inicia <br /> sesión ahora y <br /> encuentra proyectos <br /> que se adapten a tus <br /> habilidades.
-          <button className="boton-iniciar-sesion">Iniciar Sesión</button>
+          <button onClick={goToLogin} className="boton-iniciar-sesion">Iniciar Sesión</button>
         </div>
 
       </div>

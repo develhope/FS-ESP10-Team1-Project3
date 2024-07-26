@@ -1,10 +1,12 @@
 import { React } from "react";
 import '../components/css/Services.css'
+import { UseLogin } from "./UseLogin";
 
 
 
 export function Services() {
 
+  const {goToLogin} = UseLogin();
 
   return (
 
@@ -42,7 +44,7 @@ export function Services() {
 
         <div className="parte-derecha">
           Descubre la calidad <br /> de nuestros <br /> profesionales. Inicia <br /> sesión ahora y <br /> comienza tu proyecto <br /> con los mejores.
-          <button className="boton-iniciar-sesion">Iniciar Sesión</button>
+          <button onClick={goToLogin} className="boton-iniciar-sesion">Iniciar Sesión</button>
         </div>
 
       </div>

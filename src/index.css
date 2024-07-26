@@ -84,7 +84,7 @@ footer {
 
 /*  <--------------------- RESPONSIVE ----------------->*/
 
-@media (max-width: 1024px) {
+@media (max-width: 728px) {
   .container-text {
     font-size: 36px;
   }

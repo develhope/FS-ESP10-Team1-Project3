@@ -1,15 +1,14 @@
 import { React, useState } from "react";
 import "./css/Navbar.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { UseLogin } from "./UseLogin";
 
 export function Navbar({ children }) {
 
-  const navigate = useNavigate();
+  const { goToLogin } = UseLogin();
+  
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  function handleClickButton() {
-    navigate("/login");
-  }
 
   function toggleMobileMenu() {  // funciona para mostrar u ocultar el menú en u dispositivo móvil.
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -36,7 +35,7 @@ export function Navbar({ children }) {
           </li>
         </ul>
         <div className="navbar-button">
-          <button onClick={handleClickButton}>Iniciar sesión</button>
+          <button onClick={goToLogin}>Iniciar sesión</button>
         </div>
       </nav>
     </div>
