@@ -4,7 +4,7 @@ const categorias = [
   "redes sociales",
   "Diseño Gráfico",
   "Marketing",
-  "Desarrollo Audiovisual",'Escritor fantasma'
+  "Desarrollo Audiovisual",
 ];
 
 export default categorias

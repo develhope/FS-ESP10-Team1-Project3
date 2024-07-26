@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Proyectos } from './components/Proyectos'
 import { Services } from './components/Services'
 import Login from './components/Login'
+import { Footer } from './components/Footer'
 
 export function App() {
 
@@ -19,6 +20,8 @@ export function App() {
     <Route path="/login" element={<Login/>} />
     <Route path="/" element={<Container/>} />
     </Routes>
+
+    <Footer/>
   
     </div>
   );
