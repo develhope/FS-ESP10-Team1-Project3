@@ -9,9 +9,8 @@ export function Container () {
 
     <div className='container'>
         <p className='container-text'>
-          Únete a una amplia red de contactos dentro de tu sector.<br />
-          Tanto si eres solicitante o buscas proyectos, en <span className='highlight'>FreelanceHub</span> es posible!
-        </p>
+        <span> Únete a una amplia red de contactos dentro de tu sector </span><br />
+        <span>Tanto si eres solicitante o buscas proyectos, en </span><br /> <span className='highlight'>FreelanceHub es posible!</span></p> 
      
 
       <div className='buscador'>
