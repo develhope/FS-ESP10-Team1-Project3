@@ -47,7 +47,11 @@
   margin-left: 200px;
   
 }
-
+.navbar-button {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
 .navbar-button button {
   background-color: #00ffbe;
   color: black;

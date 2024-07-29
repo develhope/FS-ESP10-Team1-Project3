@@ -7,6 +7,25 @@
     flex-direction: row;
    border-radius: 15px;
 }
+.formularioLogin input {
+    border-radius: 5px;
+    background-color: #00a03d9f;
+    font-family: "Montserrat", sans-serif;
+}
+.otraOpcion p {
+   padding-top: 50px;
+}
+.formularioLogin button {
+border-radius: 5px;
+font-family: "Montserrat", sans-serif;
+background-color: #00a03d9f;
+}
+.formularioLogin {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+}
 .loginIzquierda {
     background-color: #00a03d9f;
     font-family: "Montserrat", sans-serif;
@@ -21,7 +40,7 @@
     border-bottom-left-radius: 20px;
     font-size: 14px;
 }
-.loginIzquierda h1 {
+.loginIzquierda h2 {
     font-size: 15px;
     padding-left: 5%;
 }
@@ -58,7 +77,7 @@
     width: auto;
     height: max-content;
     font-size: larger;
-    margin-top: 12px;
+    margin-top: 52px;
 }
 .terminos {
     font-size: auto;
@@ -78,10 +97,10 @@
     .loginIzquierda {
     font-size: 16px;
     }
-    .loginIzquierda h1 {
+    .loginIzquierda h2 {
    font-size: 13px;
     }
-    .loginIzquierda h1 svg {
+    .loginIzquierda h2 svg {
         width: min-content;
         height: min-content;
           }
@@ -95,14 +114,14 @@
     #liSinCursor {
         font-size: 15px;
     }
-    .loginIzquierda h1 svg {
+    .loginIzquierda h2 svg {
   width: 17px;
   height: 17px;
     }
     .loginIzquierda {  
         font-size: 15px;
         }
-        .loginIzquierda h1 {
+        .loginIzquierda h2 {
        font-size: 17px;
         }
         .terminos {
@@ -121,7 +140,7 @@
         margin: auto;
         margin-top: 100px;
     }
-    .loginIzquierda h1 {
+    .loginIzquierda h2 {
         font-size: 14px;
          }
     .loginIzquierda {
@@ -184,7 +203,7 @@
     width: 100%;
     height: max-content;
 }
-.divMovil2 h1 {
+.divMovil2 h2 {
     font-size: 20px;
 }
 .divMovil2 p {
@@ -203,7 +222,7 @@ font-size: 14px;
     .divLoginGeneral {
         height: 870px;
     }
-    .loginIzquierda h1 {
+    .loginIzquierda h2 {
         font-size: 20px;
     }
     .loginIzquierda ul li {
@@ -218,7 +237,7 @@ font-size: 14px;
         height: 1150px;
         width: 100%;
     }
-    .loginIzquierda h1 {
+    .loginIzquierda h2 {
         font-size: 30px;
     }
     .loginIzquierda ul li {
@@ -230,7 +249,7 @@ font-size: 14px;
     .loginIzquierda {
         width: 65%;
     }
-    .loginIzquierda h1 svg {
+    .loginIzquierda h2 svg {
         width: 30px;
         height: 30px;
 }

@@ -2,9 +2,10 @@ import { React, useState } from "react";
 import "./css/Navbar.css";
 import { Link } from "react-router-dom";
 import { UseLogin } from "./UseLogin";
+import { useNavigate } from "react-router-dom";
 
 export function Navbar({ children }) {
-
+  const navigate = useNavigate();
   const { goToLogin } = UseLogin();
   
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -18,8 +19,8 @@ export function Navbar({ children }) {
     <div className="navbar">
       <nav>
         <div className="navbar-logo">
-          <a href="">
-            Freelance<span class="highlight">Hub</span>
+          <a href='/'>
+            Freelance<span className="highlight">Hub</span>
           </a>
         </div>
         <div className="navbar-menu-icon" onClick={toggleMobileMenu}>
@@ -35,7 +36,8 @@ export function Navbar({ children }) {
           </li>
         </ul>
         <div className="navbar-button">
-          <button onClick={goToLogin}>Iniciar sesión</button>
+        <button onClick={() => navigate('/login', { state: { mode: 'login' } })}>Iniciar Sesión</button>
+        <button onClick={() => navigate('/login', { state: { mode: 'register' } })}>Registrarte</button>
         </div>
       </nav>
     </div>
