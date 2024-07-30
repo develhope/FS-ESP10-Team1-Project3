@@ -76,8 +76,10 @@ function Login() {
   {aContent === "iniciar sesión" ? (
     <div>
     <form className="formularioLogin" onSubmit={sendRegisterData}>
+    <p>nombre completo: <input type="text" placeholder="pon aqui tu nombre" required></input></p>
     <p>email: <input type="email" placeholder="pon aqui tu email" required></input></p>
     <p>nombre de usuario: <input type="text" placeholder="pon aqui tu nombre de usuario" required></input></p>
+    <p>fecha de nacimiento: <input type="date" required></input></p>
     <p>contraseña: <input type="password" placeholder="pon aqui tu contraseña" required></input></p>
     <button type="submit">enviar datos</button>
     </form>

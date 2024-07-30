@@ -1,0 +1,21 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: 	#D3D3D3;
+    height: 100vh;
+    width: 15%;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+}
+.listaSidebar {
+    list-style: none;
+    margin-top: 30vh;
+}
+.listaSidebar li {
+    padding: 10px;
+    width: max-content;
+}
+/* .listaSidebar li:hover {
+    background-color: #A9A9A9;
+} */
+

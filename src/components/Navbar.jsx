@@ -38,6 +38,7 @@ export function Navbar({ children }) {
         <div className="navbar-button">
         <button onClick={() => navigate('/login', { state: { mode: 'login' } })}>Iniciar Sesión</button>
         <button onClick={() => navigate('/login', { state: { mode: 'register' } })}>Registrarte</button>
+        <button onClick={() => navigate('/perfil')}>boton perfil de prueba</button>
         </div>
       </nav>
     </div>
