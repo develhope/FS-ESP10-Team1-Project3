@@ -15,7 +15,11 @@
     padding: 10px;
     width: max-content;
 }
-/* .listaSidebar li:hover {
+.listaSidebar li:hover {
     background-color: #A9A9A9;
-} */
+    cursor: pointer;
+}
+.selected {
+    background-color: #A9A9A9;
+}
 

@@ -1,20 +1,38 @@
-import './sidebar-items-css/sidebar.css'
-import { useState } from 'react';
+import "./sidebar-items-css/sidebar.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
-  
-    return (
-        <div className='sidebar'>
-        <ul className='listaSidebar'>
-        <li>Información personal</li>
-        <li>Portfolio y habilidades</li>
-        <li>Proyectos en curso</li>
-        <li>Proyectos finalizados</li>
-        <li>Proyectos acabados</li>
-        <li>Informacion bancaria</li>
-        <li>Cerrar sesión</li>
-        </ul>
-        </div>
-    )
+  const [selected, setSelected] = useState(0);
+  const items = [
+    "Información personal",
+    "Portfolio y habilidades",
+    "Proyectos en curso",
+    "Proyectos finalizados",
+    "Informacion bancaria",
+    "Cerrar sesión",
+  ];
+  const seleccionar = (index) => {
+    setSelected(index);
+  };
+  const navigate = useNavigate();
+  return (
+    <div className="sidebar">
+      <ul className="listaSidebar">
+        {items.map((item, index) => (
+          <li
+            key={index}
+            className={selected === index ? "selected" : "unselected"}
+            onClick={() => {
+              seleccionar(index);
+              navigate(`/perfil/${index}`)
+            }}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 export default Sidebar;
