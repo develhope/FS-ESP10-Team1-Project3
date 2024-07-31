@@ -58,7 +58,7 @@ function Info() {
           <input
             type="text"
             className="inputs-perfil"
-            placeholder={userDataObjectJson.userNombreCompleto}
+            placeholder={userDataObjectJson?userDataObjectJson.userNombreCompleto:"Nombre completo"}
             onChange={actualizarNombreCompleto}
           ></input>
         </div>
@@ -67,7 +67,7 @@ function Info() {
           <input
             type="text"
             className="inputs-perfil"
-            placeholder={userDataObjectJson.userApodo}
+            placeholder={userDataObjectJson?userDataObjectJson.userApodo:"Nombre de usuario"}
             onChange={actualizarNombreUsuario}
           ></input>
         </div>
