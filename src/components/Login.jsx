@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import "./css/Login.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
-
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,26 +44,21 @@ function Login() {
     }
   }, [location]);
 
-
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
     try {
-      
-      localStorage.setItem('userEmail', email);
-      localStorage.setItem('userPassword', password);
+      localStorage.setItem("userEmail", email);
+      localStorage.setItem("userPassword", password);
 
       navigate(`/perfil`);
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
-     
     }
   };
-
 
   const cambiarLoginORegister = () => {
     if (aContent === "registrarte") {
@@ -143,7 +137,6 @@ function Login() {
                   Enviar datos
                 </button>
               </form>
-
 
               <div className="otraOpcion">
                 <p>o tambien puedes:</p>

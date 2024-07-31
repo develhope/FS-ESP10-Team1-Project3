@@ -1,5 +1,5 @@
 import Sidebar from "./Sidebar";
-import "./sidebar-items-css/info.css";
+import "./sidebar-items-css/portfolio.css";
 function Portfolio() {
     return (
         <div className="div-sidebar-element">

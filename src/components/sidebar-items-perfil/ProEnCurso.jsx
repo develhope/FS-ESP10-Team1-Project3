@@ -1,6 +1,6 @@
 
 import Sidebar from "./Sidebar";
-import "./sidebar-items-css/info.css";
+import "./sidebar-items-css/proEnCurso.css";
 function ProEnCurso() {
     return (
         <div className="div-sidebar-element">

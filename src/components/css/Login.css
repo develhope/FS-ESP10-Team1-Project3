@@ -1,6 +1,6 @@
 .divLoginGeneral {
     width: 55%;
-    height: 85vh;
+    height: max-content;
     margin: auto;
     margin-top: 120px;
     display: flex;

@@ -1,6 +1,6 @@
 
 import Sidebar from "./Sidebar";
-import "./sidebar-items-css/info.css";
+import "./sidebar-items-css/infoBancaria.css";
 function InfoBancaria() {
     return (
         <div className="div-sidebar-element">
