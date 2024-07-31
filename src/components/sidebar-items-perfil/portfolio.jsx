@@ -1,12 +1,12 @@
 import Sidebar from "./Sidebar";
 import "./sidebar-items-css/info.css";
-function Info() {
+function Portfolio() {
     return (
         <div className="div-sidebar-element">
         <Sidebar />
         <div className="proximamente">
-        <h2>Informacion personal</h2></div>
+        <h2>Portfolio y habilidades</h2></div>
         </div>
     )
 }
-export default Info;
+export default Portfolio;

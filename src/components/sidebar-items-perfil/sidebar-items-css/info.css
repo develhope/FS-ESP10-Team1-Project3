@@ -1,0 +1,8 @@
+.proximamente {
+    margin-top: 400px;
+    margin-left: 600px;
+}
+.div-sidebar-element {
+    display: flex;
+    flex-direction: row;
+}

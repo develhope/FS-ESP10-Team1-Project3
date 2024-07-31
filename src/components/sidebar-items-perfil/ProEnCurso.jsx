@@ -1,12 +1,13 @@
+
 import Sidebar from "./Sidebar";
 import "./sidebar-items-css/info.css";
-function Info() {
+function ProEnCurso() {
     return (
         <div className="div-sidebar-element">
         <Sidebar />
         <div className="proximamente">
-        <h2>Informacion personal</h2></div>
+        <h2>Proyectos en curso</h2></div>
         </div>
     )
 }
-export default Info;
+export default ProEnCurso;

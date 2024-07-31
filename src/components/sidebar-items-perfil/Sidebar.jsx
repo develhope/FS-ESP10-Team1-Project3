@@ -1,5 +1,5 @@
 import "./sidebar-items-css/sidebar.css";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
@@ -12,9 +12,9 @@ function Sidebar() {
     "Informacion bancaria",
     "Cerrar sesión",
   ];
-  const seleccionar = (index) => {
+  const seleccionar = useCallback((index) => {
     setSelected(index);
-  };
+  }, []);
   const navigate = useNavigate();
   return (
     <div className="sidebar">
@@ -25,7 +25,7 @@ function Sidebar() {
             className={selected === index ? "selected" : "unselected"}
             onClick={() => {
               seleccionar(index);
-              navigate(`/perfil/${index}`)
+              navigate(`/sidebar/${index}`)
             }}
           >
             {item}
