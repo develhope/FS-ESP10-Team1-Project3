@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [birthDate, setBirthDate] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -51,8 +52,8 @@ function Login() {
     try {
       localStorage.setItem("userEmail", email);
       localStorage.setItem("userPassword", password);
-
-      navigate(`/perfil`);
+      localStorage.setItem("userDate", birthDate);
+      navigate(`/sidebar`);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -131,6 +132,15 @@ function Login() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                  />
+                </p>
+                <p>
+                  Fecha de nacimiento:{" "}
+                  <input
+                    type="date"
+                    required
+                    value={birthDate}
+                    onChange={(e) => setBirthDate(e.target.value)}
                   />
                 </p>
                 <button type="submit" disabled={loading}>
