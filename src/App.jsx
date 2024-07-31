@@ -20,7 +20,7 @@ export function App() {
     <Route path="busqueda" element={<Proyectos/>} />
     <Route path="/login" element={<Login/>} />
     <Route path="/" element={<Container/>} />
-    <Route path="/sidebar" element={<SidebarApp/>} />
+    <Route path="/sidebar/*" element={<SidebarApp/>} />
     
     </Routes>
 

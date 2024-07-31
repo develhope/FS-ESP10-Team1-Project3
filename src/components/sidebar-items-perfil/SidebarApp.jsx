@@ -3,15 +3,19 @@ import { Route, Routes } from "react-router-dom";
 import Info from "./Info";
 import Portfolio from "./portfolio";
 import ProEnCurso from "./ProEnCurso";
+import ProFinalizados from "./ProFinalizados";
+import InfoBancaria from "./InfoBancaria";
 
 function SidebarApp() {
   return (
-    <div>
+    <div className="elementsOnSidebar">
       <Sidebar />
       <Routes>
-        <Route path="/sidebar/0" element={<Info />} />
-        <Route path="/sidebar/1" element={<Portfolio />} />
-        <Route path="/sidebar/2" element={<ProEnCurso />} />
+        <Route path="0" element={<Info />} />
+        <Route path="1" element={<Portfolio />} />
+        <Route path="2" element={<ProEnCurso />} />
+        <Route path="3" element={<ProFinalizados />} />
+        <Route path="4" element={<InfoBancaria />} />
       </Routes>
     </div>
   );

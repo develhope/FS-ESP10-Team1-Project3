@@ -10,7 +10,6 @@ function Sidebar() {
     "Proyectos en curso",
     "Proyectos finalizados",
     "Informacion bancaria",
-    "Cerrar sesión",
   ];
   const seleccionar = useCallback((index) => {
     setSelected(index);

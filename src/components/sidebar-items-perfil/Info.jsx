@@ -3,7 +3,6 @@ import "./sidebar-items-css/info.css";
 function Info() {
     return (
         <div className="div-sidebar-element">
-        <Sidebar />
         <div className="proximamente">
         <h2>Informacion personal</h2></div>
         </div>
