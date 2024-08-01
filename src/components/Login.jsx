@@ -2,6 +2,7 @@ import { React } from "react";
 import { useState, useEffect } from "react";
 import "./css/Login.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import anonimo from '../assets/anonimo.jpg';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -50,10 +51,17 @@ function Login() {
     setLoading(true);
     setError(null);
     try {
-      localStorage.setItem("userEmail", email);
-      localStorage.setItem("userPassword", password);
-      localStorage.setItem("userDate", birthDate);
-      navigate(`/sidebar`);
+      const userInfoToStringify = {
+        email: email,
+        password: password,
+        birthDate: birthDate,
+        fullName: "Nombre completo",
+        userName: "Nombre usuario",
+        userImage: anonimo
+      }
+      const userInfo = JSON.stringify(userInfoToStringify);
+      localStorage.setItem("userInfo", userInfo);
+      navigate(`/sidebar/0`);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -262,7 +270,43 @@ function Login() {
             <a href="#register">{aContent}</a>
           </p>
           <div>
-            <button className="google-correo">
+          </div>
+          <div>
+          <form className="formularioLogin" onSubmit={handleFormSubmit}>
+          <p>
+            Email:{" "}
+            <input
+              type="email"
+              placeholder="example@gmail.com"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </p>
+          <p>
+            Contraseña:{" "}
+            <input
+              type="password"
+              placeholder="*********"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </p>
+          <p>
+            Fecha de nacimiento:{" "}
+            <input
+              type="date"
+              required
+              value={birthDate}
+              onChange={(e) => setBirthDate(e.target.value)}
+            />
+          </p>
+          <button type="submit" disabled={loading}>
+            Enviar datos
+          </button>
+        </form>
+        <button className="google-correo">
               <svg
                 width="18"
                 height="18"
@@ -287,19 +331,6 @@ function Login() {
                 ></path>
               </svg>{" "}
               Continuar con Google
-            </button>
-          </div>
-          <div>
-            <button className="google-correo">
-              <svg
-                width="18"
-                height="16"
-                viewBox="0 0 16 12"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M14.5 0H1.5C0.671562 0 0 0.671562 0 1.5V10.5C0 11.3284 0.671562 12 1.5 12H14.5C15.3284 12 16 11.3284 16 10.5V1.5C16 0.671562 15.3284 0 14.5 0ZM14.5 1.5V2.77516C13.7993 3.34575 12.6823 4.233 10.2942 6.10297C9.76787 6.51694 8.72538 7.51147 8 7.49988C7.27475 7.51159 6.23191 6.51678 5.70584 6.10297C3.31813 4.23328 2.20078 3.34584 1.5 2.77516V1.5H14.5ZM1.5 10.5V4.69994C2.21606 5.27028 3.23153 6.07063 4.77931 7.28263C5.46234 7.82028 6.6585 9.00719 8 8.99997C9.33491 9.00719 10.5159 7.8375 11.2204 7.28288C12.7682 6.07091 13.7839 5.27034 14.5 4.69997V10.5H1.5Z"></path>
-              </svg>
-              Continuar con el correo electrónico
             </button>
           </div>
           <div className="terminos">

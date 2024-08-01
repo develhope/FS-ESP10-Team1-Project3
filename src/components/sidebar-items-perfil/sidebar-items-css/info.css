@@ -1,7 +1,5 @@
 .proximamente {
     margin-top: 400px;
-    margin-left: 600px;
-    
 }
 .elementsOnSidebar {
     display: flex;
@@ -14,6 +12,11 @@
     border-radius: 50%;
     background-color:   #D3D3D3;
     margin-left: 25%;
+}
+.imagenItems {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 .div-sidebar-element {
     width: 100%;
@@ -29,8 +32,11 @@
     font-weight: bold;
     cursor: pointer;
     padding: 25px;
-    font-size: 15px;
-    margin-left: 28%;
+    font-size: 20px;
+    margin-left: 25%;
+}
+#inputFile {
+    display: none;
 }
 .texto-campos-perfil {
     background-color: #F2D2BD;
@@ -67,3 +73,178 @@ margin-right: 65px;
     padding-right: 50px;
     margin-left: 13%;
 }
+.userSelectedImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+@media (max-width: 790px) {
+    .subirImagen {
+        font-size: 15px;
+    }
+    .texto-input {
+        margin-left: 1%;
+        gap: 0px;
+    }
+    .texto-input input {
+        font-size: 15px;
+     }
+     .texto-campos-perfil {
+        font-size: 15px;
+    }
+    .actualizarDatosPerfil {
+        font-size: 15px;
+        
+    }
+    .imagenPerfil {
+        margin-top: 120px;
+        width: 240px;
+        height: 240px;
+        margin-left: 20%;
+    }
+}
+@media (max-width: 700px) {
+    .subirImagen {
+        font-size: 10px;
+    }
+    .texto-input {
+        margin-left: 1%;
+        gap: 0px;
+    }
+    .texto-input input {
+        font-size: 10px;
+        margin-top: 10px;
+     }
+     .texto-campos-perfil {
+        font-size: 10px;
+        width: 150px;
+        height: max-content;
+    }
+    .actualizarDatosPerfil {
+        font-size: 10px;
+        
+    }
+    .imagenPerfil {
+        margin-top: 120px;
+        width: 240px;
+        height: 240px;
+        margin-left: 20%;
+    }
+}
+@media (max-width: 540px) {
+    .sidebar {
+        display: none;
+    }
+    .texto-input {
+        margin-left: 100px;
+    }
+    .imagenItems {
+        margin-left: 90px;
+    }
+    .actualizarDatosPerfil {
+        margin-left: 25%;
+    }
+    }
+    @media (max-width: 436px) {
+        .texto-input {
+            margin-left: 150px;
+        }
+        .texto-input input {
+            font-size: 17px;
+            margin-top: 20px;
+         }
+         .texto-campos-perfil {
+            padding: 0;
+            width: 200px;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .actualizarDatosPerfil {
+            font-size: 18px;
+        }
+        .imagenItems {
+            margin-top: 30px;
+            margin-left: 120px;
+        }
+        .actualizarDatosPerfil {
+            margin-left: 27%;
+        }
+    }
+    @media (max-width: 355px) {
+        .texto-input {
+            margin-left: 200px;
+        }
+        .imagenItems {
+            margin-left: 170px;
+        }
+        .actualizarDatosPerfil {
+            margin-left: 32%;
+        }
+    }
+    @media (min-height: 1000px) {
+        .subirImagen {
+            font-size: 30px;
+            margin-left: 25%;
+        }
+        .sidebar {
+            display: none;
+        }
+        .texto-input {
+            margin-left: 1%;
+            gap: 0px;
+        }
+        .texto-input input {
+            font-size: 22px;
+            margin-top: 20px;
+         }
+         .texto-campos-perfil {
+            margin-left: 3%;
+            padding: 0px;
+            width: 260px;
+            height: auto;
+            font-size: 22px;
+        }
+        .actualizarDatosPerfil {
+            font-size: 22px;
+            margin-left: 15%;
+        }
+        .imagenPerfil {
+            margin-top: 200px;
+            width: 270px;
+            height: 270px;
+            border-radius: 50%;
+            background-color:   #D3D3D3;
+            margin-left: 25%;
+        }
+    }
+    @media (min-height: 1300px) {
+        .texto-input {
+            margin-left: 2%;
+            gap: 30px;
+        }
+        .texto-input input {
+            font-size: 35px;
+            height: 30px;
+            margin-top: 37px;
+         }
+         .texto-campos-perfil {
+            width: 390px;
+            height: 50px;
+            font-size: 35px;
+        }
+        .actualizarDatosPerfil {
+            margin-left: 21%;
+            font-size: 35px;
+            height: 50px;
+        }
+        .imagenPerfil {
+            margin-left: 30%;
+            width: 370px;
+            height: 370px;
+        }
+        .subirImagen {
+            font-size: 30px;
+            margin-left: 35%;
+        }
+    }

@@ -18,13 +18,15 @@ export function Navbar({ children }) {
   return (
     <div className="navbar">
       <nav>
+      <div className="navbar-logo-y-navbar-menu">
+      <div className="navbar-menu-icon" onClick={toggleMobileMenu}>
+            ☰  
+        </div>
         <div className="navbar-logo">
           <a href='/'>
             Freelance<span className="highlight">Hub</span>
           </a>
         </div>
-        <div className="navbar-menu-icon" onClick={toggleMobileMenu}>
-            ☰  
         </div>
         <ul
           className={`navbar-links ${isMobileMenuOpen ? "navbar-links-mobile" : ""}`}> 

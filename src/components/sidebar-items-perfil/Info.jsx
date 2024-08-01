@@ -2,39 +2,30 @@ import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import "./sidebar-items-css/info.css";
 function Info() {
-    const userDataObject = localStorage.getItem("userInfo");
-    const userDataObjectJson = JSON.parse(userDataObject);
-  const [nombreCompleto, setNombreCompleto] = useState("nombre completo");
-  const [nombreUsuario, setNombreUsuario] = useState("nombre de usuario");
-  const [fechaNacimiento, setFechaNacimiento] = useState("");
-  const [correo, setCorreo] = useState("correo electrónico");
-  const [contraseña, setContraseña] = useState("contraseña");
-  
-   const [nuevoNombre, setNuevoNombre] = useState("");
-  const [nuevoNombreUsuario, setNuevoNombreUsuario] = useState("");
+  const userDataObject = localStorage.getItem("userInfo");
+  const userDataObjectJson = JSON.parse(userDataObject);
+  const [nombreCompleto, setNombreCompleto] = useState(userDataObjectJson.fullName);
+  const [nombreUsuario, setNombreUsuario] = useState(userDataObjectJson.userName);
+  const [fechaNacimiento, setFechaNacimiento] = useState(userDataObjectJson.birthDate);
+  const [correo, setCorreo] = useState(userDataObjectJson.email);
+  const [contraseña, setContraseña] = useState(userDataObjectJson.password);
+  const [imagenPerfil, setImagenPerfil] = useState(userDataObjectJson.userImage);
 
-  useEffect(() => {
-    const fechaNacimientoUser = localStorage.getItem("userDate");
-    const password = localStorage.getItem("userPassword");
-    const email = localStorage.getItem("userEmail");
-    setCorreo(email);
-    setContraseña(password);
-    setFechaNacimiento(fechaNacimientoUser);
-
-  }, []);
-
+  const [nuevoNombre, setNuevoNombre] = useState(userDataObjectJson.fullName);
+  const [nuevoNombreUsuario, setNuevoNombreUsuario] = useState(userDataObjectJson.userName);
   const actualizarPerfil = (event) => {
     event.preventDefault();
     setNombreCompleto(nuevoNombre);
     setNombreUsuario(nuevoNombreUsuario);
     const userData = {
-        userNombreCompleto: nuevoNombre,
-        userApodo: nuevoNombreUsuario,
-        userBirthDate: fechaNacimiento,
-        userCorreo: correo,
-        userPassword: contraseña
-    }
-    const userDataStrings = JSON.stringify(userData)
+      fullName: nuevoNombre,
+      userName: nuevoNombreUsuario,
+      birthDate: fechaNacimiento,
+      email: correo,
+      password: contraseña,
+      userImage: imagenPerfil,
+    };
+    const userDataStrings = JSON.stringify(userData);
     localStorage.setItem("userInfo", userDataStrings);
   };
   const actualizarNombreCompleto = (event) => {
@@ -46,19 +37,36 @@ function Info() {
     setNuevoNombreUsuario(event.target.value);
   };
   const subirNuevaImagen = (event) => {
-    event.preventDefault()
-  }
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagenPerfil(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   return (
     <div className="div-sidebar-element">
       <form onSubmit={actualizarPerfil}>
-        <div className="imagenPerfil"></div>
-        <button onClick={subirNuevaImagen} className="subirImagen">subir imagen</button>
+        <div className="imagenItems">
+          <div className="imagenPerfil">{imagenPerfil !== ""?<img className="userSelectedImage" src={imagenPerfil}></img>:<p className="parrafoImagen">No hay ninguna imagen</p>}</div>
+          <input
+            type="file"
+            onChange={subirNuevaImagen}
+            accept="image/*"
+            id="inputFile"
+          ></input>
+          <label htmlFor="inputFile" className="subirImagen">
+            Subir imagen
+          </label>
+        </div>
         <div className="texto-input">
           <p className="texto-campos-perfil">Nombre y apellidos</p>
           <input
             type="text"
             className="inputs-perfil"
-            placeholder={userDataObjectJson?userDataObjectJson.userNombreCompleto:"Nombre completo"}
+            placeholder={nombreCompleto}
             onChange={actualizarNombreCompleto}
           ></input>
         </div>
@@ -67,13 +75,18 @@ function Info() {
           <input
             type="text"
             className="inputs-perfil"
-            placeholder={userDataObjectJson?userDataObjectJson.userApodo:"Nombre de usuario"}
+            placeholder={nombreUsuario}
             onChange={actualizarNombreUsuario}
           ></input>
         </div>
         <div className="texto-input dateInput">
           <p className="texto-campos-perfil">Fecha de nacimiento</p>
-          <input type="date" className="inputs-perfil" value={fechaNacimiento} readOnly></input>
+          <input
+            type="date"
+            className="inputs-perfil"
+            value={fechaNacimiento}
+            readOnly
+          ></input>
         </div>
         <div className="texto-input">
           <p className="texto-campos-perfil">correo electrónico</p>

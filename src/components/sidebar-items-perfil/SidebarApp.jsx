@@ -11,7 +11,6 @@ function SidebarApp() {
     <div className="elementsOnSidebar">
       <Sidebar />
       <Routes>
-        <Route path="/" element={<Info />} />
         <Route path="0" element={<Info />} />
         <Route path="1" element={<Portfolio />} />
         <Route path="2" element={<ProEnCurso />} />

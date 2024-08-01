@@ -78,7 +78,10 @@
     flex-direction: column;
     align-items: flex-start;
   }
-
+.navbar-logo-y-navbar-menu {
+  display: flex;
+  flex-direction: row;
+}
   .navbar-menu-icon {
     display: block;
   }
