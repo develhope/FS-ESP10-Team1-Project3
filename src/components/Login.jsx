@@ -2,8 +2,12 @@ import { React } from "react";
 import { useState, useEffect } from "react";
 import "./css/Login.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import anonimo from '../assets/anonimo.jpg';
-
+import anonimo from './sidebar-items-perfil/assets-sidebar/anonimo.jpg';
+export function anonimus() {
+return (
+  <img src={anonimo}></img>
+)
+}
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

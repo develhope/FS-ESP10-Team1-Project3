@@ -1,25 +1,24 @@
 import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import "./sidebar-items-css/info.css";
+import anonimo from './assets-sidebar/anonimo.jpg';
 function Info() {
   const userDataObject = localStorage.getItem("userInfo");
   const userDataObjectJson = JSON.parse(userDataObject);
-  const [nombreCompleto, setNombreCompleto] = useState(userDataObjectJson.fullName);
-  const [nombreUsuario, setNombreUsuario] = useState(userDataObjectJson.userName);
-  const [fechaNacimiento, setFechaNacimiento] = useState(userDataObjectJson.birthDate);
-  const [correo, setCorreo] = useState(userDataObjectJson.email);
-  const [contraseña, setContraseña] = useState(userDataObjectJson.password);
-  const [imagenPerfil, setImagenPerfil] = useState(userDataObjectJson.userImage);
+  const [nombreCompleto, setNombreCompleto] = useState(userDataObjectJson?.fullName || "Nombre completo");
+  const [nombreUsuario, setNombreUsuario] = useState(userDataObjectJson?.userName || "Nombre de usuario");
+ 
+  
+  const [fechaNacimiento, setFechaNacimiento] = useState("");
+  const [correo, setCorreo] = useState("correo electrónico");
+  const [contraseña, setContraseña] = useState("contraseña");
+  const [imagenPerfil, setImagenPerfil] = useState(anonimo);
 
-  const [nuevoNombre, setNuevoNombre] = useState(userDataObjectJson.fullName);
-  const [nuevoNombreUsuario, setNuevoNombreUsuario] = useState(userDataObjectJson.userName);
   const actualizarPerfil = (event) => {
     event.preventDefault();
-    setNombreCompleto(nuevoNombre);
-    setNombreUsuario(nuevoNombreUsuario);
     const userData = {
-      fullName: nuevoNombre,
-      userName: nuevoNombreUsuario,
+      fullName: nombreCompleto,
+      userName: nombreUsuario,
       birthDate: fechaNacimiento,
       email: correo,
       password: contraseña,
@@ -30,11 +29,11 @@ function Info() {
   };
   const actualizarNombreCompleto = (event) => {
     event.preventDefault();
-    setNuevoNombre(event.target.value);
+    setNombreCompleto(event.target.value);
   };
   const actualizarNombreUsuario = (event) => {
     event.preventDefault();
-    setNuevoNombreUsuario(event.target.value);
+    setNombreUsuario(event.target.value);
   };
   const subirNuevaImagen = (event) => {
     const file = event.target.files[0];
@@ -46,6 +45,14 @@ function Info() {
       reader.readAsDataURL(file);
     }
   };
+  useEffect(() => {
+  if (userDataObject) {
+        setFechaNacimiento(userDataObjectJson.birthDate);
+        setCorreo(userDataObjectJson.email);
+        setContraseña(userDataObjectJson.password);
+        setImagenPerfil(userDataObjectJson.userImage);
+    }
+  }, []);
   return (
     <div className="div-sidebar-element">
       <form onSubmit={actualizarPerfil}>
@@ -66,7 +73,8 @@ function Info() {
           <input
             type="text"
             className="inputs-perfil"
-            placeholder={nombreCompleto}
+            value={nombreCompleto}
+            onFocus={(() => {setNombreCompleto("")})}
             onChange={actualizarNombreCompleto}
           ></input>
         </div>
@@ -75,7 +83,8 @@ function Info() {
           <input
             type="text"
             className="inputs-perfil"
-            placeholder={nombreUsuario}
+            value={nombreUsuario}
+            onFocus={(() => {setNombreUsuario("")})}
             onChange={actualizarNombreUsuario}
           ></input>
         </div>
