@@ -1,3 +1,160 @@
-.portfolio-habilidades {
+.div-sidebar-element-portfolio {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    justify-content: center;
+}
+.listaHabilidades {
+    list-style: circle;
+    list-style-position: inside;
+    color: white;
+    width: 26%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0;
+    position: relative;
+    margin-left: 250px;
+    font-family: "Montserrat", sans-serif;
+}
+.liHabilidades {
+    cursor: pointer;
+    padding-top: 7px;
+    background-color: black;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    height: 3vh;
+    padding-right: 7px;
+}
+.liHabilidades:hover {
+    background-color: #b5b2b2;
+}
+.habilidad-tag {
+    padding-top: 5px;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    width: 110px;
+    background-color: black;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    height: 3vh;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+    padding-bottom: 8px;
+    font-size: 15px;
+}
+.habilidades-estructura-listas {
+    display: flex;
+    flex-direction: row;
+}
+.buscador {
+    border-radius: 5px;
+    height: 3vh;
+    width: 50%;
+}
+.texto-input-habilidades {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+.habilidadesSeleccionadas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(min-content, max-content));
+    gap: 10px;
+    justify-content: end;
     
+}
+.habilidadesSeleccionadas .habilidad-tag button {
+    border-color: transparent;
+    background-color: transparent;
+    cursor: pointer;
+}
+.habilidadesSeleccionadas .habilidad-tag button:hover {
+    background-color: #b5b2b2;
+}
+.portfolio-habilidades form .actualizarDatosPerfil {
+    margin-top: 20px;
+}
+@media (max-width: 790px) {
+    .div-sidebar-element-portfolio .texto-campos-perfil {
+        width: 150px;
+        height: max-content;
+    }
+    .div-sidebar-element-portfolio .texto-input input {
+    margin-top: 18px;
+    }
+    .div-sidebar-element-portfolio .buscador {
+        margin-top: 14px
+    }
+    .div-sidebar-element-portfolio .liHabilidades {
+        font-size: 15px;
+        height: max-content;
+        padding-bottom: 10px;
+        width: 110px;
+    }
+    .div-sidebar-element-portfolio .listaHabilidades {
+        margin-left: 80px;
+    }
+    .div-sidebar-element-portfolio .habilidad-tag {
+        font-size: 12px;
+        width: max-content;
+        height: max-content;
+    }
+    .habilidad-tag button svg {
+        width: 16px;
+        height: 16px;
+    }
+    @media (max-width: 700px) {
+        .div-sidebar-element-portfolio .texto-campos-perfil {
+            width: max-content;
+            font-size: 15px;
+        }
+        .div-sidebar-element-portfolio .texto-input input {
+            margin-top: 20px;
+            font-size: 12px;
+            }
+            .div-sidebar-element-portfolio .liHabilidades {
+                width: max-content;
+            }
+            .portfolio-habilidades form .actualizarDatosPerfil {
+               font-size: 15px;
+            }
+    }
+    @media (max-width: 572px) {
+        .div-sidebar-element-portfolio .liHabilidades {
+            font-size: 10px;
+        }
+        .div-sidebar-element-portfolio .listaHabilidades {
+            margin-left: 60px;
+        }
+    }
+    @media (max-width: 540px) {
+.div-sidebar-element-portfolio {
+    margin-top: 270px;
+}
+.portfolio-habilidades form .actualizarDatosPerfil {
+   margin-bottom: 200px;
+   font-size: 20px;
+   margin-left: 35px;
+ }
+ .div-sidebar-element-portfolio .texto-campos-perfil {
+    width: 150px;
+    height: max-content;
+}
+.div-sidebar-element-portfolio .listaHabilidades {
+    margin-left: 180px;
+}
+.div-sidebar-element-portfolio .texto-input input {
+    font-size: 15px;
+    margin-top: 17px;
+    }
+    .div-sidebar-element-portfolio .texto-input .texto-campos-perfil {
+       margin-left: -95px;
+    }
+}
 }
