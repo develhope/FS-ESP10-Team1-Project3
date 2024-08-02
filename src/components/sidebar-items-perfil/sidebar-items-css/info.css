@@ -39,7 +39,7 @@
     display: none;
 }
 .texto-campos-perfil {
-    background-color: #F2D2BD;
+    background-color: #faeee7;
     padding: 5px;
     width: 220px;
     font-size: 20px;
@@ -63,7 +63,7 @@ border-color: transparent;
 margin-right: 65px;
 }
 .actualizarDatosPerfil {
-    background-color: #F2D2BD;
+    background-color: #faeee7;
     cursor: pointer;
     border-color: transparent;
     border-radius: 5px;

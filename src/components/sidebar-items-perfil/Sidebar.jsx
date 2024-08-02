@@ -3,7 +3,10 @@ import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
-  const [selected, setSelected] = useState(0);
+
+  const [selected, setSelected] = useState(false);
+  const navigate = useNavigate();
+
   const items = [
     "Información personal",
     "Portfolio y habilidades",
@@ -11,10 +14,11 @@ function Sidebar() {
     "Proyectos finalizados",
     "Informacion bancaria",
   ];
+  
   const seleccionar = useCallback((index) => {
     setSelected(index);
   }, []);
-  const navigate = useNavigate();
+ 
   return (
     <div className="sidebar">
       <ul className="listaSidebar">
@@ -24,7 +28,7 @@ function Sidebar() {
             className={selected === index ? "selected" : "unselected"}
             onClick={() => {
               seleccionar(index);
-              navigate(`/sidebar/${index}`)
+              navigate(`/sidebar/${index}`);
             }}
           >
             {item}

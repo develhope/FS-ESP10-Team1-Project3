@@ -14,9 +14,10 @@
 .listaSidebar li {
     padding: 10px;
     width: max-content;
+    border-radius: 5px;
 }
 .listaSidebar li:hover {
-    background-color: #A9A9A9;
+    background-color: #b5b2b2;
     cursor: pointer;
 }
 .selected {
