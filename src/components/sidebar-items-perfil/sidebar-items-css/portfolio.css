@@ -158,3 +158,65 @@
     }
 }
 }
+@media (max-width: 436px) {
+    .div-sidebar-element-portfolio .portfolio-habilidades .texto-input .texto-campos-perfil {
+        margin-left: -145px;
+    }
+}
+@media (max-width: 355px) {
+    .div-sidebar-element-portfolio .texto-input input {
+        margin-top: 14px;
+        font-size: 10px;
+    }
+    .div-sidebar-element-portfolio .portfolio-habilidades .texto-input .texto-campos-perfil {
+        margin-left: -175px;
+    }
+   .buscador {
+    width: 35%;
+   }
+   .div-sidebar-element-portfolio .portfolio-habilidades .texto-input-habilidades .texto-campos-perfil {
+    margin-left: 25px;
+   }
+   .div-sidebar-element-portfolio .listaHabilidades {
+    margin-left: 120px;
+}
+.div-sidebar-element-portfolio .habilidad-tag {
+ font-size: 10px;
+ margin-left: 20px;
+}
+}
+@media (min-height: 1000px) {
+    .div-sidebar-element-portfolio {
+        margin-top: 300px;
+        padding-bottom: 200px;
+    }
+    .div-sidebar-element-portfolio .portfolio-habilidades .texto-input .texto-campos-perfil {
+        width: 200px;
+    }
+    .div-sidebar-element-portfolio .portfolio-habilidades .texto-input-habilidades .texto-campos-perfil {
+       padding-right: 35px;
+    }
+}
+@media (min-height: 1150px) {
+    .div-sidebar-element-portfolio {
+        padding-bottom: 315px;
+    }
+        .div-sidebar-element-portfolio .portfolio-habilidades .texto-input-habilidades .texto-campos-perfil {
+        width: 150px;
+    }
+}
+@media (min-height: 1300px) {
+    .div-sidebar-element-portfolio .portfolio-habilidades .texto-input .texto-campos-perfil {
+        width: 360px;
+    }
+    .div-sidebar-element-portfolio .portfolio-habilidades .texto-input-habilidades .texto-campos-perfil {
+       padding-right: 180px;
+    }
+    .buscador {
+        font-size: 20px;
+        margin-top: 35px;
+    }
+    .div-sidebar-element-portfolio {
+        padding-bottom: 345px;
+    }
+}
