@@ -31,7 +31,7 @@
     font-family: "Montserrat", sans-serif;
 }
 .div-sidebar-element-proEnCurso .texto-campos-perfil input {
-width: max-content;
+width: 16.5vw;
 height: min-content;
 padding: 5px;
 margin-top: 25px;
@@ -40,6 +40,9 @@ font-weight: bold;
 font-family: "Montserrat", sans-serif;
 border-color: transparent;
 background-color: transparent;
+}
+.div-sidebar-element-proEnCurso .texto-campos-perfil .inputPrecio {
+    width: 6vw;
 }
 .div-sidebar-element-proEnCurso .proyectos ul {
     display: flex;

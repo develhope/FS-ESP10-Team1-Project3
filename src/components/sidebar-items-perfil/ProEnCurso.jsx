@@ -76,8 +76,8 @@ function ProEnCurso() {
                 <div className="texto-campos-perfil">
                   <input type='date' readOnly value={proyecto.startDate} />
                   <input type='text' value={proyecto.nombre} readOnly />
-                  <input type='text' value={`${proyecto.precio} $/h`} readOnly />
-                  <input type='date' value={proyecto.fechaLimite} readOnly />
+                  <input className="inputPrecio" type='text' value={`${proyecto.precio} $/h`} readOnly />
+                  <input type='text' value={"deadline: " + proyecto.fechaLimite} readOnly />
                 </div>
               </li>
             ))}
