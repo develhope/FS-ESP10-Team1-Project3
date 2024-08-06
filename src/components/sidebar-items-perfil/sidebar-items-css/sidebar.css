@@ -1,25 +1,38 @@
 .sidebar {
     display: flex;
     flex-direction: column;
-    background-color: 	#D3D3D3;
+    background-color: 	#EFEDED;
     height: 100vh;
-    width: max-content;
+    width: 16%;
     font-family: "Montserrat", sans-serif;
-    font-size: 18px;
+    font-weight: 500;
+    font-size: 20px;
+    
 }
 .listaSidebar {
     list-style: none;
-    margin-top: 30vh;
+    margin-top: 55%;
 }
 .listaSidebar li {
-    padding: 10px;
+    
     width: max-content;
-    border-radius: 5px;
+    border-radius: 10px;
+    margin-bottom: 40px;
 }
 .listaSidebar li:hover {
     background-color: #b5b2b2;
     cursor: pointer;
 }
+
+.special-item {
+    background-color: #00FFBE;
+    color: black;
+    text-align: center;
+    border-radius: 30px; /* Botón redondeado */
+    padding: 10px 20px; /* Ajustar padding para el botón */
+    font-weight: 600;
+}
+
 .selected {
     background-color: #A9A9A9;
 }

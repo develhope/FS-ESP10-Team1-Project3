@@ -13,6 +13,8 @@ function Sidebar() {
     "Proyectos en curso",
     "Proyectos finalizados",
     "Informacion bancaria",
+    "Solicitar servicios",
+    "Buscar proyectos"
   ];
   
   const seleccionar = useCallback((index) => {
@@ -25,7 +27,8 @@ function Sidebar() {
         {items.map((item, index) => (
           <li
             key={index}
-            className={selected === index ? "selected" : "unselected"}
+            className={`${selected === index ? "selected" : "unselected"} ${index >= 5 ? "special-item" : ""}`} //Añadido código para poder modificar el color de solamente las dos ultimas categorias del sidebar.
+            
             onClick={() => {
               seleccionar(index);
               navigate(`/sidebar/${index}`);
