@@ -12,16 +12,22 @@ html, body {
   justify-content: space-between;
   min-height: 100vh;
   text-align: center;
+  font-family: "Montserrat", sans-serif;
   box-sizing: border-box;
   padding: 80px 20px; /* Asegura que el contenido no se superponga con la navbar */
-  margin-top: 60px; /* Ajusta este valor para asegurar que no se superponga con la navbar */
+  margin-top: 40px; /* Ajusta este valor para asegurar que no se superponga con la navbar */
   overflow: hidden; /* Oculta la barra de desplazamiento */
 }
 
 .highlight {
   color: #00ffbe;
+  font-weight: 800;
 }
 
+.bold {
+font-weight: 800;
+color: black;
+}
 
 .buscador {
   display: flex;
@@ -32,12 +38,14 @@ html, body {
 }
 
 .buscador input {
-  padding: 10px;
+  padding: 8px;
   width: 100%; /* Ajusta el ancho al 100% del contenedor */
   max-width: 400px; /* Ancho máximo para pantallas grandes */
   margin-right:  10px; /* Espacio entre el input y el botón */
   box-sizing: border-box;
   border-radius: 5px;
+  margin-left: 120px;
+  
 }
 
 /* Boton Buscar*/
@@ -49,6 +57,7 @@ html, body {
   border-radius: 5px;
   cursor: pointer;
   font-family: "Montserrat", sans-serif;
+  
 }
 
 
@@ -71,6 +80,7 @@ html, body {
 }
 
 
+
 footer {
   width: 100vw;
   height: 20vh;
@@ -78,18 +88,26 @@ footer {
 }
 
 .container-text {
-  font-size: 40px;
+  font-size: 30px;
   margin-bottom: 20px;
   overflow: hidden;
   box-sizing: border-box;
   padding: 10px;
   position: relative;
-  height: 200px;
+  height: 250px;
+  text-align: left;
+  font-weight: 500;
+  white-space: nowrap; /* Asegura que el texto no se rompa en múltiples líneas */
 }
+
+.textcategorias  {
+  font-size: 25px;
+  font-weight: 500;
+  }
 
 .container-text span {
   display: inline-block;
-  animation: scrollUp 5s linear forwards; /* Esto asegura que la animación se ejecute durante 5 segundos y luego se detenga en el estado final. */
+  animation: scrollUp 3s linear forwards; /* Esto asegura que la animación se ejecute durante 5 segundos y luego se detenga en el estado final. */
 }
 
 
@@ -107,7 +125,7 @@ footer {
 
 @media (max-width: 728px) {
   .container-text {
-    font-size: 36px;
+    font-size: 30px;
   }
 
   .buscador input {
