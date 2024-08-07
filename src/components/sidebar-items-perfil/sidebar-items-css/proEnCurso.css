@@ -15,11 +15,15 @@
     border-radius: 5px;
     cursor: pointer;
     font-family: "Montserrat", sans-serif;
+    font-weight: bold;
 }
-.div-sidebar-element-proEnCurso form{
+.div-sidebar-element-proEnCurso form {
    display: flex;
    flex-direction: row;
    margin-left: 300px;
+}
+.div-sidebar-element-proEnCurso form input {
+    border-radius: 5px;
 }
 .div-sidebar-element-proEnCurso .texto-campos-perfil {
     display: flex;

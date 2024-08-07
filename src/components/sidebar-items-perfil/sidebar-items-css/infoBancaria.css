@@ -23,6 +23,7 @@
     font-family: "Montserrat", sans-serif;
     border-color: transparent;
     background-color: transparent;
+    text-align: center;
 }
 .div-sidebar-element-infoBancaria .cuentasBancarias ul {
     width: 100%;
@@ -38,4 +39,35 @@
 }
 #moneda {
     width: 70%;
+}
+.no-mostrar-form {
+    display: none;
+}
+.mostrar-form {
+    margin-top: 20px;
+    margin-right: 620px;
+}
+.mostrar-form input {
+    border-radius: 5px;
+}
+.mostrar-form select {
+    border-radius: 5px;
+}
+.nueva-cuenta {
+    background-color: #00ffbe;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 7px;
+    margin-right: 1170px;
+}
+.div-sidebar-element-infoBancaria .cuentasBancarias ul li button svg {
+    cursor: pointer;
+} 
+.div-sidebar-element-infoBancaria .cuentasBancarias ul li input {
+    cursor: context-menu;
 }

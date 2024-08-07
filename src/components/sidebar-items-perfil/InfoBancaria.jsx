@@ -8,6 +8,7 @@ function InfoBancaria() {
     const [nombreCuentaBancaria, setNombreCuentaBancaria] = useState("");
     const [pais, setPais] = useState("");
     const [monedaDePago, setMonedaDePago] = useState("EUR");
+    const [cuentaSeleccionada, setCuentaSeleccionada] = useState(null)
     const actualizarNumeroCuenta = (event) => {
         setNumeroCuenta(event.target.value);
     }
@@ -35,12 +36,17 @@ function InfoBancaria() {
           setNumeroCuenta("");
           setNombreCuentaBancaria("");
           setPais("");
-          setMonedaDePago("");
+          setMonedaDePago("EUR");
+          setMostrarForm(false);
     }
     const eliminarCuentaBancaria = (cuenta) => {
         const arrayFiltrado = cuentasBancarias.filter(c => c !== cuenta)
         setCuentasBancarias(arrayFiltrado);
         localStorage.setItem('userInfoBancaria', JSON.stringify(arrayFiltrado));
+    }
+    const seleccionarCuentaBancaria = (cuenta) => {
+      setCuentaSeleccionada(cuenta.nombre);
+      const cuentaSeleccionadaActualizar = localStorage.setItem("userCuentaBancaria", JSON.stringify(cuenta.nombre))
     }
     useEffect(() => {
         const storedProyects = localStorage.getItem('userInfoBancaria');
@@ -48,10 +54,16 @@ function InfoBancaria() {
           const localproyectParsed = JSON.parse(storedProyects);
           setCuentasBancarias(localproyectParsed);
         }
+        const storedAccount = localStorage.getItem('userCuentaBancaria');
+        if (storedAccount) {
+          const storedAccountParsed = JSON.parse(storedAccount);
+          setCuentaSeleccionada(storedAccountParsed);
+        }
       }, []);
     return (
         <div className="div-sidebar-element-infoBancaria">
-         <form onSubmit={actualizarInfoBancaria}>
+        <button className="nueva-cuenta" onClick={() => mostrarForm ? setMostrarForm(false) : setMostrarForm(true)}>Añadir cuenta</button>
+         <form className={mostrarForm ? "mostrar-form" : "no-mostrar-form"} onSubmit={actualizarInfoBancaria}>
             <input 
             type="text" 
             value={numeroCuenta} 
@@ -84,7 +96,7 @@ function InfoBancaria() {
             <div className="cuentasBancarias">
               <ul>
                 {cuentasBancarias.map((cuenta) => (
-                  <li key={cuenta.id}>
+                  <li onClick={() => seleccionarCuentaBancaria(cuenta)} key={cuenta.id}>
                     <div className="texto-campos-perfil">
                       <input type='text' readOnly value={cuenta.numero} />
                       <input type='text' value={cuenta.nombre} readOnly />
@@ -98,7 +110,8 @@ function InfoBancaria() {
                 ))}
               </ul>
             </div>
-          
+          {cuentaSeleccionada != null ? <h3>Cuenta seleccionada actualmente: {cuentaSeleccionada}</h3> : <h3>no tienes ninguna cuenta seleccionada, por favor, elige una de tus cuentas como cuenta de pago por defecto</h3>}
+            
         </div>
       );
 }

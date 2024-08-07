@@ -52,16 +52,18 @@
     display: flex;
     flex-direction: row;
 }
-.buscador {
+.div-sidebar-element-portfolio .buscador-habilidades {
     border-radius: 5px;
     height: 3vh;
     width: 50%;
+    align-self: center;
 }
 .texto-input-habilidades {
     display: flex;
     flex-direction: row;
     gap: 30px;
 }
+
 .habilidadesSeleccionadas {
     display: grid;
     grid-template-columns: repeat(2, minmax(min-content, max-content));
@@ -88,7 +90,7 @@
     .div-sidebar-element-portfolio .texto-input input {
     margin-top: 18px;
     }
-    .div-sidebar-element-portfolio .buscador {
+    .div-sidebar-element-portfolio .buscador-habilidades {
         margin-top: 14px
     }
     .div-sidebar-element-portfolio .liHabilidades {
@@ -171,7 +173,7 @@
     .div-sidebar-element-portfolio .portfolio-habilidades .texto-input .texto-campos-perfil {
         margin-left: -175px;
     }
-   .buscador {
+   .buscador-habilidades {
     width: 35%;
    }
    .div-sidebar-element-portfolio .portfolio-habilidades .texto-input-habilidades .texto-campos-perfil {
@@ -212,7 +214,7 @@
     .div-sidebar-element-portfolio .portfolio-habilidades .texto-input-habilidades .texto-campos-perfil {
        padding-right: 180px;
     }
-    .buscador {
+    .buscador-habilidades {
         font-size: 20px;
         margin-top: 35px;
     }

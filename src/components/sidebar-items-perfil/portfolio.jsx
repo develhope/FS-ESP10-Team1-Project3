@@ -72,7 +72,7 @@ function Portfolio() {
       <div className="texto-input-habilidades">
         <p className="texto-campos-perfil">Habilidades</p>
       <input type="text" 
-      className="buscador"
+      className="buscador-habilidades"
       value={busqueda} 
       onChange={manejarBusqueda} 
       placeholder="Buscar habilidades" ></input></div>

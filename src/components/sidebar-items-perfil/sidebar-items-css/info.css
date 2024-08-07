@@ -64,7 +64,6 @@ border-color: transparent;
 margin-right: 65px;
 }
 .actualizarDatosPerfil {
-    background-color: #faeee7;
     cursor: pointer;
     border-color: transparent;
     border-radius: 5px;
@@ -73,6 +72,8 @@ margin-right: 65px;
     padding-left: 50px;
     padding-right: 50px;
     margin-left: 13%;
+    font-weight: bold;
+    background-color: #00ffbe;
 }
 .userSelectedImage {
     width: 100%;
