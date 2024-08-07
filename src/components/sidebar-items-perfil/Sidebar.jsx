@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
 
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState(0);
   const navigate = useNavigate();
 
   const items = [
