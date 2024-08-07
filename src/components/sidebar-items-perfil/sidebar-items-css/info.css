@@ -1,6 +1,3 @@
-.proximamente {
-    margin-top: 400px;
-}
 .elementsOnSidebar {
     display: flex;
     flex-direction: row;
@@ -20,7 +17,6 @@
 }
 .div-sidebar-element {
     width: 100%;
-    
     display: flex;
     flex-direction: column;
     align-items: center;
