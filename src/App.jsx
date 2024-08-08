@@ -12,9 +12,10 @@ export function App() {
 
   return (
    
-    <div>
+    <div className='app'>
     
     <Navbar/>
+    <div className='content'>
     <Routes>
     <Route path="services" element={<Services/>} />
     <Route path="busqueda" element={<Proyectos/>} />
@@ -23,7 +24,7 @@ export function App() {
     <Route path="/sidebar/*" element={<SidebarApp/>} />
     
     </Routes>
-
+    </div>
     <Footer/>
   
     </div>

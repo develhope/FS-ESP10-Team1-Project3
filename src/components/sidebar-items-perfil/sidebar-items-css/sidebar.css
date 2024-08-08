@@ -9,7 +9,6 @@
     font-weight: 500;
     font-size: 20px;
     z-index: 1;
-    
 }
 .listaSidebar {
     list-style: none;
@@ -32,7 +31,7 @@
     text-align: center;
     border-radius: 30px; /* Botón redondeado */
     padding: 10px 20px; /* Ajustar padding para el botón */
-    font-weight: 600;
+    font-weight: bold;
 }
 
 .selected {

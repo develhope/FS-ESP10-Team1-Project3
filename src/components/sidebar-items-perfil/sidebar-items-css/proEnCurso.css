@@ -6,7 +6,6 @@
     font-family: "Montserrat", sans-serif;
     justify-content: center;
     gap: 35px;
-    margin: 200px;
 }
 .nuevo-proyecto {
     background-color: #00ffbe;
@@ -20,7 +19,7 @@
 .div-sidebar-element-proEnCurso form {
    display: flex;
    flex-direction: row;
-   margin-left: 300px;
+   justify-content: center;
 }
 .div-sidebar-element-proEnCurso form input {
     border-radius: 5px;
@@ -35,7 +34,7 @@
     font-family: "Montserrat", sans-serif;
 }
 .div-sidebar-element-proEnCurso .texto-campos-perfil input {
-width: 16.5vw;
+width: max-content;
 height: min-content;
 padding: 5px;
 margin-top: 25px;
@@ -53,4 +52,157 @@ background-color: transparent;
     flex-direction: column;
     gap: 35px;
     list-style: none;
+    justify-content: center;
+    justify-self: center;
+}
+@media (max-width: 1380px) {
+    .div-sidebar-element-proEnCurso .texto-campos-perfil input {
+        font-size: 15px;
+    }
+    .div-sidebar-element-proEnCurso form input {
+        width: 100px;
+    }
+}
+@media (max-width: 1006px) {
+    .div-sidebar-element-proEnCurso .texto-campos-perfil input {
+        font-size: 10px;
+    }
+    .div-sidebar-element-proEnCurso form input {
+        width: 50px;
+    }
+}
+@media (max-width: 836px) {
+    .div-sidebar-element-proEnCurso {
+        align-items: start;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil {
+        height: min-content;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil input {
+        padding-bottom: 0;
+        padding: 0;
+        width: auto;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .fechaInicio {
+        width: 12.5vw;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .fechafin {
+        width: 14.5vw;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .nombreProyecto {
+        width: 17vw;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .inputPrecio {
+        width: 5vw;
+    }
+}
+@media (max-width: 735px) {
+    .div-sidebar-element-proEnCurso {
+        margin-left: -15px;
+    }
+    .div-sidebar-element-proEnCurso form input {
+        font-size: 10px;
+        height: 1.5vh;
+        width: 40px;
+    }
+    .div-sidebar-element-proEnCurso form {
+        margin-left: 20px;
+    }
+    .nuevo-proyecto {
+        height: 2vh;
+        font-size: 10px;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .nombreProyecto {
+        width: 18vw;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .inputPrecio {
+        width: 6vw;
+    }
+}
+@media (max-width: 540px) {
+    .div-sidebar-element-proEnCurso {
+        margin-top: 150px;
+        align-items: center;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .fechaInicio {
+        width: max-content;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .fechafin {
+        width: max-content;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .nombreProyecto {
+        width: 24vw;
+    }
+    .div-sidebar-element-proEnCurso form {
+        position: relative;
+    }
+}
+@media (max-width: 398px) { 
+     .div-sidebar-element-proEnCurso .texto-campos-perfil .fechafin {
+        width: 20.5vw;
+        font-size: 9px;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .nombreProyecto {
+        width: max-content;
+        font-size: 9px;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .fechaInicio {
+        font-size: 9px;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .inputPrecio {
+        font-size: 9px;
+    }
+}
+@media (min-height: 1000px) { 
+    .div-sidebar-element-proEnCurso {
+        margin-top: 150px;
+        align-items: center;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .fechafin {
+        width: max-content;
+        font-size: 16px;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .nombreProyecto {
+        width: max-content;
+        font-size: 16px;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .fechaInicio {
+        width: max-content;
+        font-size: 16px;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .inputPrecio {
+        width: 6vw;
+        padding-right: 30px;
+        font-size: 16px;
+    }
+    .div-sidebar-element-proEnCurso form input {
+        font-size: 16px;
+        height: 3.5vh;
+        width: 130px;
+    }
+    .nuevo-proyecto {
+        height: 3.8vh;
+        font-size: 16px;
+    }
+}
+@media (min-height: 1300px) { 
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .fechafin {
+        font-size: 22px;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .nombreProyecto {
+        font-size: 22px;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .fechaInicio {
+        font-size: 22px;
+    }
+    .div-sidebar-element-proEnCurso .texto-campos-perfil .inputPrecio {
+        width: 7vw;
+        padding-right: 12px;
+        font-size: 22px;
+    }
+    .div-sidebar-element-proEnCurso form input {
+        font-size: 22px;
+        height: 3.5vh;
+        width: 160px;
+    }
 }

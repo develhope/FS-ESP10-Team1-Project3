@@ -69,7 +69,6 @@ html, body {
   
 }
 
-
 .categorias {
   display: flex;
   flex-wrap: wrap;
@@ -88,8 +87,18 @@ html, body {
   width: 200px;
 }
 
-
-
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  flex: 1;
+}
+main {
+  flex: 1;
+}
+.content {
+  flex: 1;
+}
 footer {
   width: 100vw;
   height: 20vh;
@@ -157,7 +166,7 @@ footer {
   }
 
   .buscador {
-    flex-direction: column; /* Cambia la dirección a columna */
+    flex-direction: column;
     align-items: stretch;
   }
 
