@@ -26,7 +26,7 @@ export function Navbar({ children }) {
     // y actualizamos el estado de autenticación.
     localStorage.removeItem("userInfo");
     setIsAuthenticated(false);
-    navigate("/");
+    window.location.href = `/`;
   };
 
   function toggleMobileMenu() {

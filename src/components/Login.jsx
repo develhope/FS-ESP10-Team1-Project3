@@ -66,7 +66,7 @@ function Login() {
       }
       const userInfo = JSON.stringify(userInfoToStringify);
       localStorage.setItem("userInfo", userInfo);
-      navigate(`/sidebar/0`);
+      window.location.href = `/sidebar/0`;
     } catch (err) {
       setError(err.message);
     } finally {

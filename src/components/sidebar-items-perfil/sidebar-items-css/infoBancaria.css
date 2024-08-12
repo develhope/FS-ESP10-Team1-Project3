@@ -71,3 +71,123 @@
 .div-sidebar-element-infoBancaria .cuentasBancarias ul li input {
     cursor: context-menu;
 }
+@media (max-width: 1575px) {
+    .mostrar-form {
+        margin-right: 420px;
+    }
+    .nueva-cuenta {
+        font-size: 10px;
+        margin-right: 700px;
+        position: relative;
+    }
+    .div-sidebar-element-infoBancaria .texto-campos-perfil input {
+        font-size: 15px;
+    }
+}
+@media (max-width: 1165px) {
+    .div-sidebar-element-infoBancaria .cuentasBancarias ul li {
+        width: 100%;
+    }
+    .div-sidebar-element-infoBancaria {
+        margin-left: 50px;
+    }
+    .nueva-cuenta {
+        margin-right: 400px;
+    }
+}
+@media (max-width: 1000px) {
+    .mostrar-form {
+        margin-right: 0;
+        margin-left: 50px;
+    }
+    .div-sidebar-element-infoBancaria {
+        margin-left: -20px;
+    }
+    .div-sidebar-element-infoBancaria .cuentaActual {
+        font-size: 15px;
+    }
+}
+@media (max-width: 800px) {
+    .nueva-cuenta {
+        margin-right: 300px;
+    }
+    .div-sidebar-element-infoBancaria .cuentasBancarias ul li button svg {
+        width: 25px;
+        height: 25px;
+    } 
+    .div-sidebar-element-infoBancaria .cuentasBancarias ul li button {
+        width: auto;
+        height: auto;
+        margin-right: 50px;
+    }
+    .div-sidebar-element-infoBancaria .cuentaActual {
+        font-size: 10px;
+    }
+}
+@media (min-width: 745px) {
+    #pais {
+      display: block;
+    }
+  }
+  
+  @media(max-width: 744px) {
+    #pais {
+      display: none;
+    }
+    .div-sidebar-element-infoBancaria .texto-campos-perfil input {
+        font-size: 12px;
+    }
+    .div-sidebar-element-infoBancaria .cuentasBancarias ul {
+        gap: 0px;
+    }
+    .nueva-cuenta {
+        margin-right: 100px;
+    }
+    .div-sidebar-element-infoBancaria .cuentaActual {
+        margin-left: 20px;
+    }
+  }
+  @media(min-height: 1000px) {
+    .div-sidebar-element-infoBancaria .texto-campos-perfil input {
+        font-size: 20px;
+    }
+    .nueva-cuenta {
+        font-size: 20px;
+    }
+    .div-sidebar-element-infoBancaria .cuentaActual {
+        font-size: 20px;
+    }
+  }
+  @media(min-height: 1300px) {
+    .div-sidebar-element-infoBancaria .texto-campos-perfil input {
+        font-size: 30px;
+    }
+    .nueva-cuenta {
+        font-size: 30px;
+    }
+    .div-sidebar-element-infoBancaria .cuentaActual {
+        font-size: 30px;
+    }
+    .mostrar-form input {
+        font-size: 25px;
+    }
+    .mostrar-form select {
+        font-size: 25px;
+    }
+    .mostrar-form {
+        margin-left: 0;
+    }
+    .div-sidebar-element-infoBancaria .nuevo-proyecto {
+        font-size: 25px;
+    }
+    .div-sidebar-element-infoBancaria .texto-campos-perfil {
+        padding-bottom: 40px;
+    }
+    .div-sidebar-element-infoBancaria {
+        margin-left: 0;
+        margin-right: 100px;
+    }
+    #pais {
+        display: none;
+      }
+  }
