@@ -52,6 +52,8 @@
   flex-direction: row;
   gap: 20px;
 }
+
+
 .navbar-button button {
   background-color: #00ffbe;
   color: black;
@@ -62,15 +64,43 @@
   font-family: "Montserrat", sans-serif;
 }
 
+.navbar-button .button-logout {
+  background-color: #292b2b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  margin-right: 50px;
+}
+
 .navbar-button button:hover {
   background-color: #0b9270;
 }
+
+
+.navbar-button .button-logout:hover {
+  background-color: #858d8a;
+}
+
 
 
 .navbar-menu-icon {
   display: none;
   cursor: pointer;
   font-size: 24px;
+}
+
+.icon-navbar {
+  display: flex;
+  align-items: center; /* Alinea los elementos verticalmente */
+
+}
+.icon-navbar .icon {
+margin-right: 50px;
+font-size: 25px;
+cursor: pointer;
 }
 
 @media (max-width: 768px) {

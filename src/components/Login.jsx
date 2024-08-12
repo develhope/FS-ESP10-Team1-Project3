@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import "./css/Login.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import anonimo from './sidebar-items-perfil/assets-sidebar/anonimo.jpg';
+
 export function anonimus() {
 return (
   <img src={anonimo}></img>
@@ -133,6 +134,7 @@ function Login() {
                     placeholder="example@gmail.com"
                     required
                     value={email}
+                    autocomplete="username"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </p>
@@ -143,6 +145,7 @@ function Login() {
                     placeholder="*********"
                     required
                     value={password}
+                    autoComplete="current-password" 
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </p>
