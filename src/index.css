@@ -14,7 +14,7 @@ html, body {
   text-align: left;
   box-sizing: border-box;
   padding: 30px 20px; /* Asegura que el contenido no se superponga con la navbar */
-  margin-top: 40px; /* Ajusta este valor para asegurar que no se superponga con la navbar */
+  margin-top: 60px; /* Ajusta este valor para asegurar que no se superponga con la navbar */
   overflow: hidden; /* Oculta la barra de desplazamiento */
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
@@ -28,7 +28,7 @@ html, body {
 
 .frase-categoria{
   font-size: 35px;
-  margin-bottom: 100px;
+  margin-bottom: 80px;
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 40px;
@@ -38,9 +38,10 @@ html, body {
 .buscador {
   display: flex;
   align-items: center;
+  width: 45%;
   margin: 0 auto;
   margin-left: 33%;
-  margin-top: 230px;
+  margin-top: 130px;
   margin-bottom: 100px;
   
   
@@ -53,7 +54,7 @@ html, body {
   margin-right:  10px; /* Espacio entre el input y el botón */
   box-sizing: border-box;
   border-radius: 5px;
-  margin-left: 120px;
+  /* margin-left: 20px; */
   
 }
 
@@ -99,39 +100,31 @@ main {
 .content {
   flex: 1;
 }
-footer {
-  width: 100vw;
-  height: 20vh;
-  background-color: #00ffbe;
-}
+
 
 .container-text {
   font-size: 48px;
-  margin-bottom: 20px;
-  /* overflow: hidden; */
+  margin-bottom: 50px;
   box-sizing: border-box;
   padding: 10px;
   position: relative;
-  height: 250px;
+  height:300px;
   text-align: left;
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap; /* Asegura que el texto no se rompa en múltiples líneas */
 }
 
-.textcategorias  {
-  font-size: 25px;
-  font-weight: 500;
-  }
 
-.container-text span {
+  .animated-text  {
   display: inline-block;
+  line-height: 1.2;
   animation: scrollUp 3s linear forwards; /* Esto asegura que la animación se ejecute durante 5 segundos y luego se detenga en el estado final. */
 }
 
 
 @keyframes scrollUp {
   0% {
-    transform: translateY(300%); /* Comienza desde abajo */
+    transform: translateY(100%); /* Comienza desde abajo */
   }
   100% {
     transform: translateY(0); /* Se detiene en la posición inicial */
@@ -139,15 +132,21 @@ footer {
 }
 
 
+footer {
+  width: 100vw;
+  height: 20vh;
+  background-color: #00ffbe;
+}
 /*  <--------------------- RESPONSIVE ----------------->*/
+/* 
 
-@media (max-width: 728px) {
+/*@media (max-width: 728px) {
   .container-text {
     font-size: 30px;
   }
 
   .buscador input {
-    width: 80%; /* Aumenta el ancho en dispositivos pequeños */
+    width: 80%; /* Aumenta el ancho en dispositivos pequeños 
   }
 
   .buscador button {
@@ -185,4 +184,4 @@ footer {
     width: 120px;
     height: 50px;
   }
-}
+} */

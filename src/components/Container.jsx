@@ -26,28 +26,23 @@ export function Container() {
       <p className="container-text">
 
       {isAuthenticated ? (
-      <span>
-        {" "}
-        Busca por etiquetas o <br /> usa el buscador y accede a <br /> los ultimos empleos ofertados{" "} 
+      <span className="animated-text">
+       Busca por etiquetas o <br/> usa el buscador y accede a <br/> los ultimos empleos ofertados
       </span>
-      
     ) : (
      <>
-        <span>
-          {" "}
-          Únete a una amplia red de <br /> contactos dentro de tu sector.{" "}
+        <span className="animated-text">
+          Únete a una amplia red de <br/> contactos dentro de tu sector.
+        </span>
+        <br/><br/>
+        <span className="animated-text">
+          Tanto si eres solicitante o <br /> buscas proyectos, en
         </span>
         <br />
-        <br />
-        <span>
-          Tanto si eres solicitante o <br /> buscas proyectos, en{" "}
-        </span>
-        <br />
-        <strong>Freelance</strong>
-        <span className="highlight">
-          <strong>Hub</strong>{" "}
-        </span>{" "}
-        es posible!
+        <span className="animated-text">
+        <strong className="animated-text">Freelance</strong>
+          <strong className="highlight animated-text">Hub</strong>
+        <span className="animated-text">es posible!</span> </span>
         </>
         )}
       </p>
