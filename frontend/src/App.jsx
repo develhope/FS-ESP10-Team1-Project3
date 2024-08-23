@@ -7,6 +7,7 @@ import { Services } from "./components/Services";
 import Login from "./components/Login";
 import { Footer } from "./components/Footer";
 import SidebarApp from "./components/sidebar-items-perfil/SidebarApp";
+import UserList from "./components/UserList";
 
 export function App() {
 
@@ -20,6 +21,7 @@ export function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Container />} />
           <Route path="/sidebar/*" element={<SidebarApp />} />
+          <Route path="/UserList/*" element={<UserList />} />
         </Routes>
       </div>
       <Footer />
