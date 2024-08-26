@@ -21,7 +21,7 @@ export function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Container />} />
           <Route path="/sidebar/*" element={<SidebarApp />} />
-          <Route path="/UserList/*" element={<UserList />} />
+          <Route path="/UserList/" element={<UserList />} />
         </Routes>
       </div>
       <Footer />

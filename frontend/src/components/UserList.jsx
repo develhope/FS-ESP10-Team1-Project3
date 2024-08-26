@@ -21,11 +21,15 @@ function UserList() {
     return (
         <div>
             <h2>User List</h2>
-            <ul>
-                {users.map(user => (
-                    <li key={user.user_id}>{user.username}</li>
-                ))}
-            </ul>
+            {users.length > 0 ? (
+                <ul>
+                    {users.map(user => (
+                        <li key={user.user_id}>{user.username}</li>
+                    ))}
+                </ul>
+            ) : (
+                <p>No users found.</p>
+            )}
         </div>
     );
 }
