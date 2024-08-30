@@ -2,6 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const pool = require('../config/db');
 require('dotenv').config();
 
 // Configura CORS primero
@@ -26,7 +27,31 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
+const createUsersTable = async () => {
+    await pool.query(`
+        DROP TABLE IF EXISTS users;
+        DROP TYPE IF EXISTS users;
+         create table users (
+    user_id serial primary key,
+    username varchar(50) not null unique,
+    email varchar(100) not null unique,
+    password_hash varchar(50) not null,
+    full_name varchar(50) not null,
+    date_of_birth timestamp not null
+)`);
+    console.log('Tabla de usuarios verificada o creada');
+};
+createUsersTable();
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+const startServer = async () => {
+    try {
+        await createUsersTable();
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    } catch (error) {
+        console.error('Error al iniciar el servidor:', error);
+        process.exit(1); // Salir del proceso si hay un error crítico
+    }
+};
+startServer();
