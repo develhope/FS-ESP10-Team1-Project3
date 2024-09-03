@@ -33,11 +33,12 @@ const createUsersTable = async () => {
         DROP TYPE IF EXISTS users;
          create table users (
     user_id serial primary key,
-    username varchar(50) not null unique,
+    username varchar(50) unique,
     email varchar(100) not null unique,
     password_hash varchar(50) not null,
-    full_name varchar(50) not null,
-    date_of_birth timestamp not null
+    full_name varchar(50),
+    date_of_birth timestamp not null,
+    token TEXT 
 )`);
     console.log('Tabla de usuarios verificada o creada');
 };

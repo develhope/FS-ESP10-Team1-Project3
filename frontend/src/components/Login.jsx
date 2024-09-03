@@ -10,6 +10,10 @@ return (
 )
 }
 function Login() {
+  const [loginCorreo, setLoginCorreo] = useState(false);
+  const [emailLoginCorreo, setEmailLoginCorreo] = useState("");
+  const [passwordLoginCorreo, setPasswordLoginCorreo] = useState("");
+  //
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [birthDate, setBirthDate] = useState("");
@@ -36,6 +40,9 @@ function Login() {
   const [aContent, setAcontent] = useState(
     initialMode === "register" ? enlaceContent2 : enlaceContent1
   );
+  const mostrarLoginCorreo = () => {
+    setLoginCorreo(!loginCorreo);
+  };
 
   useEffect(() => {
     if (location.state?.mode) {
@@ -55,22 +62,84 @@ function Login() {
     event.preventDefault();
     setLoading(true);
     setError(null);
-    try {
-      const userInfoToStringify = {
-        email: email,
-        password: password,
-        birthDate: birthDate,
-        fullName: "Nombre completo",
-        userName: "Nombre usuario",
-        userImage: anonimo
+    if (aContent === "registrarte") {
+      try {
+        const loginDataToBackend = {
+          email: emailLoginCorreo,
+          password_hash: passwordLoginCorreo
+        };
+    
+        const response = await fetch('http://localhost:5000/api/users/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(loginDataToBackend)
+        });
+      
+    
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Error en el inicio de sesión');
+        }
+        const data = await response.json();
+    
+    
+        localStorage.setItem("token", data.token);
+    
+        const userLoginInfo = JSON.stringify({
+          email: emailLoginCorreo,
+          userName: (data.username!=null)? data.username: "Nombre usuario",
+          fullName: (data.full_name!=null)? data.full_name: "Nombre completo",
+          userImage: (data.user_image!=null)? data.user_image: anonimo,
+        });
+        localStorage.setItem("userInfo", userLoginInfo);
+        window.location.href = `/sidebar/0`;
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
-      const userInfo = JSON.stringify(userInfoToStringify);
-      localStorage.setItem("userInfo", userInfo);
-      window.location.href = `/sidebar/0`;
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+      } else {
+      try {
+        const userDataTobackEnd = {
+          username: null,
+          email: email,
+          password_hash: password,
+          full_name: null,
+          date_of_birth: birthDate
+        };
+    
+        const response = await fetch('http://localhost:5000/api/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userDataTobackEnd)
+        });
+    
+        if (!response.ok) {
+          throw new Error('Error en el registro');
+        }
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        const userInfoToStringify = {
+          email: email,
+          password: password,
+          birthDate: birthDate,
+          fullName: "Nombre completo",
+          userName: "Nombre usuario",
+          userImage: anonimo
+        }
+        const userInfo = JSON.stringify(userInfoToStringify);
+        localStorage.setItem("userInfo", userInfo);
+        window.location.href = `/sidebar/0`;
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+      
     }
   };
 
@@ -224,7 +293,7 @@ function Login() {
                 </button>
               </div>
               <div>
-                <button className="google-correo">
+                <button className="google-correo" onClick={mostrarLoginCorreo}>
                   <svg
                     width="16"
                     height="12"
@@ -235,6 +304,23 @@ function Login() {
                   </svg>
                   Continuar con el correo electrónico
                 </button>
+                {loginCorreo && (
+                  <form className="formularioLogin" onSubmit={handleFormSubmit}>
+                    <input
+                      type="email"
+                      placeholder="Correo electrónico"
+                      value={emailLoginCorreo}
+                      onChange={(e) => setEmailLoginCorreo(e.target.value)}
+                    />
+                    <input
+                      type="password"
+                      placeholder="Contraseña"
+                      value={passwordLoginCorreo}
+                      onChange={(e) => setPasswordLoginCorreo(e.target.value)}
+                    />
+                    <button type="submit">Enviar</button>
+                  </form>
+                )}
               </div>
             </>
           )}

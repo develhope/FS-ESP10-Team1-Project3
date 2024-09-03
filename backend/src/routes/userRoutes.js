@@ -6,6 +6,7 @@ const userController = require('../controllers/userController');
 router.get('/users', userController.getAllUsers);
 router.get('/users/:userId', userController.getUser);
 router.post('/users', userController.createUser);
+router.post('/users/login', userController.logIn);
 router.get('/test', (req, res) => {
     res.json({ message: 'Server is running' });
 });
