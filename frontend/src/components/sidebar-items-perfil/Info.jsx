@@ -5,10 +5,7 @@ import anonimo from './assets-sidebar/anonimo.jpg';
 function Info() {
   const userDataObject = localStorage.getItem("userInfo");
   const userDataObjectJson = JSON.parse(userDataObject);
-  const [nombreCompleto, setNombreCompleto] = useState(userDataObjectJson?.fullName || "Nombre completo");
-  const [nombreUsuario, setNombreUsuario] = useState(userDataObjectJson?.userName || "Nombre de usuario");
- 
-  
+  const [nombreCompleto, setNombreCompleto] = useState("Nombre completo");
   const [fechaNacimiento, setFechaNacimiento] = useState("");
   const [correo, setCorreo] = useState("correo electrónico");
   const [contraseña, setContraseña] = useState("contraseña");
@@ -18,7 +15,6 @@ function Info() {
     event.preventDefault();
     const userData = {
       fullName: nombreCompleto,
-      userName: nombreUsuario,
       birthDate: fechaNacimiento,
       email: correo,
       password: contraseña,
@@ -26,14 +22,6 @@ function Info() {
     };
     const userDataStrings = JSON.stringify(userData);
     localStorage.setItem("userInfo", userDataStrings);
-  };
-  const actualizarNombreCompleto = (event) => {
-    event.preventDefault();
-    setNombreCompleto(event.target.value);
-  };
-  const actualizarNombreUsuario = (event) => {
-    event.preventDefault();
-    setNombreUsuario(event.target.value);
   };
   const subirNuevaImagen = (event) => {
     const file = event.target.files[0];
@@ -47,6 +35,7 @@ function Info() {
   };
   useEffect(() => {
   if (userDataObject) {
+        setNombreCompleto(userDataObjectJson.fullName);
         setFechaNacimiento(userDataObjectJson.birthDate);
         setCorreo(userDataObjectJson.email);
         setContraseña(userDataObjectJson.password);
@@ -74,18 +63,7 @@ function Info() {
             type="text"
             className="inputs-perfil"
             value={nombreCompleto}
-            onFocus={(() => {setNombreCompleto("")})}
-            onChange={actualizarNombreCompleto}
-          ></input>
-        </div>
-        <div className="texto-input">
-          <p className="texto-campos-perfil">Nombre de usuario</p>
-          <input
-            type="text"
-            className="inputs-perfil"
-            value={nombreUsuario}
-            onFocus={(() => {setNombreUsuario("")})}
-            onChange={actualizarNombreUsuario}
+            readOnly
           ></input>
         </div>
         <div className="texto-input dateInput">

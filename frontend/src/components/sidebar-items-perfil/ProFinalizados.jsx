@@ -70,7 +70,7 @@ function ProFinalizados() {
             type="text"
             value={nombreProyecto}
             onChange={actualizarNombreProyecto}
-            maxlength="16"
+            maxLength="16"
             placeholder="Nombre del proyecto"
           />
           <input
@@ -137,7 +137,7 @@ function ProFinalizados() {
             <input
               type="text"
               value={nombreProyecto}
-              maxlength="16"
+              maxLength="16"
               onChange={actualizarNombreProyecto}
               placeholder="Nombre del proyecto"
             />

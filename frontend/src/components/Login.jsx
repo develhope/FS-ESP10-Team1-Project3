@@ -14,6 +14,7 @@ function Login() {
   const [emailLoginCorreo, setEmailLoginCorreo] = useState("");
   const [passwordLoginCorreo, setPasswordLoginCorreo] = useState("");
   //
+  const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [birthDate, setBirthDate] = useState("");
@@ -84,17 +85,17 @@ function Login() {
         }
         const data = await response.json();
     
-    
         localStorage.setItem("token", data.token);
     
         const userLoginInfo = JSON.stringify({
           email: emailLoginCorreo,
-          userName: (data.username!=null)? data.username: "Nombre usuario",
+          password: passwordLoginCorreo,
+          birthDate: new Date(data.date_of_birth).toISOString().split('T')[0],
           fullName: (data.full_name!=null)? data.full_name: "Nombre completo",
           userImage: (data.user_image!=null)? data.user_image: anonimo,
         });
         localStorage.setItem("userInfo", userLoginInfo);
-        window.location.href = `/sidebar/0`;
+        window.location.href = `/`;
       } catch (err) {
         setError(err.message);
       } finally {
@@ -103,10 +104,9 @@ function Login() {
       } else {
       try {
         const userDataTobackEnd = {
-          username: null,
           email: email,
           password_hash: password,
-          full_name: null,
+          full_name: nombre,
           date_of_birth: birthDate
         };
     
@@ -127,13 +127,12 @@ function Login() {
           email: email,
           password: password,
           birthDate: birthDate,
-          fullName: "Nombre completo",
-          userName: "Nombre usuario",
+          fullName: nombre,
           userImage: anonimo
         }
         const userInfo = JSON.stringify(userInfoToStringify);
         localStorage.setItem("userInfo", userInfo);
-        window.location.href = `/sidebar/0`;
+        window.location.href = `/`;
       } catch (err) {
         setError(err.message);
       } finally {
@@ -196,14 +195,25 @@ function Login() {
           {aContent === "iniciar sesión" ? (
             <div>
               <form className="formularioLogin" onSubmit={handleFormSubmit}>
+              <p>
+                  Nombre completo:{" "}
+                  <input
+                    type="text"
+                    placeholder="Nombre completo"
+                    required
+                    value={nombre}
+                    autoComplete="nombre"
+                    onChange={(e) => setNombre(e.target.value)}
+                  />
+                </p>
                 <p>
                   Email:{" "}
                   <input
                     type="email"
-                    placeholder="example@gmail.com"
+                    placeholder="Ejemplo@gmail.com"
                     required
                     value={email}
-                    autocomplete="username"
+                    autoComplete="email"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </p>
@@ -233,7 +243,7 @@ function Login() {
               </form>
 
               <div className="otraOpcion">
-                <p>o tambien puedes:</p>
+                <p>O tambien puedes:</p>
                 <button className="google-correo">
                   <svg
                     width="16"

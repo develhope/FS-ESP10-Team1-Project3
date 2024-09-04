@@ -9,11 +9,11 @@ import { faFacebook, faGithub, faInstagram } from "@fortawesome/free-brands-svg-
 export function Footer() {
   return (
     <div>
-      <footer class="bg-gray-100">
-        <div class="container-footer">
-          <div class="footer-links">
+      <footer className="bg-gray-100">
+        <div className="container-footer">
+          <div className="footer-links">
             <div>
-              <p class="footer-title">Freelance<span className="highlight">Hub</span></p>
+              <p className="footer-title">Freelance<span className="highlight">Hub</span></p>
               <p className="footer-text">Es una plataforma dedicada a conectar freelancers con oportunidades de trabajo en todo el mundo. <br/>
               Nuestra misión es facilitar el acceso a proyectos para profesionales independientes y <br/> ayudar a las empresas a encontrar el talento que necesitan.</p>
               <ul>
@@ -39,9 +39,9 @@ export function Footer() {
               
             </div>
           </div>
-          <div class="footer-bottom">
+          <div className="footer-bottom">
           
-            <ul class="footer-social">
+            <ul className="footer-social">
               <li>
               <FontAwesomeIcon icon={faTwitter} />
               </li>
@@ -56,7 +56,7 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          <p class="footer-text">© 2024 FreelanceHub. Todos los derechos reservados.</p>
+          <p className="footer-text">© 2024 FreelanceHub. Todos los derechos reservados.</p>
         </div>
         
       </footer>

@@ -29,13 +29,11 @@ app.use((err, req, res, next) => {
 
 const createUsersTable = async () => {
     await pool.query(`
-        DROP TABLE IF EXISTS users;
-        DROP TYPE IF EXISTS users;
-         create table users (
-    user_id serial primary key,
-    username varchar(50) unique,
+        CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+         create table IF NOT EXISTS users (
+    user_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     email varchar(100) not null unique,
-    password_hash varchar(50) not null,
+    password_hash TEXT not null,
     full_name varchar(50),
     date_of_birth timestamp not null,
     token TEXT 

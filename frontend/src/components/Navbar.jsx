@@ -12,20 +12,66 @@ export function Navbar({ children }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const register = localStorage.getItem("userInfo");
-    if (register) {
-      setIsAuthenticated(true); // Si existe userInfo en localStorage, el usuario está autenticado
-    }
+    const checkToken = async () => {
+      const token = localStorage.getItem('token');
+      
+      if (!token) {
+      throw new Error('No hay token en el localStorage');
+      }
+  
+      try {
+        const response = await fetch('http://localhost:5000/api/users/token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ token }),
+        });
+    
+        if (!response.ok) {
+          throw new Error('Error al verificar el token');
+        }
+    
+        const data = await response.json();
+        if (data.loggedIn) {
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+          }
+      } catch (error) {
+        console.error('Error en la verificación del token:', error);
+      }
+    };
+    checkToken();
   }, []);
 
   // Función para manejar la autenticación
 
-  const handleLogout = () => {
-    // Al cerrar sesión, eliminamos la información del usuario del localStorage
-    // y actualizamos el estado de autenticación.
-    localStorage.removeItem("userInfo");
-    setIsAuthenticated(false);
-    window.location.href = `/`;
+  const handleLogout = async () => {
+    // Obtén el token del localStorage
+    const token = localStorage.getItem("token");
+  
+    try {
+      // Realiza el fetch para cerrar sesión
+      const response = await fetch('http://localhost:5000/api/users/logout', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ token: token }) // Si el servidor espera el token en el cuerpo
+      });
+  
+      if (!response.ok) {
+        throw new Error('Logout failed');
+      }
+      localStorage.removeItem("userInfo");
+      localStorage.removeItem("token");
+      setIsAuthenticated(false);
+      window.location.href = `/`;
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
   };
 
   function toggleMobileMenu() {
@@ -89,9 +135,6 @@ export function Navbar({ children }) {
                 }
               >
                 Registrarte
-              </button>
-              <button onClick={() => navigate("/sidebar")}>
-                boton sidebar de prueba
               </button>
             </div>
           )}
