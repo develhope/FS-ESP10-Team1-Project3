@@ -7,10 +7,37 @@ export function Container() {
 
   // Efecto para verificar la autenticación al montar el componente
   useEffect(() => {
-    const register = localStorage.getItem("userInfo");
-    if (register) {
-      setIsAuthenticated(true);
-    }
+    const checkToken = async () => {
+      const token = localStorage.getItem('token');
+      
+      if (!token) {
+      throw new Error('No hay token en el localStorage');
+      }
+  
+      try {
+        const response = await fetch('http://localhost:5000/api/users/token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ token }),
+        });
+    
+        if (!response.ok) {
+          throw new Error('Error al verificar el token');
+        }
+    
+        const data = await response.json();
+        if (data.loggedIn) {
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+          }
+      } catch (error) {
+        console.error('Error en la verificación del token:', error);
+      }
+    };
+    checkToken();
   }, []);
 
 

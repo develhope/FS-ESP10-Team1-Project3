@@ -16,7 +16,7 @@ const getUserById = async (userId) => {
 const createUser = async (user) => {
   const { email, password_hash, full_name, date_of_birth } = user;
   const result = await pool.query(
-    "INSERT INTO users ( email, password_hash, full_name, date_of_birth) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+    "INSERT INTO users ( email, password_hash, full_name, date_of_birth) VALUES ($1, $2, $3, $4) RETURNING *",
     [ email, password_hash, full_name, date_of_birth ]
   );
   return result.rows[0];
