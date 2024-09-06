@@ -37,7 +37,18 @@ const createUsersTable = async () => {
     full_name varchar(50),
     date_of_birth timestamp not null,
     token TEXT 
-)`);
+);
+
+create table IF NOT EXISTS infoBancaria (
+    propietario UUID,
+    titular varchar(100), 
+   numero_cuenta varchar(100),
+   pais varchar(50),
+   moneda varchar(25),
+   PRIMARY KEY (propietario, numero_cuenta),
+   FOREIGN KEY (propietario) REFERENCES users(user_id)
+);
+`);
     console.log('Tabla de usuarios verificada o creada');
 };
 createUsersTable();
