@@ -75,6 +75,15 @@ const createTableFunction = async () => {
         PRIMARY KEY (propietario, numero_cuenta),
         FOREIGN KEY (propietario) REFERENCES users(user_id)
     );
+
+`);
+
+//Tabla skills:
+    await pool.query(`
+    CREATE TABLE IF NOT EXISTS skills (
+        skill_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        name VARCHAR(100) NOT NULL
+    );
 `);
 
     console.log("Tabla infoBancaria verificada o creada");

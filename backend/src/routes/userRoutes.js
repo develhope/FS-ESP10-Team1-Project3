@@ -21,4 +21,6 @@ router.get('/bankInfo', bankController.getAllAccounts);
 router.post('/bankInfo', bankController.createAcc);
 
 module.exports = router;
- 
+
+//Tabla skills routes
+router.get('/skills', skillsController.getAllSkills);
