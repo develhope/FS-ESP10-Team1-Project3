@@ -29,7 +29,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Internal server error" });
 });
 
-const createUsersTable = async () => {
+const createTableFunction = async () => {
   try {
     // Creamos la extensión pgcrypto:
     await pool.query(`CREATE EXTENSION IF NOT EXISTS "pgcrypto";`);
@@ -47,10 +47,12 @@ const createUsersTable = async () => {
     );
 `);
     console.log("Tabla de usuarios verificada o creada");
+   
 
     // Tabla Proyectos:
     await pool.query(`
     CREATE TABLE IF NOT EXISTS projects (
+    
     project_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(100) NOT NULL,
     description TEXT,
@@ -81,12 +83,12 @@ const createUsersTable = async () => {
   }
 };
 
-// createUsersTable();
+// createTableFunction();
 const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
   try {
-    await createUsersTable();
+    await createTableFunction();
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });

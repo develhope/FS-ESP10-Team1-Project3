@@ -4,8 +4,10 @@
   "main": "src/routes/app.js",
   "scripts": {
     "start": "node src/routes/app.js",
-    "dev": "nodemon src/routes/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon --legacy-watch src/routes/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "kill-port": "npx kill-port 5000 5001"
+
   },
   "keywords": [],
   "author": "",
@@ -17,7 +19,9 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-    "nodemon": "^3.1.4",
     "pg": "^8.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
   }
 }
