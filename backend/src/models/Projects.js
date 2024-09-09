@@ -8,7 +8,7 @@ const getProjects = async () => {
     return result.rows; 
 };
 
-const getProjectById = async () => {
+const getProjectById = async (id) => {
     const result = await pool.query('SELECT * FROM projects WHERE id = $1', [id]);
     return result.rows[0];
   };
@@ -16,7 +16,7 @@ const getProjectById = async () => {
 
 const createProject = async (creator_id, name, description) => {
     const result = await pool.query(
-"INSERT INTO users ( creator_id, name, description) VALUES ($1, $2, $3) RETURNING *", [ creator_id, name, description ]);
+"INSERT INTO projects ( creator_id, name, description) VALUES ($1, $2, $3) RETURNING *", [ creator_id, name, description ]);
     return result.rows[0];
   };
 

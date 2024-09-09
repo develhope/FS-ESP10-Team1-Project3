@@ -30,5 +30,5 @@ router.get('/skills', skillsController.getAllSkills);
 //Tabla Projects ruotes
 
 router.get('/proyects', proyectsController.getAllProjects);
-router.get('/proyects:proyectId', proyectsController.getProject);
+router.get('/proyects:proyectId', proyectsController.getProjectById);
 router.post('/proyects', proyectsController.createProject);
