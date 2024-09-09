@@ -77,13 +77,13 @@ const createTableFunction = async () => {
     await pool.query(`
     CREATE TABLE IF NOT EXISTS projects (
         id UUID PRIMARY KEY,
-        creator_id UUID REFERENCES users(id) ON DELETE SET NULL,
+        creator_id UUID REFERENCES users(user_id) ON DELETE SET NULL,
         name VARCHAR(255) NOT NULL,
         description TEXT,
         status BOOLEAN DEFAULT FALSE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-        developer_id UUID REFERENCES users(id) ON DELETE SET NULL,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        developer_id UUID REFERENCES users(user_id) ON DELETE SET NULL
     );
 `);
 
