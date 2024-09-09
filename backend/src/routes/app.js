@@ -56,7 +56,7 @@ const createTableFunction = async () => {
         numero_cuenta VARCHAR(100),
         pais VARCHAR(50),
         moneda VARCHAR(25),
-        seleccionada int,
+        seleccionada BOOLEAN DEFAULT FALSE,
         PRIMARY KEY (propietario, numero_cuenta),
         FOREIGN KEY (propietario) REFERENCES users(user_id)
     );
@@ -83,8 +83,8 @@ const createTableFunction = async () => {
         description TEXT,
         status BOOLEAN DEFAULT FALSE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-        developer_id UUID REFERENCES users(id) ON DELETE SET NULL,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        developer_id UUID REFERENCES users(id) ON DELETE SET NULL
     );
 `);
 

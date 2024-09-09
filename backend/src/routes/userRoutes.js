@@ -19,9 +19,10 @@ router.get('/test', (req, res) => {
 });
 
 //tabla infobancaria routes
-router.get('/bankInfo', bankController.getAllAccounts);
+router.post('/bankInfo/filterByToken', bankController.getAllAccountsByToken);
 router.post('/bankInfo', bankController.createAcc);
 router.delete('/bankInfo', bankController.deleteAcc);
+router.put('/bankInfo/selected', bankController.selectAcc);
 
 module.exports = router;
 
