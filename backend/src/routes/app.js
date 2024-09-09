@@ -47,22 +47,6 @@ const createTableFunction = async () => {
     );
 `);
     console.log("Tabla de usuarios verificada o creada");
-   
-
-    // Tabla Proyectos:
-    await pool.query(`
-    CREATE TABLE IF NOT EXISTS projects (
-    
-    project_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    name VARCHAR(100) NOT NULL,
-    description TEXT,
-    start_date TIMESTAMP NOT NULL,
-    end_date TIMESTAMP,
-    owner_id UUID,
-    FOREIGN KEY (owner_id) REFERENCES users(user_id)
- );
-`);
-    console.log("Tabla de proyectos verificada o creada");
 
     //Tabla infoBancaria:
     await pool.query(`
@@ -75,10 +59,11 @@ const createTableFunction = async () => {
         PRIMARY KEY (propietario, numero_cuenta),
         FOREIGN KEY (propietario) REFERENCES users(user_id)
     );
-
+      
 `);
+    console.log("Tabla de infobancaria verificada o creada");
 
-//Tabla skills:
+    //Tabla skills:
     await pool.query(`
     CREATE TABLE IF NOT EXISTS skills (
         skill_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -86,7 +71,24 @@ const createTableFunction = async () => {
     );
 `);
 
-    console.log("Tabla infoBancaria verificada o creada");
+    console.log("Tabla Skills verificada o creada");
+
+    // Tabla Projects:
+    await pool.query(`
+    CREATE TABLE IF NOT EXISTS projects (
+        id UUID PRIMARY KEY,
+        creator_id UUID REFERENCES users(id) ON DELETE SET NULL,
+        name VARCHAR(255) NOT NULL,
+        description TEXT,
+        status BOOLEAN DEFAULT FALSE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        developer_id UUID REFERENCES users(id) ON DELETE SET NULL,
+    );
+`);
+
+    console.log("Tabla de proyectos verificada o creada");
+
   } catch (error) {
     console.error("Error al crear las tablas o la extensión:", error);
   }

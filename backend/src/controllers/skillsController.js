@@ -9,4 +9,4 @@ const getAllSkills = async (req, res) => {
    }
 };
 
-module.exports = { getAllSkills };
+module.exports = { getAllSkills};

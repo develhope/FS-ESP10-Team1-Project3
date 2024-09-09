@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const bankController = require('../controllers/bankController');
+const skillsController = require('../controllers/skillsController');
+const proyectsController = require('../controllers/projectsController');
 
 //tabla users routes
 router.get('/users', userController.getAllUsers);
@@ -24,3 +26,9 @@ module.exports = router;
 
 //Tabla skills routes
 router.get('/skills', skillsController.getAllSkills);
+
+//Tabla Projects ruotes
+
+router.get('/proyects', proyectsController.getAllProjects);
+router.get('/proyects:proyectId', proyectsController.getProject);
+router.post('/proyects', proyectsController.createProject);
