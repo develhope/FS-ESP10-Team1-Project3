@@ -62,7 +62,7 @@ function InfoBancaria() {
         if (storedAccount) {
           const storedAccountParsed = JSON.parse(storedAccount);
           setCuentaSeleccionada(storedAccountParsed);
-        }
+        } 
         const handleResize = () => {
           const width = window.innerWidth;
           setMostrarMoneda(width > 845);

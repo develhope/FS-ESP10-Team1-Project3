@@ -72,6 +72,7 @@ const createTableFunction = async () => {
         numero_cuenta VARCHAR(100),
         pais VARCHAR(50),
         moneda VARCHAR(25),
+        seleccionada int,
         PRIMARY KEY (propietario, numero_cuenta),
         FOREIGN KEY (propietario) REFERENCES users(user_id)
     );

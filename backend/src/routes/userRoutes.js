@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const bankController = require('../controllers/bankController');
+const skillsController = require('../controllers/skillsController');
 
 //tabla users routes
 router.get('/users', userController.getAllUsers);
@@ -19,6 +20,7 @@ router.get('/test', (req, res) => {
 //tabla infobancaria routes
 router.get('/bankInfo', bankController.getAllAccounts);
 router.post('/bankInfo', bankController.createAcc);
+router.delete('/bankInfo', bankController.deleteAcc);
 
 module.exports = router;
 
