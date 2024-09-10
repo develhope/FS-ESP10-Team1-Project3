@@ -71,6 +71,7 @@ export function Anuncio() {
       <div className="texto-input">
         <p className="box3-text">Añadir descripción:</p>
         <textarea
+            placeholder="añade tu descripcion aqui"
             type="text"
             className="descripcionSolicitarServicios"
             onChange={agregarDescripcion}
