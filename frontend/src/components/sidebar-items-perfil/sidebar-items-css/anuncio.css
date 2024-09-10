@@ -20,7 +20,8 @@
 }
 
 .box1 {
-  height: 200px;
+  padding: 0;
+  min-height: 200px;
   margin-bottom: 0; /* Eliminar el margen inferior de box1 */
   align-items: center;
   display: flex;
@@ -33,7 +34,6 @@
 
 .box2-text,
 .box3-text {
-  margin-right: 300px;
   text-align: left;
 }
 
@@ -44,4 +44,53 @@
 .box3 {
   height: 150px;
   margin-top: 50px;
+}
+.proyectSelectedImage {
+    width: 100%;
+    object-fit: cover;
+}
+.cont-anuncio .texto-input input {
+  margin-top: 15px;
+  text-align: start;
+  width: 350px;
+}
+.inputPago {
+  text-align: start;
+  height: 10px;
+    padding: 5px;
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+    border-color: transparent;
+}
+.texto-input-pago {
+  display: flex;
+    flex-direction: row;
+    gap: 30px;
+    position: relative;
+}
+.texto-input-pago::before {
+  content: '$';
+  position: absolute;
+  left: 330px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 22px;
+}
+.descripcionSolicitarServicios {
+  text-align: start;
+  height: max-content;
+    padding: 5px;
+    margin-top: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+    border-color: transparent;
+    position: relative;
+}
+.box3 .texto-input textarea {
+  width: 600px;
+  height: 100px;
 }
