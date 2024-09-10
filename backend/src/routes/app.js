@@ -72,6 +72,18 @@ const createTableFunction = async () => {
     );
 `);
 
+    await pool.query(`
+  CREATE TABLE IF NOT EXISTS user_skills (
+    user_id UUID,
+    skill_id UUID,
+    PRIMARY KEY (user_id, skill_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (skill_id) REFERENCES skills(skill_id) ON DELETE CASCADE
+  );
+`);
+
+    console.log("Tabla user_skills verificada o creada");
+
     console.log("Tabla Skills verificada o creada");
 
     // Tabla Projects:

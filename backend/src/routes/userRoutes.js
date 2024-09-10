@@ -27,7 +27,9 @@ router.put('/bankInfo/selected', bankController.selectAcc);
 module.exports = router;
 
 //Tabla skills routes
-router.get('/skills', skillsController.getAllSkills);
+router.get('/skills', skillsController.getAllSkills);      
+router.post('/skills', skillsController.createSkill);     
+router.delete('/skills/:id', skillsController.deleteSkill); 
 
 //Tabla Projects ruotes
 
