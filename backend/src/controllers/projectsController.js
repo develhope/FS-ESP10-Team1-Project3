@@ -2,7 +2,7 @@ const ProjectsModel = require('../models/Projects');
 
 // Obtener todos los proyectos
 
-const getAllProjects = async (req, res) => {
+const getProjects = async (req, res) => {
     try {
         const projectsResult = await ProjectsModel.getProjects();
         res.status(200).json(projectsResult);
@@ -47,4 +47,42 @@ const getProjectById = async (req, res) => {
     }
   };
 
-module.exports = { getAllProjects, getProjectById, createProject};
+  const updateProject = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { name, description, status, developer_id } = req.body;
+  
+      const projectResult = await ProjectsModel.updateProject(id, name, description, status, developer_id);
+  
+  
+      if (!projectResult) {
+        return res.status(404).json({ message: 'Proyecto no encontrado' });
+      }
+  
+      return res.status(200).json(projectResult);
+    } catch (error) {
+      return res.status(500).json({ error: 'Internal server error: ${error.message}' });
+    }
+  };
+  
+    // Eliminar un proyecto
+  
+    const deleteProject = async (req, res) => {
+      try {
+        const { id } = req.params;
+        const result = await ProjectsModel.deleteProject(id);
+  
+        if (!result) {
+          return res.status(404).json({ message: 'Proyecto no encontrado' });
+        }
+        return res.status(200).json({ message: 'Proyecto eliminado exitosamente' });
+  
+      } catch (error) {
+  
+        return res.status(500).json({ error: 'Internal server error: ${error.message}' });
+      }
+    };
+  
+  
+  
+module.exports = { getProjects, getProjectById, createProject, updateProject, deleteProject };

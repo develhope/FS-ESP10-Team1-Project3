@@ -4,7 +4,7 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const bankController = require('../controllers/bankController');
 const skillsController = require('../controllers/skillsController');
-const proyectsController = require('../controllers/projectsController');
+const projectsController = require('../controllers/projectsController');
 
 //tabla users routes
 router.get('/users', userController.getAllUsers);
@@ -33,6 +33,8 @@ router.delete('/skills/:id', skillsController.deleteSkill);
 
 //Tabla Projects ruotes
 
-router.get('/proyects', proyectsController.getAllProjects);
-router.get('/proyects:proyectId', proyectsController.getProjectById);
-router.post('/proyects', proyectsController.createProject);
+router.get('/projects', projectsController.getProjects);
+router.get('/projects:projectId', projectsController.getProjectById);
+router.post('/projects', projectsController.createProject);
+router.put('/projects', projectsController.updateProject);
+router.delete('/projects/:id', projectsController.deleteProject);
