@@ -100,6 +100,8 @@ const createTableFunction = async () => {
     );
 `);
 
+
+
     console.log("Tabla de proyectos verificada o creada");
 
   } catch (error) {

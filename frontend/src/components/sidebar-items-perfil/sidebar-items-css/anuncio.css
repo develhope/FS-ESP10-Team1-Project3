@@ -21,11 +21,17 @@
 
 .box1 {
   padding: 0;
+  height: 200px;
+  width: 900px;
   min-height: 200px;
+  max-height: 200px;
+  min-width: 900px;
+  max-width: 900px;
   margin-bottom: 0; /* Eliminar el margen inferior de box1 */
   align-items: center;
   display: flex;
   justify-content: center; /* Centrado horizontal */
+  overflow: hidden;
 }
 
 .box2 {
@@ -47,7 +53,9 @@
 }
 .proyectSelectedImage {
     width: 100%;
+    height: 100%;
     object-fit: cover;
+    
 }
 .cont-anuncio .texto-input input {
   margin-top: 15px;
