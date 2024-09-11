@@ -90,6 +90,7 @@ const createTableFunction = async () => {
     await pool.query(`
     CREATE TABLE IF NOT EXISTS projects (
         id UUID PRIMARY KEY,
+        imagen bytea,
         creator_id UUID REFERENCES users(user_id) ON DELETE SET NULL,
         name VARCHAR(255) NOT NULL,
         description TEXT,
@@ -107,6 +108,19 @@ const createTableFunction = async () => {
   } catch (error) {
     console.error("Error al crear las tablas o la extensión:", error);
   }
+   // Tabla services:
+ await pool.query(`
+  CREATE TABLE IF NOT EXISTS services (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      creator_id UUID,
+      titulo varchar(50),
+      pago numeric(10,2),
+      descripcion varchar(1000),
+      imagen_path TEXT,
+      categoria varchar(50),
+      FOREIGN KEY (creator_id) REFERENCES users(user_id)
+  );
+`);
 };
 
 // createTableFunction();

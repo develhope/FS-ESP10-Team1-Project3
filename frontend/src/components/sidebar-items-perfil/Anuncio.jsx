@@ -3,83 +3,155 @@ import "./sidebar-items-css/anuncio.css";
 import { useEffect, useState } from "react";
 
 export function Anuncio() {
-  const [imagenPerfil, setImagenPerfil] = useState("");
+  const [vistaPrevia, setVistaPrevia] = useState("");
+  const [imagen, setImagen] = useState("");
   const [titulo, setTitulo] = useState("Nuevo Titulo");
   const [descripcion, setDescripcion] = useState("");
+  const [categoria, setCategoria] = useState("otros");
   const [pago, setPago] = useState(0);
   const subirNuevaImagen = (event) => {
     const file = event.target.files[0];
     if (file) {
+      setImagen(file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagenPerfil(reader.result);
+        setVistaPrevia(reader.result);
       };
       reader.readAsDataURL(file);
     }
   };
   const agregarTitulo = (event) => {
     setTitulo(event.target.value);
-  }
+  };
   const agregarPago = (event) => {
     setPago(event.target.value);
-  }
+  };
   const agregarDescripcion = (event) => {
     setDescripcion(event.target.value);
-  }
+  };
+  const seleccionarCategoria = (event) => {
+    setCategoria(event.target.value);
+  };
+  const publicar = async (event) => {
+    event.preventDefault();
+    try {
+      const token = localStorage.getItem("token");
+      const formData = new FormData();
+      formData.append("titulo", titulo);
+      formData.append("descripcion", descripcion);
+      formData.append("categoria", categoria);
+      formData.append("pago", pago);
+      formData.append("token", token);
+      if (imagen) {
+        formData.append('imagen', imagen);
+      }
+      const response = await fetch("http://localhost:5000/api/services", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al publicar oferta");
+      }
+      const data = await response.json();
+      const offerInfo = {
+        titulo,
+        descripcion,
+        categoria,
+        pago,
+        imagen: imagen ? imagen.name : null,
+      };
+      localStorage.setItem("offerInfo", JSON.stringify(offerInfo));
+      setVistaPrevia("");
+      setImagen("");
+      setTitulo("Nuevo Titulo");
+      setDescripcion("");
+      setCategoria("otros");
+      setPago(0);
+    } catch (err) {
+      console.error("error al publicar oferta:" + err.message);
+    }
+  };
   return (
-    <form className="cont-anuncio">
-    <div>
-      <div className="box1">
-      <div className="imagenItems">{imagenPerfil !== ""?<div><img className="proyectSelectedImage" src={imagenPerfil}></img> <label htmlFor="inputFile" className="subirImagenDeProyecto">
-      Cambiar imagen
-      </label></div>: <label htmlFor="inputFile" className="subirImagenDeProyecto">
-      Añadir imagen
-      </label>}
-      <input
-        type="file"
-        onChange={subirNuevaImagen}
-        accept="image/*"
-        id="inputFile"
-      ></input>
-     
-    </div>
-      </div>
-      <div className="box2">
-        <div className="texto-input">
-          <p className="box2-text">Añade un título:</p>
-          <input
-            type="text"
-            className="inputs-perfil"
-            onChange={agregarTitulo}
-            onFocus={(() => { if (titulo == "Nuevo Titulo") {
-              setTitulo("");
-            }})}
-            value={titulo}
-          ></input>
-        </div>
-        <div className="texto-input-pago">
-        <p className="box2-text">Añade pago por hora y etiqueta:</p>
-          <input
-            type="number"
-            className="inputPago"
-            onChange={agregarPago}
-            value={pago}
-          ></input>
-        </div>
-      </div>
-      <div className="box3">
-      <div className="texto-input">
-        <p className="box3-text">Añadir descripción:</p>
-        <textarea
-            placeholder="añade tu descripcion aqui"
-            type="text"
-            className="descripcionSolicitarServicios"
-            onChange={agregarDescripcion}
-            value={descripcion}
-          ></textarea>
+    <form className="cont-anuncio" onSubmit={publicar}>
+      <div>
+        <div className="box1">
+          <div className="imagenItems">
+            {vistaPrevia !== "" ? (
+              <div>
+                <img className="proyectSelectedImage" src={vistaPrevia}></img>{" "}
+                <label htmlFor="inputFile" className="subirImagenDeProyecto">
+                  Cambiar imagen
+                </label>
+              </div>
+            ) : (
+              <label htmlFor="inputFile" className="subirImagenDeProyecto">
+                Añadir imagen
+              </label>
+            )}
+            <input
+              type="file"
+              onChange={subirNuevaImagen}
+              accept="image/*"
+              id="inputFile"
+            ></input>
           </div>
+        </div>
+        <div className="box2">
+          <div className="texto-input">
+            <p className="box2-text">Añade un título:</p>
+            <input
+              type="text"
+              className="inputs-perfil"
+              onChange={agregarTitulo}
+              onFocus={() => {
+                if (titulo == "Nuevo Titulo") {
+                  setTitulo("");
+                }
+              }}
+              value={titulo}
+            ></input>
+          </div>
+          <div className="texto-input-pago">
+            <p className="box2-text">Añade pago por hora:</p>
+            <input
+              type="number"
+              className="inputPago"
+              onChange={agregarPago}
+              value={pago}
+            ></input>
+          </div>
+        </div>
+        <div className="box3">
+          <div className="texto-input">
+            <p className="box3-text">Añadir descripción:</p>
+            <textarea
+              placeholder="añade tu descripcion aqui"
+              type="text"
+              className="descripcionSolicitarServicios"
+              onChange={agregarDescripcion}
+              value={descripcion}
+            ></textarea>
+          </div>
+          <div className="texto-input">
+            <p>Añade una categoria aqui: </p>
+            <select value={categoria} onChange={seleccionarCategoria}>
+              <option value="Desarrollo web">Desarrollo web</option>
+              <option value="Comunicacion">Comunicacion</option>
+              <option value="Redes sociales">Redes sociales</option>
+              <option value="Diseño grafico">Diseño grafico</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Desarrollo audiovisual">
+                Desarrollo audiovisual
+              </option>
+              <option value="otros">Otros</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" className="nuevo-proyecto">
+          Publicar anuncio
+        </button>
       </div>
-    </div>
     </form>
   );
 }
