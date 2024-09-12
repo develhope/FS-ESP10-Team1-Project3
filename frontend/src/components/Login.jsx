@@ -156,7 +156,7 @@ function Login() {
           birthDate: birthDate,
           fullName: nombre,
           userImage: anonimo,
-          user_id: user_id
+          
         }
         const userInfo = JSON.stringify(userInfoToStringify);
         localStorage.setItem("userInfo", userInfo);
@@ -186,9 +186,7 @@ function Login() {
   // };
 
   //Auth0 Login
-  const login = async () => {
-    await auth0.loginWithRedirect();
-  };
+  
 
   return (
     <div className="divLoginGeneral">
