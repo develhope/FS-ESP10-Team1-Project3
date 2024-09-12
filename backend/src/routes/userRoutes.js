@@ -53,18 +53,6 @@ router.get('/skills', skillsController.getAllSkills);
 router.post('/skills', skillsController.createSkill);     
 router.delete('/skills/:id', skillsController.deleteSkill); 
 
-//Tabla Projects routes
-
-router.get('/projects', projectsController.getProjects);
-router.get('/projects:projectId', projectsController.getProjectById);
-router.post('/projects', projectsController.createProject);
-router.put('/projects', projectsController.updateProject);
-router.delete('/projects/:id', projectsController.deleteProject);
-
-
-
-
-
 //rutas protegidas
 //tabla services routes
 router.post('/services', passport.authenticate('jwt', { session: false }), upload.single('imagen'), servicesController.createService);
@@ -74,5 +62,12 @@ router.post('/bankInfo/filterByToken', passport.authenticate('jwt', { session: f
 router.post('/bankInfo', passport.authenticate('jwt', { session: false }), bankController.createAcc);
 router.delete('/bankInfo', passport.authenticate('jwt', { session: false }), bankController.deleteAcc);
 router.put('/bankInfo/selected', passport.authenticate('jwt', { session: false }), bankController.selectAcc);
+//Tabla Projects routes
+router.get('/projects', passport.authenticate('jwt', { session: false }), projectsController.getProjects);
+router.get('/projects:projectId', passport.authenticate('jwt', { session: false }), projectsController.getProjectById);
+router.post('/projects', passport.authenticate('jwt', { session: false }), projectsController.postProject);
+router.put('/projects', passport.authenticate('jwt', { session: false }), projectsController.updateProject);
+router.delete('/projects/:id', passport.authenticate('jwt', { session: false }), projectsController.deleteProject);
+
 
 module.exports = router;

@@ -118,10 +118,11 @@ const logIn = async (req, res) => {
           full_name: userData.full_name,
           token: token,
           email: userData.email,
-          password_hash: userData.password_hash,
+          // password_hash: userData.password_hash,
           user_id: userData.user_id,
           full_name: userData.full_name,
           date_of_birth: userData.date_of_birth,
+          
         });
     } else {
       res.status(400).json({ msg: "credenciales incorrectas" });

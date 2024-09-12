@@ -113,7 +113,7 @@ function Login() {
         const data = await response.json();
 
         localStorage.setItem("token", data.token);
-
+    
         const userLoginInfo = JSON.stringify({
           email: emailLoginCorreo,
           password: passwordLoginCorreo,
@@ -155,7 +155,8 @@ function Login() {
           password: password,
           birthDate: birthDate,
           fullName: nombre,
-          userImage: anonimo
+          userImage: anonimo,
+          user_id: user_id
         }
         const userInfo = JSON.stringify(userInfoToStringify);
         localStorage.setItem("userInfo", userInfo);
