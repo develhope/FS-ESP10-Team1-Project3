@@ -34,15 +34,15 @@ const getProjectById = async (req, res) => {
 
  const createProject = async (req, res) => {
     try {
-      const { name, description } = req.body;
+      const { name, pago, token } = req.body;
       const creator_id = await bankModel.getPropetario(token);
 
     // Validar que todos los campos estén presentes
-    if (!creator_id || !name || !description) {
+    if (!creator_id || !name || !pago) {
         return res.status(400).json({ message: 'Faltan campos necesarios' });
       }
 
-      const newProject = await ProjectsModel.createProject(creator_id, name, description);
+      const newProject = await ProjectsModel.createProject(creator_id, name, pago);
   
       return res.status(201).json(newProject);
     } catch (error) {
@@ -53,9 +53,9 @@ const getProjectById = async (req, res) => {
   const updateProject = async (req, res) => {
     try {
       const { id } = req.params;
-      const { name, description, status, developer_id } = req.body;
+      const { name, pago, status, developer_id } = req.body;
   
-      const projectResult = await ProjectsModel.updateProject(id, name, description, status, developer_id);
+      const projectResult = await ProjectsModel.updateProject(id, name, pago, status, developer_id);
   
   
       if (!projectResult) {
