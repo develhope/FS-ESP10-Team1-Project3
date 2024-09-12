@@ -6,10 +6,36 @@ const pool = require("../config/db");
 const passport = require('../config/passport');
 require("dotenv").config();
 
+const { auth } = require('express-openid-connect');
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: 'CIz9Kbobqw8rLnaQue5CP-npSp5c_uo19kinIoz04UCifhY5Dgj10LFDFwL5SPag',
+  baseURL: 'http://localhost:5000',
+  clientID: 'yFef9pGuzjA0JToQEtXhRn5fLXFsCV0a',
+  issuerBaseURL: 'https://dev-o72k56frd2psobgl.us.auth0.com'
+};
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
+// req.isAuthenticated is provided from the auth router
+app.get('/', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+});
+
+const { requiresAuth } = require('express-openid-connect');
+
+app.get('/profile', requiresAuth(), (req, res) => {
+  res.send(JSON.stringify(req.oidc.user));
+});
+
 // Configura CORS primero
+//?Conflicto solucionado puerto cors no era compatible con puerto vite.
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "http://localhost:5175",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })

@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 import "./css/Login.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import anonimo from './sidebar-items-perfil/assets-sidebar/anonimo.jpg';
+import { login, handleRedirect, isAuthenticated, getUser } from './auth';
 
 export function anonimus() {
-return (
-  <img src={anonimo}></img>
-)
+  return (
+    <img src={anonimo}></img>
+  )
 }
 function Login() {
   const [loginCorreo, setLoginCorreo] = useState(false);
@@ -41,6 +42,12 @@ function Login() {
   const [aContent, setAcontent] = useState(
     initialMode === "register" ? enlaceContent2 : enlaceContent1
   );
+
+  //Auth0 Logic
+ 
+
+
+
   const mostrarLoginCorreo = () => {
     setLoginCorreo(!loginCorreo);
   };
@@ -59,6 +66,27 @@ function Login() {
     }
   }, [location]);
 
+  //Async Auth0
+  const [user, setUser] = useState<any>(null);
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+
+  // Ejecutar la inicialización al cargar el componente
+  useEffect(() => {
+    const initAuthFlow = async () => {
+      await handleRedirect(); // Maneja la redirección después del login
+      const authStatus = await isAuthenticated(); // Verifica si el usuario está autenticado
+      setLoggedIn(authStatus);
+
+      if (authStatus) {
+        const userInfo = await getUser(); // Obtén la información del usuario autenticado
+        setUser(userInfo);
+      }
+    };
+
+    initAuthFlow();
+  }, []);
+  
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -69,7 +97,7 @@ function Login() {
           email: emailLoginCorreo,
           password_hash: passwordLoginCorreo
         };
-    
+
         const response = await fetch('http://localhost:5000/api/users/login', {
           method: 'POST',
           headers: {
@@ -77,24 +105,22 @@ function Login() {
           },
           body: JSON.stringify(loginDataToBackend)
         });
-      
-    
+
+
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.message || 'Error en el inicio de sesión');
         }
         const data = await response.json();
-    
+
         localStorage.setItem("token", data.token);
     
-        console.log(data);
-        
         const userLoginInfo = JSON.stringify({
           email: emailLoginCorreo,
           password: passwordLoginCorreo,
           birthDate: new Date(data.date_of_birth).toISOString().split('T')[0],
-          fullName: (data.full_name!=null)? data.full_name: "Nombre completo",
-          userImage: (data.user_image!=null)? data.user_image: anonimo,
+          fullName: (data.full_name != null) ? data.full_name : "Nombre completo",
+          userImage: (data.user_image != null) ? data.user_image : anonimo,
         });
         localStorage.setItem("userInfo", userLoginInfo);
         window.location.href = `/`;
@@ -103,7 +129,7 @@ function Login() {
       } finally {
         setLoading(false);
       }
-      } else {
+    } else {
       try {
         const userDataTobackEnd = {
           email: email,
@@ -111,7 +137,7 @@ function Login() {
           full_name: nombre,
           date_of_birth: birthDate
         };
-    
+
         const response = await fetch('http://localhost:5000/api/users', {
           method: 'POST',
           headers: {
@@ -119,7 +145,7 @@ function Login() {
           },
           body: JSON.stringify(userDataTobackEnd)
         });
-    
+
         if (!response.ok) {
           throw new Error('Error en el registro');
         }
@@ -141,7 +167,7 @@ function Login() {
       } finally {
         setLoading(false);
       }
-      
+
     }
   };
 
@@ -159,6 +185,12 @@ function Login() {
   // const sendRegisterData = (event) => {
   //   event.preventDefault();
   // };
+
+  //Auth0 Login
+  const login = async () => {
+    await auth0.loginWithRedirect();
+  };
+
   return (
     <div className="divLoginGeneral">
       <div className="loginIzquierda">
@@ -198,7 +230,7 @@ function Login() {
           {aContent === "iniciar sesión" ? (
             <div>
               <form className="formularioLogin" onSubmit={handleFormSubmit}>
-              <p>
+                <p>
                   Nombre completo:{" "}
                   <input
                     type="text"
@@ -227,7 +259,7 @@ function Login() {
                     placeholder="*********"
                     required
                     value={password}
-                    autoComplete="current-password" 
+                    autoComplete="current-password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </p>
@@ -248,6 +280,7 @@ function Login() {
               <div className="otraOpcion">
                 <p>O tambien puedes:</p>
                 <button className="google-correo">
+                  
                   <svg
                     width="16"
                     height="16"
@@ -378,41 +411,41 @@ function Login() {
           <div>
           </div>
           <div>
-          <form className="formularioLogin" onSubmit={handleFormSubmit}>
-          <p>
-            Email:{" "}
-            <input
-              type="email"
-              placeholder="example@gmail.com"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </p>
-          <p>
-            Contraseña:{" "}
-            <input
-              type="password"
-              placeholder="*********"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </p>
-          <p>
-            Fecha de nacimiento:{" "}
-            <input
-              type="date"
-              required
-              value={birthDate}
-              onChange={(e) => setBirthDate(e.target.value)}
-            />
-          </p>
-          <button type="submit" disabled={loading}>
-            Enviar datos
-          </button>
-        </form>
-        <button className="google-correo">
+            <form className="formularioLogin" onSubmit={handleFormSubmit}>
+              <p>
+                Email:{" "}
+                <input
+                  type="email"
+                  placeholder="example@gmail.com"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </p>
+              <p>
+                Contraseña:{" "}
+                <input
+                  type="password"
+                  placeholder="*********"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </p>
+              <p>
+                Fecha de nacimiento:{" "}
+                <input
+                  type="date"
+                  required
+                  value={birthDate}
+                  onChange={(e) => setBirthDate(e.target.value)}
+                />
+              </p>
+              <button type="submit" disabled={loading}>
+                Enviar datos
+              </button>
+            </form>
+            <button className="google-correo">
               <svg
                 width="18"
                 height="18"
