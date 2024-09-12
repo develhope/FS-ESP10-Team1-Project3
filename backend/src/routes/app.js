@@ -35,7 +35,7 @@ app.get('/profile', requiresAuth(), (req, res) => {
 //?Conflicto solucionado puerto cors no era compatible con puerto vite.
 app.use(
   cors({
-    origin: "http://localhost:5175",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
