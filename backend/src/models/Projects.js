@@ -14,7 +14,7 @@ const getProjectById = async (id) => {
 };
 
 
-const createProject = async (creator_id, name, pago) => {
+const createProject = async (creator_id, name, pago ) => {
   const result = await pool.query(
     "INSERT INTO projects ( creator_id, name, pago) VALUES ($1, $2, $3) RETURNING *", [creator_id, name, pago]);
   return result.rows[0];

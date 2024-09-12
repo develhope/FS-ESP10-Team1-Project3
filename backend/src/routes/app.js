@@ -73,7 +73,7 @@ const createTableFunction = async () => {
 `);
 
     await pool.query(`
-  CREATE TABLE IF NOT EXISTS user_skills (
+    CREATE TABLE IF NOT EXISTS user_skills (
     user_id UUID,
     skill_id UUID,
     PRIMARY KEY (user_id, skill_id),
@@ -101,15 +101,36 @@ const createTableFunction = async () => {
     );
 `);
 
+    // En Postgres, se crea la función update_updated_at_column para actualizar el campo updated_at cada vez que un registro en la tabla projects sea modificado.
 
+    // Los triggers en PostgreSQL son funciones que se ejecutan automáticamente en respuesta a ciertos eventos en una tabla, como INSERT, UPDATE o DELETE.
+
+    // NEW.updated_at establece el valor del campo updated_at al tiempo actual (CURRENT_TIMESTAMP) cada vez que se actualice el registro.
+
+    await pool.query(`
+    CREATE OR REPLACE FUNCTION update_updated_at_column()
+       RETURNS TRIGGER AS $$
+       BEGIN
+      NEW.updated_at = CURRENT_TIMESTAMP;
+      RETURN NEW; -- Esto devuelve el registro modificado
+      END;
+  $$ LANGUAGE plpgsql;
+`);
+
+// Crear el Trigger para Actualizar updated_at
+
+    await pool.query(`
+    CREATE TRIGGER update_projects_updated_at
+    BEFORE UPDATE ON projects
+    FOR EACH ROW
+   EXECUTE FUNCTION update_updated_at_column();
+`);
 
     console.log("Tabla de proyectos verificada o creada");
 
-  } catch (error) {
-    console.error("Error al crear las tablas o la extensión:", error);
-  }
-   // Tabla services:
- await pool.query(`
+    // Tabla services:
+
+    await pool.query(`
   CREATE TABLE IF NOT EXISTS services (
       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
       creator_id UUID,
@@ -121,6 +142,11 @@ const createTableFunction = async () => {
       FOREIGN KEY (creator_id) REFERENCES users(user_id)
   );
 `);
+
+    console.log("Tabla de servicios verificada o creada");
+  } catch (error) {
+    console.error("Error al crear las tablas o la extensión:", error);
+  }
 };
 
 // createTableFunction();

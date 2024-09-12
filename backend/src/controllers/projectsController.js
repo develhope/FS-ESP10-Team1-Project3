@@ -34,7 +34,11 @@ const getProjectById = async (req, res) => {
 
  const createProject = async (req, res) => {
     try {
-      const { name, pago, token } = req.body;
+      const { token, name, pago } = req.body;
+
+      if (!token) {
+        return res.status(401).json({ message: 'Token no proporcionado' });
+      }
       const creator_id = await bankModel.getPropetario(token);
 
     // Validar que todos los campos estén presentes
@@ -47,6 +51,7 @@ const getProjectById = async (req, res) => {
       return res.status(201).json(newProject);
     } catch (error) {
     return res.status(500).json({ error: `Internal server error: ${error.message}` });
+    
     }
   };
 
@@ -64,7 +69,8 @@ const getProjectById = async (req, res) => {
   
       return res.status(200).json(projectResult);
     } catch (error) {
-      return res.status(500).json({ error: 'Internal server error: ${error.message}' });
+      return res.status(500).json({ error: `Internal server error: ${error.message}` });
+      
     }
   };
   
@@ -82,7 +88,7 @@ const getProjectById = async (req, res) => {
   
       } catch (error) {
   
-        return res.status(500).json({ error: 'Internal server error: ${error.message}' });
+        return res.status(500).json({ error: `Internal server error: ${error.message}` });
       }
     };
   

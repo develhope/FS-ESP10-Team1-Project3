@@ -22,15 +22,20 @@ function ProEnCurso() {
     setDeadline(event.target.value);
   };
 
-
- // -------> Añadimos una función asíncrona que se encargara de enviar los datos del proyecto al backend-------->
+  // -------> Añadimos una función asíncrona que se encargara de enviar los datos del proyecto al backend-------->
 
   const addProjects = async (proyecto) => {
     try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("Token no disponible. Debes iniciar sesión.");
+      }
+
       const response = await fetch("http://localhost:5000/api/projects", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          // Authorization: `Bearer ${token}`, // Añadir el token aquí
         },
         body: JSON.stringify(proyecto),
       });
@@ -42,7 +47,6 @@ function ProEnCurso() {
       // Si la solicitud es exitosa, puedes procesar la respuesta aquí si es necesario
       const data = await response.json();
       console.log("Proyecto enviado:", data);
-
     } catch (error) {
       console.error("Error al enviar el proyecto:", error.message);
     }
@@ -50,16 +54,36 @@ function ProEnCurso() {
 
   const subirProyecto = async (event) => {
     event.preventDefault();
+
+    // Control para que el valor de precio sea numerico antes de ser enviado al backend.
+
+    // Validaciones de los campos requeridos
+    if (!nombreProyecto) {
+      alert("Por favor, ingrese el nombre del proyecto.");
+      return;
+    }
+
+    if (!precio) {
+      alert("Por favor, ingrese el precio del proyecto.");
+      return;
+    }
+
+    const parsedPrecio = parseFloat(precio);
+    if (isNaN(parsedPrecio)) {
+      alert("Por favor, ingresa un valor numérico para el precio.");
+      return;
+    }
+    // Creación del objeto del proyecto para el backend
+
     const nuevoProyecto = {
-      id: Date.now(),
-      nombre: nombreProyecto,
-      startDate: new Date().toISOString().split("T")[0],
-      precio: precio,
-      fechaLimite: deadline,
+      name: nombreProyecto, // Cambiado de 'nombre' a 'name'
+      pago: parseFloat(precio), // Cambiado de 'precio' a 'pago' y convertido a número
+      created_at: new Date().toISOString().split("T")[0], // Cambiado de 'startDate' a 'created_at'
+    
     };
 
-   // Llama a la función que envía el proyecto al backend
-     await addProjects(nuevoProyecto);
+    // Llama a la función que envía el proyecto al backend
+    await addProjects(nuevoProyecto);
 
     const nuevosProyectos = [...localProyects, nuevoProyecto];
     setLocalProyects(nuevosProyectos);
@@ -68,7 +92,6 @@ function ProEnCurso() {
     setNombreProyecto("");
     setPrecio("");
     setDeadline("");
-
   };
 
   useEffect(() => {
@@ -125,7 +148,7 @@ function ProEnCurso() {
                       className="fechaInicio"
                       type="date"
                       readOnly
-                      value={proyecto.startDate}
+                      value={proyecto.created_at}
                     />
                   ) : (
                     console.log(proyecto.startDate)
@@ -133,19 +156,19 @@ function ProEnCurso() {
                   <input
                     className="nombreProyecto"
                     type="text"
-                    value={proyecto.nombre}
+                    value={proyecto.name}
                     readOnly
                   />
                   <input
                     className="inputPrecio"
                     type="text"
-                    value={`${proyecto.precio} $/h`}
+                    value={`${proyecto.pago} $/h`}
                     readOnly
                   />
                   <input
                     className="fechafin"
                     type="text"
-                    value={"fin: " + proyecto.fechaLimite}
+                    value={"fin: " + proyecto.deadline}
                     readOnly
                   />
                 </div>
