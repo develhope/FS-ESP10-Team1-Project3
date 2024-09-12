@@ -13,6 +13,7 @@ function InfoBancaria() {
       const width = window.innerWidth;
       return width > 895;
     });
+    const token = localStorage.getItem("token");
     const actualizarNumeroCuenta = (event) => {
         setNumeroCuenta(event.target.value);
     }
@@ -28,7 +29,6 @@ function InfoBancaria() {
     const actualizarInfoBancaria = async (event) => {
       event.preventDefault();
       try {
-        const token = localStorage.getItem("token");
         const nuevaCuenta = {
           id: Date.now(),
           numero_cuenta: numeroCuenta, 
@@ -41,6 +41,7 @@ function InfoBancaria() {
     const response = await fetch('http://localhost:5000/api/bankInfo', {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(nuevaCuenta)
@@ -64,6 +65,7 @@ function InfoBancaria() {
         const response = await fetch('http://localhost:5000/api/bankInfo', {
           method: 'DELETE',
           headers: {
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({numero_cuenta})
@@ -82,6 +84,7 @@ function InfoBancaria() {
         const response = await fetch('http://localhost:5000/api/bankInfo/selected', {
           method: 'PUT',
           headers: {
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ numero_cuenta: cuenta.numero_cuenta })
@@ -101,6 +104,7 @@ function InfoBancaria() {
         const response = await fetch('http://localhost:5000/api/bankInfo/filterByToken', {
           method: 'POST',
           headers: {
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({token})

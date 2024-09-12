@@ -70,9 +70,9 @@ router.delete('/projects/:id', projectsController.deleteProject);
 router.post('/services', passport.authenticate('jwt', { session: false }), upload.single('imagen'), servicesController.createService);
 router.get('/services/offers', passport.authenticate('jwt', { session: false }), servicesController.getAllOffers);
 //tabla infobancaria routes
-router.post('/bankInfo/filterByToken', bankController.getAllAccountsByToken);
-router.post('/bankInfo', bankController.createAcc);
-router.delete('/bankInfo', bankController.deleteAcc);
-router.put('/bankInfo/selected', bankController.selectAcc);
+router.post('/bankInfo/filterByToken', passport.authenticate('jwt', { session: false }), bankController.getAllAccountsByToken);
+router.post('/bankInfo', passport.authenticate('jwt', { session: false }), bankController.createAcc);
+router.delete('/bankInfo', passport.authenticate('jwt', { session: false }), bankController.deleteAcc);
+router.put('/bankInfo/selected', passport.authenticate('jwt', { session: false }), bankController.selectAcc);
 
 module.exports = router;
