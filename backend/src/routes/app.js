@@ -89,15 +89,15 @@ const createTableFunction = async () => {
     // Tabla Projects:
     await pool.query(`
     CREATE TABLE IF NOT EXISTS projects (
-        id UUID PRIMARY KEY,
-        imagen bytea,
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         creator_id UUID REFERENCES users(user_id) ON DELETE SET NULL,
         name VARCHAR(255) NOT NULL,
-        description TEXT,
+        pago numeric(10,2),
         status BOOLEAN DEFAULT FALSE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        developer_id UUID REFERENCES users(user_id) ON DELETE SET NULL
+        developer_id UUID REFERENCES users(user_id) ON DELETE SET NULL,
+        parent_project_id UUID REFERENCES projects(id) ON DELETE CASCADE  -- (Relación One to Many en la misma tabla)
     );
 `);
 

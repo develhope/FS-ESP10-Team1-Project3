@@ -23,6 +23,11 @@ function ProFinalizados() {
   const actualizarFechaComienzo = (event) => {
     setFechaComienzo(event.target.value);
   };
+
+
+
+
+  
   const subirProyecto = (event) => {
     event.preventDefault();
     const nuevoProyecto = {

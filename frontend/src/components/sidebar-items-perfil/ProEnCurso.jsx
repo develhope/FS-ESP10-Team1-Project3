@@ -21,7 +21,34 @@ function ProEnCurso() {
   const actualizarDeadline = (event) => {
     setDeadline(event.target.value);
   };
-  const subirProyecto = (event) => {
+
+
+ // -------> Añadimos una función asíncrona que se encargara de enviar los datos del proyecto al backend-------->
+
+  const addProjects = async (proyecto) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/projects", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(proyecto),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al enviar proyecto al backend");
+      }
+
+      // Si la solicitud es exitosa, puedes procesar la respuesta aquí si es necesario
+      const data = await response.json();
+      console.log("Proyecto enviado:", data);
+
+    } catch (error) {
+      console.error("Error al enviar el proyecto:", error.message);
+    }
+  };
+
+  const subirProyecto = async (event) => {
     event.preventDefault();
     const nuevoProyecto = {
       id: Date.now(),
@@ -30,6 +57,10 @@ function ProEnCurso() {
       precio: precio,
       fechaLimite: deadline,
     };
+
+   // Llama a la función que envía el proyecto al backend
+     await addProjects(nuevoProyecto);
+
     const nuevosProyectos = [...localProyects, nuevoProyecto];
     setLocalProyects(nuevosProyectos);
     setProyectosEnCurso(nuevosProyectos);
@@ -37,6 +68,7 @@ function ProEnCurso() {
     setNombreProyecto("");
     setPrecio("");
     setDeadline("");
+
   };
 
   useEffect(() => {

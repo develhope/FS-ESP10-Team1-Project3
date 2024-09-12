@@ -1,4 +1,6 @@
 const ProjectsModel = require('../models/Projects');
+const bankModel = require('../models/infoBancaria');
+
 
 // Obtener todos los proyectos
 
@@ -32,7 +34,8 @@ const getProjectById = async (req, res) => {
 
  const createProject = async (req, res) => {
     try {
-      const { creator_id, name, description } = req.body;
+      const { name, description } = req.body;
+      const creator_id = await bankModel.getPropetario(token);
 
     // Validar que todos los campos estén presentes
     if (!creator_id || !name || !description) {
