@@ -1,49 +1,87 @@
 .divLoginGeneral {
     width: 55%;
-    height: max-content;
+    height: 600px;
     margin: auto;
     margin-top: 120px;
     display: flex;
     flex-direction: row;
-   border-radius: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra del contenedor */
 }
-.formularioLogin input {
-    border-radius: 5px;
-    background-color: #00a03d9f;
-    font-family: "Montserrat", sans-serif;
-}
-.otraOpcion p {
-   padding-top: 50px;
-}
-.formularioLogin button {
-border-radius: 5px;
-font-family: "Montserrat", sans-serif;
-background-color: #00a03d9f;
-}
-.formularioLogin {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    
-}
+
 .loginIzquierda {
-    background-color: #00a03d9f;
-    font-family: "Montserrat", sans-serif;
-    background-image: url('./src/assets/imagenLoginDiseño.jpeg');
-    background-size: cover; 
-    background-repeat: no-repeat;
+    background-color: black;
     width: 50%;
-    border: 1px solid;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-    font-size: 14px;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    padding: 20px; /* Añade un poco de espacio alrededor del contenido */
 }
-.loginIzquierda h2 {
-    font-size: 15px;
-    padding-left: 5%;
+
+.textoFinal{
+    font-size: 50px;
 }
+
+.textoWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre los bloques de texto */
+}
+
+.textoArriba h1 {
+    font-size: 30px; /* Tamaño aumentado para la primera frase */
+    margin: 0; /* Elimina márgenes por defecto */
+    
+}
+
+.textoIzquierda {
+    font-family: "Montserrat", sans-serif;
+    font-size: 30px;
+}
+
+.textoIzquierda ul {
+    padding-left: 0;
+    list-style-type: none; /* Elimina puntos de la lista */
+}
+
+.textoIzquierda ul li {
+    margin-bottom: 10px; /* Espacio entre los elementos de la lista */
+}
+
+#liSinCursor {
+    font-size: 20px; /* Tamaño aumentado para la última frase */
+    cursor: default; /* Asegura que el cursor no cambie sobre este elemento */
+}
+
+.google-correo {
+    cursor: pointer;
+    border: 1px solid #e4e5e7;
+    border-radius: 5px;
+    color: #222325;
+    background-color: white;
+    justify-content: center;
+    width: auto;
+    height: max-content;
+    font-size: larger;
+    margin-top: 52px;
+}
+
+.terminos {
+    font-size: auto;
+    padding: 30px;
+}
+
+.loginParaMovil {
+    display: none;
+    font-family: "Montserrat", sans-serif;
+}
+
 .loginDerecha {
     display: flex;
     flex-direction: column;
@@ -53,25 +91,42 @@ background-color: #00a03d9f;
     text-align: center;
     background-color: white;
     width: 50%;
-    border: 1px solid;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     font-family: "Montserrat", sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra del contenedor */
 }
-.loginIzquierda ul {
-    padding-left: 20%;
+
+.formularioLogin input {
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    font-family: "Montserrat", sans-serif;
 }
-#liSinCursor {
-    list-style-type: none;
-    font-size: 15px;
+
+
+.otraOpcion p {
+    padding-top: 20px;
 }
+
+.formularioLogin button {
+    border-radius: 5px;
+    font-family: "Montserrat", sans-serif;
+    background-color: #f0f0f0;
+}
+
+.formularioLogin {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .google-correo {
     cursor: pointer;
-    border: 1 px solid #e4e5e7;;
+    border: 1px solid #e4e5e7;
     border-radius: 5px;
-    color: #222325;;
+    color: #222325;
     background-color: white;
     justify-content: center;
     width: auto;
@@ -79,83 +134,89 @@ background-color: #00a03d9f;
     font-size: larger;
     margin-top: 52px;
 }
+
 .terminos {
     font-size: auto;
     padding: 30px;
 }
+
 .loginParaMovil {
     display: none;
     font-family: "Montserrat", sans-serif;
 }
+
 @media (max-width: 1656px) {
     #liSinCursor {
         font-size: 12px;
     }
-    .loginIzquierda ul li {
+    .textoIzquierda ul li {
         font-size: smaller;
     }
     .loginIzquierda {
-    font-size: 16px;
+        font-size: 16px;
     }
-    .loginIzquierda h2 {
-   font-size: 13px;
+    .textoArriba h2 {
+        font-size: 13px;
     }
     .loginIzquierda h2 svg {
         width: min-content;
         height: min-content;
-          }
-          .divLoginGeneral {
-            width: 65%;
-            margin: auto;
-            margin-top: 100px;
-        }
+    }
+    .divLoginGeneral {
+        width: 65%;
+        margin: auto;
+        margin-top: 100px;
+    }
 }
+
 @media (max-width: 1252px) {
     #liSinCursor {
         font-size: 15px;
     }
     .loginIzquierda h2 svg {
-  width: 17px;
-  height: 17px;
+        width: 17px;
+        height: 17px;
     }
-    .loginIzquierda {  
+    .loginIzquierda {
         font-size: 15px;
-        }
-        .loginIzquierda h2 {
-       font-size: 17px;
-        }
-        .terminos {
-            font-size: 16px;
-            
-        }
-        .divLoginGeneral {
-            width: 75%;
-            margin: auto;
-            margin-top: 100px;
-        }
+    }
+    .textoArriba h2 {
+        font-size: 17px;
+    }
+    .terminos {
+        font-size: 16px;
+    }
+    .divLoginGeneral {
+        width: 75%;
+        margin: auto;
+        margin-top: 100px;
+    }
 }
+
 @media (max-width: 1011px) {
     .divLoginGeneral {
         width: 90%;
         margin: auto;
         margin-top: 100px;
     }
-    .loginIzquierda h2 {
+    .textoArriba h2 {
         font-size: 14px;
-         }
+    }
     .loginIzquierda {
         font-size: 16px;
-        }
-        .terminos {
-            font-size: 14px;
-        }
+    }
+    .terminos {
+        font-size: 14px;
+    }
 }
+
 @media (max-width: 881px) {
     .divLoginGeneral {
         width: 100%;
         margin-top: 100px;
     }
 }
+
 @media (max-width: 664px) {
     .loginIzquierda {
         display: none;
@@ -171,7 +232,7 @@ background-color: #00a03d9f;
         width: 90%;
         margin-top: 0;
         border-radius: 10px;
-        border: 1px solid ;
+        border: 1px solid;
     }
     .divMovil1 {
         background-color: #00a03d9f;
@@ -195,52 +256,55 @@ background-color: #00a03d9f;
     }
     .terminos {
         background-color: #00a03d9f;
-    
     }
 }
+
 @media (max-width: 550px) {
-.divLoginGeneral {
-    width: 100%;
-    height: max-content;
-}
-.divMovil2 h2 {
-    font-size: 20px;
-}
-.divMovil2 p {
-    font-size: 16px;    
+    .divLoginGeneral {
+        width: 100%;
+        height: max-content;
+    }
+    .divMovil2 h2 {
+        font-size: 20px;
+    }
+    .divMovil2 p {
+        font-size: 16px;
     }
 }
+
 @media (max-width: 400px) {
-.divMovil2 p {
-font-size: 14px;    
+    .divMovil2 p {
+        font-size: 14px;
+    }
+    .google-correo {
+        font-size: 20px;
+    }
 }
-.google-correo {
-    font-size: 20px;
-}
-}
+
 @media (min-height: 1000px) {
     .divLoginGeneral {
         height: 870px;
     }
-    .loginIzquierda h2 {
+    .textoArriba h2 {
         font-size: 20px;
     }
-    .loginIzquierda ul li {
+    .textoIzquierda ul li {
         font-size: 17px;
     }
     #liSinCursor {
         font-size: 17px;
     }
 }
+
 @media (min-height: 1300px) {
     .divLoginGeneral {
         height: 1150px;
         width: 100%;
     }
-    .loginIzquierda h2 {
+    .textoArriba h2 {
         font-size: 30px;
     }
-    .loginIzquierda ul li {
+    .textoIzquierda ul li {
         font-size: 24px;
     }
     #liSinCursor {
@@ -252,15 +316,15 @@ font-size: 14px;
     .loginIzquierda h2 svg {
         width: 30px;
         height: 30px;
-}
-.loginDerecha p {
-    font-size: 20px;
-}
-.google-correo {
-    font-size: 26px;
-}
-.google-correo svg {
-    width: 20px;
-    height: 20px;
-}
+    }
+    .loginDerecha p {
+        font-size: 20px;
+    }
+    .google-correo {
+        font-size: 26px;
+    }
+    .google-correo svg {
+        width: 20px;
+        height: 20px;
+    }
 }

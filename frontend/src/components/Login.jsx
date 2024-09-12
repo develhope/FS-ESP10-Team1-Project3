@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./css/Login.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import anonimo from './sidebar-items-perfil/assets-sidebar/anonimo.jpg';
-import { login, handleRedirect, isAuthenticated, getUser } from './auth';
+import { login, handleRedirect, isAuthenticated, getUser } from '../authO';
 
 export function anonimus() {
   return (
@@ -25,11 +25,11 @@ function Login() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const loginTitle = "iniciar sesión con tu cuenta";
-  const registerTitle = "crear una nueva cuenta";
-  const textoEnlace1 = "¿no tienes cuenta? pincha aqui para ";
-  const textoEnlace2 = "ya tienes cuenta? pincha aqui para ";
-  const enlaceContent1 = "registrarte";
+  const loginTitle = "Iniciar sesión con tu cuenta";
+  const registerTitle = "Crear una nueva cuenta";
+  const textoEnlace1 = "¿No tienes cuenta? ";
+  const textoEnlace2 = "¿Ya tienes una cuenta? Haz click aquí para ";
+  const enlaceContent1 = "Registrate!";
   const enlaceContent2 = "iniciar sesión";
 
   const initialMode = location.state?.mode || "login";
@@ -67,8 +67,7 @@ function Login() {
   }, [location]);
 
   //Async Auth0
-  const [user, setUser] = useState<any>(null);
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  
 
   // Ejecutar la inicialización al cargar el componente
   useEffect(() => {
@@ -91,7 +90,7 @@ function Login() {
     event.preventDefault();
     setLoading(true);
     setError(null);
-    if (aContent === "registrarte") {
+    if (aContent === "Registrate!") {
       try {
         const loginDataToBackend = {
           email: emailLoginCorreo,
@@ -171,7 +170,7 @@ function Login() {
   };
 
   const cambiarLoginORegister = () => {
-    if (aContent === "registrarte") {
+    if (aContent === "Registrate!") {
       setH1Content(registerTitle);
       setP1Content(textoEnlace2);
       setAcontent(enlaceContent2);
@@ -192,31 +191,21 @@ function Login() {
 
   return (
     <div className="divLoginGeneral">
-      <div className="loginIzquierda">
-        <h2>
-          Unete a nosotros y encuentra trabajo cuanto antes!{" "}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24px"
-            viewBox="0 -960 960 960"
-            width="24px"
-            fill="#FFFFFF"
-          >
-            <path d="M360-840v-80h240v80H360Zm80 440h80v-240h-80v240Zm40 320q-74 0-139.5-28.5T226-186q-49-49-77.5-114.5T120-440q0-74 28.5-139.5T226-694q49-49 114.5-77.5T480-800q62 0 119 20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5 77.5T480-80Zm0-80q116 0 198-82t82-198q0-116-82-198t-198-82q-116 0-198 82t-82 198q0 116 82 198t198 82Zm0-280Z" />
-          </svg>
-        </h2>
+  <div className="loginIzquierda">
+    <div className="textoWrapper">
+      <div className="textoArriba">
+        <h1>¡Únete a FreelanceHub y encuentra centenares de ofertas!</h1>
+      </div>
+      <div className="textoIzquierda">
         <ul>
-          <li>Contacto con diversas empresas de toda españa</li>
-          <li>Inscipcion gratis</li>
-          <li>
-            Un monton de categorias entre las que puedes buscar u ofrecer
-            trabajo
-          </li>
-          <li id="liSinCursor">
-            <strong>No lo pienses mas!</strong>
-          </li>
+          <li>Amplia variedad de oportunidades en diferentes sectores</li>
+          <li>Totalmente gratuito</li>
+          <li>Perfiles verificados con gran experiencia</li>
+          <div className="textoFinal"><strong>No lo pienses más!</strong></div>
         </ul>
       </div>
+    </div>
+  </div>
       <div className="loginDerecha">
         <h2>{h1Content}</h2>
         <p>

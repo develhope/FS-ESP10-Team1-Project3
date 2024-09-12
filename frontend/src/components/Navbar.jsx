@@ -1,9 +1,8 @@
-import { React, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./css/Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMessage, faUser } from "@fortawesome/free-regular-svg-icons";
-import { faBell } from "@fortawesome/free-regular-svg-icons";
+import { faMessage, faUser, faBell } from "@fortawesome/free-regular-svg-icons";
 
 export function Navbar({ children }) {
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ export function Navbar({ children }) {
       const token = localStorage.getItem('token');
       
       if (!token) {
-      throw new Error('No hay token en el localStorage');
+        throw new Error('No hay token en el localStorage');
       }
   
       try {
@@ -37,7 +36,7 @@ export function Navbar({ children }) {
           setIsAuthenticated(true);
         } else {
           setIsAuthenticated(false);
-          }
+        }
       } catch (error) {
         console.error('Error en la verificación del token:', error);
       }
@@ -45,21 +44,17 @@ export function Navbar({ children }) {
     checkToken();
   }, []);
 
-  // Función para manejar la autenticación
-
   const handleLogout = async () => {
-    // Obtén el token del localStorage
     const token = localStorage.getItem("token");
   
     try {
-      // Realiza el fetch para cerrar sesión
       const response = await fetch('http://localhost:5000/api/users/logout', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ token: token }) // Si el servidor espera el token en el cuerpo
+        body: JSON.stringify({ token })
       });
   
       if (!response.ok) {
@@ -75,11 +70,8 @@ export function Navbar({ children }) {
   };
 
   function toggleMobileMenu() {
-    // funciona para mostrar u ocultar el menú en u dispositivo móvil.
     setIsMobileMenuOpen(!isMobileMenuOpen);
   }
-
-  console.log("Navbar isAuthenticated:", isAuthenticated);
 
   return (
     <div className="navbar">
@@ -123,20 +115,22 @@ export function Navbar({ children }) {
               </button>
             </div>
           ) : (
-            <div>
-              <button
-                onClick={() => navigate("/login", { state: { mode: "login" } })}
-              >
-                Iniciar Sesión
-              </button>
-              <button
-                onClick={() =>
-                  navigate("/login", { state: { mode: "register" } })
-                }
-              >
-                Registrarte
-              </button>
-            </div>
+            <>
+              <div className="iniciar">
+                <button
+                  onClick={() => navigate("/login", { state: { mode: "login" } })}
+                >
+                  Iniciar Sesión
+                </button>
+              </div>
+              <div className="registrarte">
+                <button
+                  onClick={() => navigate("/login", { state: { mode: "register" } })}
+                >
+                  Registrarte
+                </button>
+              </div>
+            </>
           )}
         </div>
       </nav>
