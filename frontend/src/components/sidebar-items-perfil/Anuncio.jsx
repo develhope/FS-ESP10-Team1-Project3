@@ -47,6 +47,9 @@ export function Anuncio() {
       }
       const response = await fetch("http://localhost:5000/api/services", {
         method: "POST",
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          },
         body: formData,
       });
 

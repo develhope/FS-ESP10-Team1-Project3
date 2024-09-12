@@ -1,3 +1,4 @@
+const { query } = require('express');
 const ProjectsModel = require('../models/Projects');
 const bankModel = require('../models/infoBancaria');
 
@@ -29,11 +30,17 @@ const getProjectById = async (req, res) => {
     }
   };
 
+  // const createProject = async (creator_id, name, pago ) => {
+  //   const result = await pool.query(
+  //     "INSERT INTO projects ( creator_id, name, pago) VALUES ($1, $2, $3)", [creator_id, name, pago]);
+  //   return result.rows[0];
+  // };
 
   // Crear un nuevo proyecto 
 
- const createProject = async (req, res) => {
+ const postProject = async (req, res) => {
     try {
+      
       const { token, name, pago } = req.body;
 
       if (!token) {
@@ -42,6 +49,7 @@ const getProjectById = async (req, res) => {
       const creator_id = await bankModel.getPropetario(token);
 
     // Validar que todos los campos estén presentes
+
     if (!creator_id || !name || !pago) {
         return res.status(400).json({ message: 'Faltan campos necesarios' });
       }
@@ -94,4 +102,4 @@ const getProjectById = async (req, res) => {
   
   
   
-module.exports = { getProjects, getProjectById, createProject, updateProject, deleteProject };
+module.exports = { getProjects, getProjectById, postProject, updateProject, deleteProject };

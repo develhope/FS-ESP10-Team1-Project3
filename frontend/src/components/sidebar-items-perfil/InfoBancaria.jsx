@@ -41,7 +41,8 @@ function InfoBancaria() {
     const response = await fetch('http://localhost:5000/api/bankInfo', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(nuevaCuenta)
     });

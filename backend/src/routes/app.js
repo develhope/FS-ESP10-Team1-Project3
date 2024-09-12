@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const pool = require("../config/db");
+const passport = require('../config/passport');
 require("dotenv").config();
 
 // Configura CORS primero
@@ -16,7 +17,7 @@ app.use(
 
 // Luego, configura otros middleware
 app.use(express.json());
-
+app.use(passport.initialize());
 // Importa las rutas
 const userRoutes = require("../routes/userRoutes");
 
@@ -50,6 +51,7 @@ const createTableFunction = async () => {
 
     //Tabla infoBancaria:
     await pool.query(`
+  
     CREATE TABLE IF NOT EXISTS infoBancaria (
         propietario UUID,
         titular VARCHAR(100), 
@@ -120,6 +122,7 @@ const createTableFunction = async () => {
 // Crear el Trigger para Actualizar updated_at
 
     await pool.query(`
+    DROP TRIGGER IF EXISTS update_projects_updated_at ON projects;
     CREATE TRIGGER update_projects_updated_at
     BEFORE UPDATE ON projects
     FOR EACH ROW

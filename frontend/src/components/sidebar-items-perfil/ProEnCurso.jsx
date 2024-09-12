@@ -34,8 +34,9 @@ function ProEnCurso() {
       const response = await fetch("http://localhost:5000/api/projects", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          // Authorization: `Bearer ${token}`, // Añadir el token aquí
+           'Authorization': `Bearer ${token}`,
+          "Content-Type": "application/json"
+
         },
         body: JSON.stringify(proyecto),
       });
@@ -76,6 +77,7 @@ function ProEnCurso() {
     // Creación del objeto del proyecto para el backend
 
     const nuevoProyecto = {
+      token:localStorage.getItem("token"),
       name: nombreProyecto, // Cambiado de 'nombre' a 'name'
       pago: parseFloat(precio), // Cambiado de 'precio' a 'pago' y convertido a número
       created_at: new Date().toISOString().split("T")[0], // Cambiado de 'startDate' a 'created_at'
@@ -151,7 +153,7 @@ function ProEnCurso() {
                       value={proyecto.created_at}
                     />
                   ) : (
-                    console.log(proyecto.startDate)
+                    console.log(proyecto.created_at)
                   )}
                   <input
                     className="nombreProyecto"
