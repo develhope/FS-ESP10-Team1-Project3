@@ -27,3 +27,5 @@ const getAllOffers = async (req, res) => {
     }
   };
 module.exports = { createService, getAllOffers };
+
+

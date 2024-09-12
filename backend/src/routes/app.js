@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const pool = require("../config/db");
+const passport = require('../config/passport');
 require("dotenv").config();
 
 // Configura CORS primero
@@ -16,7 +17,7 @@ app.use(
 
 // Luego, configura otros middleware
 app.use(express.json());
-
+app.use(passport.initialize());
 // Importa las rutas
 const userRoutes = require("../routes/userRoutes");
 

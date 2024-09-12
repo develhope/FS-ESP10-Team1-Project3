@@ -9,6 +9,7 @@ const servicesController = require('../controllers/servicesController');
 const multer = require('multer');
 const path = require('path'); 
 const fs = require('fs'); 
+const passport = require('../config/passport');
 
 //creacion de un archivo upload para guardar imagenes y configuracion de multer
 const uploadDir = path.join(__dirname, 'uploads');
@@ -43,13 +44,9 @@ router.get('/test', (req, res) => {
     res.json({ message: 'Server is running' });
 });
 
-//tabla infobancaria routes
-router.post('/bankInfo/filterByToken', bankController.getAllAccountsByToken);
-router.post('/bankInfo', bankController.createAcc);
-router.delete('/bankInfo', bankController.deleteAcc);
-router.put('/bankInfo/selected', bankController.selectAcc);
 
-module.exports = router;
+
+
 
 //Tabla skills routes
 router.get('/skills', skillsController.getAllSkills);      
@@ -64,7 +61,18 @@ router.post('/projects', projectsController.createProject);
 router.put('/projects', projectsController.updateProject);
 router.delete('/projects/:id', projectsController.deleteProject);
 
-//tabla services routes
 
-router.post('/services', upload.single('imagen'), servicesController.createService);
-router.get('/services/offers', servicesController.getAllOffers);
+
+
+
+//rutas protegidas
+//tabla services routes
+router.post('/services', passport.authenticate('jwt', { session: false }), upload.single('imagen'), servicesController.createService);
+router.get('/services/offers', passport.authenticate('jwt', { session: false }), servicesController.getAllOffers);
+//tabla infobancaria routes
+router.post('/bankInfo/filterByToken', bankController.getAllAccountsByToken);
+router.post('/bankInfo', bankController.createAcc);
+router.delete('/bankInfo', bankController.deleteAcc);
+router.put('/bankInfo/selected', bankController.selectAcc);
+
+module.exports = router;
