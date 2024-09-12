@@ -41,7 +41,7 @@ const getProjectById = async (req, res) => {
  const postProject = async (req, res) => {
     try {
       
-      const { token, name, pago } = req.body;
+      const { token, name, pago, deadline } = req.body;
 
       if (!token) {
         return res.status(401).json({ message: 'Token no proporcionado' });
@@ -50,11 +50,11 @@ const getProjectById = async (req, res) => {
 
     // Validar que todos los campos estén presentes
 
-    if (!creator_id || !name || !pago) {
+    if (!creator_id || !name || !pago || !deadline) {
         return res.status(400).json({ message: 'Faltan campos necesarios' });
       }
 
-      const newProject = await ProjectsModel.createProject(creator_id, name, pago);
+      const newProject = await ProjectsModel.createProject(creator_id, name, pago, deadline);
   
       return res.status(201).json(newProject);
     } catch (error) {
