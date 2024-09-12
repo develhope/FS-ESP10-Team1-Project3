@@ -14,16 +14,16 @@ const getProjectById = async (id) => {
 };
 
 
-const createProject = async (creator_id, name, description) => {
+const createProject = async (creator_id, name, pago) => {
   const result = await pool.query(
-    "INSERT INTO projects ( creator_id, name, description) VALUES ($1, $2, $3) RETURNING *", [creator_id, name, description]);
+    "INSERT INTO projects ( creator_id, name, pago) VALUES ($1, $2, $3) RETURNING *", [creator_id, name, pago]);
   return result.rows[0];
 };
 
-const updateProject = async (id, name, description, status, developer_id) => {
+const updateProject = async (id, name, pago, status, developer_id) => {
   const result = await pool.query(
-    'UPDATE projects SET name = $1, description = $2, status = $3, developer_id = $4, updated_at = CURRENT_TIMESTAMP WHERE id = $5 RETURNING *',
-    [name, description, status, developer_id, id]
+    'UPDATE projects SET name = $1, pago = $2, status = $3, developer_id = $4, updated_at = CURRENT_TIMESTAMP WHERE id = $5 RETURNING *',
+    [name, pago, status, developer_id, id]
   );
   const updatedProject = result.rows[0];
 
