@@ -77,7 +77,8 @@ const createTableFunction = async () => {
 
     //Tabla infoBancaria:
     await pool.query(`
-  
+    
+
     CREATE TABLE IF NOT EXISTS infoBancaria (
         propietario UUID,
         titular VARCHAR(100), 
