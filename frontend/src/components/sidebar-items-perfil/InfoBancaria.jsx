@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import "./sidebar-items-css/infoBancaria.css";
 function InfoBancaria() {
+  const token = localStorage.getItem("token");
     const [mostrarForm, setMostrarForm] = useState(false);
     const [cuentasBancarias, setCuentasBancarias] = useState([]);
     const [numeroCuenta, setNumeroCuenta] = useState("");
@@ -28,7 +29,6 @@ function InfoBancaria() {
     const actualizarInfoBancaria = async (event) => {
       event.preventDefault();
       try {
-        const token = localStorage.getItem("token");
         const nuevaCuenta = {
           id: Date.now(),
           numero_cuenta: numeroCuenta, 
@@ -65,7 +65,8 @@ function InfoBancaria() {
         const response = await fetch('http://localhost:5000/api/bankInfo', {
           method: 'DELETE',
           headers: {
-            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({numero_cuenta})
         });
@@ -83,7 +84,8 @@ function InfoBancaria() {
         const response = await fetch('http://localhost:5000/api/bankInfo/selected', {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({ numero_cuenta: cuenta.numero_cuenta })
         });
@@ -102,7 +104,8 @@ function InfoBancaria() {
         const response = await fetch('http://localhost:5000/api/bankInfo/filterByToken', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({token})
         });

@@ -125,6 +125,7 @@ const createTableFunction = async () => {
         status BOOLEAN DEFAULT FALSE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        deadline DATE,
         developer_id UUID REFERENCES users(user_id) ON DELETE SET NULL,
         parent_project_id UUID REFERENCES projects(id) ON DELETE CASCADE  -- (Relación One to Many en la misma tabla)
     );

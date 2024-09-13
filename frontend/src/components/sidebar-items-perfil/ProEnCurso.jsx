@@ -81,7 +81,7 @@ function ProEnCurso() {
       name: nombreProyecto, // Cambiado de 'nombre' a 'name'
       pago: parseFloat(precio), // Cambiado de 'precio' a 'pago' y convertido a número
       created_at: new Date().toISOString().split("T")[0], // Cambiado de 'startDate' a 'created_at'
-    
+      deadline: deadline //añadido deadline al proyecto nuevo
     };
 
     // Llama a la función que envía el proyecto al backend
