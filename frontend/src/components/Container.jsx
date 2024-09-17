@@ -1,8 +1,12 @@
 import { React, useEffect, useState } from "react";
 import categorias from "../INFOGENERAL/categorias.js";
 import { useNavigate } from "react-router-dom";
+
+
 export function Container() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(""); // Almacenar lo que el usuario escribe
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]); // Almacenar las sugerencias filtradas
   const navigate = useNavigate();
 
   // Efecto para verificar la autenticación al montar el componente
@@ -48,6 +52,18 @@ export function Container() {
     navigate("/"); // Redirige a la página principal después del logout
   };
 
+  // Filtrar las sugerencias en base a lo que escribe el usuario
+  useEffect(() => {
+    if (searchTerm) {
+      const filtered = categorias.filter((categoria) =>
+        categoria.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredSuggestions(filtered);
+    } else {
+      setFilteredSuggestions([]); // Vacía las sugerencias si no hay búsqueda
+    }
+  }, [searchTerm]);
+
   return (
     <div className="container">
       <p className="container-text">
@@ -75,10 +91,21 @@ export function Container() {
       </p>
 
       <div className="buscador">
-        <input type="text" placeholder="Escribe lo que buscas..." />
-        <button>Buscar</button>
-      </div>
-
+      <input type="text" placeholder="Escribe lo que buscas..." 
+             value={searchTerm}
+             onChange={(e) => setSearchTerm(e.target.value)} />
+      
+      <button>Buscar</button>
+        {/* Mostrar las sugerencias solo si hay coincidencias */}
+        {filteredSuggestions.length > 0 && (
+          <ul className="sugerencias">
+            {filteredSuggestions.map((suggestion, index) => (
+              <li key={index}>{suggestion}</li>
+            ))}
+          </ul>
+        )}
+    </div>
+      
       <div className="frase-categoria">
       {isAuthenticated ? (
         <span>Ver mas...</span>
@@ -88,9 +115,10 @@ export function Container() {
       </div>
 
       <div className="categorias">
-        {categorias.map((categoria) => (
-          <button key={categoria}>{categoria}</button>
+      {categorias.map((categoria) => (
+        <button key={categoria}>{categoria}</button>
         ))}
+
       </div>
     </div>
   );
