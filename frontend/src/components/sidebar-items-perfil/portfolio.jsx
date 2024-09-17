@@ -1,41 +1,95 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import "./sidebar-items-css/portfolio.css";
 function Portfolio() {
+  const token = localStorage.getItem("token");
   const [portfolioData, setPortfolioData] = useState(() => {
-    let portfolioExistente = localStorage.getItem("userPortfolio");
+    let portfolioExistente = localStorage.getItem("userHabilidades");
     
     if (!portfolioExistente) {
       const portfolioYhabilidades = {
-        link: "link a tu portfolio",
+        link: "",
         habilidades: []
       };
       portfolioExistente = JSON.stringify(portfolioYhabilidades);
-      localStorage.setItem("userPortfolio", portfolioExistente);
+      localStorage.setItem("userHabilidades", portfolioExistente);
     }
     
     return JSON.parse(portfolioExistente);
   });
-  const [portfolio, setPortfolio] = useState(portfolioData.link);
+  const [portfolio, setPortfolio] = useState("");
   const [habilidadesDisponibles, setHabilidadesDisponibles] = useState([
     "javascript", "react", "typescript", "node", "java", "python","C++", "HTML", "CSS",
   "SQL", "MongoDB", "Git", "Docker", "AWS", "Azure"
   ]);
   const [mostrarLista, setMostrarLista] = useState(false);
   const [busqueda, setBusqueda] = useState('');
-  const [habilidades, setHabilidades] = useState(portfolioData.habilidades);
+  const [habilidades, setHabilidades] = useState([]);
+  const [habilidadesEnDb, setHabilidadesEnDb] = useState([]);
   const actualizarLinkPortfolio = (event) => {
     event.preventDefault();
     setPortfolio(event.target.value);
   };
-    const guardarPortf = (event) => {
+  const guardarPortf = async (event) => {
     event.preventDefault();
     const userDataPortf = {
-     link: portfolio,
-     habilidades: habilidades
+      token: token,
     };
-    const userDataPortStrings = JSON.stringify(userDataPortf);
-    localStorage.setItem("userPortfolio", userDataPortStrings);
+  
+    // Iterar sobre las habilidades para hacer un fetch por cada una
+    try {
+      console.log(habilidades);
+      
+      for (const habilidad of habilidades) {
+        if (!habilidadesEnDb.includes(habilidad)) {
+          const data = {
+            ...userDataPortf,
+            name: habilidad,
+          };
+    
+          const response = await fetch('http://localhost:5000/api/skills', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+    
+          if (response.ok) {
+            console.log(`Habilidad ${habilidad} guardada exitosamente.`);
+          } else {
+            console.error(`Error al guardar la habilidad ${habilidad}:`, response.statusText);
+          }
+        } 
+      }
+      // Almacenar todas las habilidades en el localStorage si se guarda correctamente
+      localStorage.setItem('userHabilidades', JSON.stringify(habilidades));
+    } catch (error) {
+      console.error("Error interno: ", error);
+    }
+    try {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      const response = await fetch('http://localhost:5000/api/users/portfolio', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: userInfo.email,
+          link: portfolio
+        })
+      });
+  
+      if (!response.ok) {
+        throw new Error('Error al actualizar el enlace del portfolio');
+      }
+  
+      const data = await response.json();
+    } catch (error) {
+      console.error('Error:', error.message);
+      throw error;
+    }
   };
   const manejarBusqueda = (event) => {
     const value = event.target.value;
@@ -44,18 +98,86 @@ function Portfolio() {
   }
   const habilidadesPosibles = habilidadesDisponibles.filter(habilidad =>
     habilidad.toLowerCase().includes(busqueda.toLowerCase()) &&
-    !habilidades.includes(habilidad)
+    !habilidades.includes(habilidad.toLowerCase())
   );
   const seleccionarHabilidad = (habilidad) => {
     if (!habilidades.includes(habilidad)) {
+     
       setHabilidades([...habilidades, habilidad]);
     }
     setBusqueda('');
     setMostrarLista(false);
   };
-  const eliminarHabilidad = (habilidad) => {
-    setHabilidades(habilidades.filter(hab => hab !== habilidad));
+  const eliminarHabilidad = async (habilidad) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/skills', {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: token, name: habilidad }),
+      });
+  
+      if (response.ok) {
+        console.log(`Habilidad "${habilidad}" eliminada exitosamente.`);
+        setHabilidades(habilidades.filter(hab => hab !== habilidad));
+      } else {
+        console.error(`Error al eliminar la habilidad "${habilidad}":`, response.statusText);
+      }
+    } catch (error) {
+      console.error('Error interno:', error);
+    }
   };
+  useEffect(() => {
+    const fetchDataHab = async () => {
+      try {
+        const token = localStorage.getItem("token");
+    const response = await fetch('http://localhost:5000/api/skills/getAll', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({token})
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log("data", data);
+      
+      const habilidadesNombres = data.map(habilidad => habilidad.name);
+      console.log("entra", habilidadesNombres);
+      
+      setHabilidades(habilidadesNombres);
+      localStorage.setItem("userHabilidades", JSON.stringify(data));
+    }
+  } catch (error) {
+    console.error("error al cargar las cuentas bancarias", error);
+  }
+  }
+  const fetchDataLink = async () => {
+    try {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const response = await fetch('http://localhost:5000/api/users/portfolio', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email: userInfo.email })
+  });
+  if (response.ok) {
+    const data = await response.json();
+    setPortfolio(data.linkportfolio);
+    localStorage.setItem("userLinkPortfolio", JSON.stringify(data.linkportfolio));
+  }
+} catch (error) {
+  console.error("error al cargar el link al portfolio", error);
+}
+}
+  fetchDataHab();
+  fetchDataLink();
+  }, []);
     return (
         <div className="div-sidebar-element-portfolio">
         <div className="portfolio-habilidades">
@@ -65,6 +187,7 @@ function Portfolio() {
         <input
           type="text"
           className="inputs-perfil"
+          placeholder="link a tu portfolio"
           value={portfolio}
           onChange={actualizarLinkPortfolio}
         ></input>
@@ -81,7 +204,7 @@ function Portfolio() {
       {habilidades.map((habilidad, index) => (
         <div key={index} className="habilidad-tag">
           {habilidad}
-          <button classname="botonBorrarHabilidad"onClick={() => eliminarHabilidad(habilidad)}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>
+          <button type="button" className="botonBorrarHabilidad"onClick={() => eliminarHabilidad(habilidad)}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>
         </div>
       ))}
     </div>

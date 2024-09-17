@@ -173,6 +173,33 @@ const deleteUser = async (req, res) => {
     console.error(error);
   }
 };
+const updateLink = async (req, res) => {
+  try {
+    const userData = await userModel.getUserByEmail(req.body);
+    const result = await userModel.updateLinkPortfolio(userData.user_id, req.body.link);
+    if (result) {
+      res.status(200).json({ message: "link actualizado correctamente" });
+    } else {
+      res.status(404).json({ error: "error al actualizar el link" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+    console.error(error);
+  }
+};
+const getLink = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const userLink = await userModel.getUserLink(email);
+    if (userLink) {
+      res.json(userLink);
+    } else {
+      res.status(404).json({ error: "User link not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 module.exports = {
   getAllUsers,
   getUser,
@@ -181,4 +208,6 @@ module.exports = {
   checkIfLoged,
   logOut,
   deleteUser,
+  updateLink,
+  getLink,
 };

@@ -65,20 +65,19 @@ const createTableFunction = async () => {
     //  Tabla de usuarios:
     await pool.query(`
     CREATE TABLE IF NOT EXISTS users (
-        user_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-        email VARCHAR(100) NOT NULL UNIQUE,
-        password_hash TEXT NOT NULL,
-        full_name VARCHAR(50),
-        date_of_birth TIMESTAMP NOT NULL,
-        token TEXT 
-    );
+    user_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    full_name VARCHAR(50),
+    date_of_birth TIMESTAMP NOT NULL,
+    token TEXT,
+    linkportfolio TEXT
+);
 `);
     console.log("Tabla de usuarios verificada o creada");
 
     //Tabla infoBancaria:
     await pool.query(`
-    
-
     CREATE TABLE IF NOT EXISTS infoBancaria (
         propietario UUID,
         titular VARCHAR(100), 
@@ -94,12 +93,33 @@ const createTableFunction = async () => {
     console.log("Tabla de infobancaria verificada o creada");
 
     //Tabla skills:
+   
     await pool.query(`
     CREATE TABLE IF NOT EXISTS skills (
         skill_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-        name VARCHAR(100) NOT NULL
-    );
+        name varchar(50)
+    ); 
 `);
+await pool.query(`
+  INSERT INTO skills (skill_id, name) 
+  VALUES 
+    ('5a3b7417-6443-4913-b411-f2b9bb7b8547', 'javascript'),
+    ('711913a3-5cfa-4161-b472-0832a9e45f9b', 'react'),
+    ('6a99e676-17b8-4c0d-af01-b307ca4ba7a0', 'typescript'),
+    ('d88975ac-bba5-4b70-b251-609bdfc14219', 'node'),
+    ('b45078a8-4617-4b7c-8f44-cebb5f3ad483', 'java'),
+    ('09613d15-2d56-48dc-b3d2-b9aaf06cd1b4', 'python'),
+    ('8d81ac2f-9301-4e4c-af5e-2ff2a368b442', 'C++'),
+    ('3354a77a-d74f-41a7-a395-8bdfa2f30cfb', 'HTML'),
+    ('f01b96f6-e471-41cd-b904-6006d54b9554', 'CSS'),
+    ('f2092891-1e26-4658-9845-c0a34e47d15f', 'SQL'),
+    ('01df5a25-cc46-41c7-b58f-17c59249fabf', 'MongoDB'),
+    ('d04246f0-d26d-4078-a624-f05119f6367b', 'Git'),
+    ('4aba52d1-e730-4f39-864a-6689eb2b77e2', 'Docker'),
+    ('a6abcd2f-661a-418a-8eb0-0895ed1e4f9b', 'AWS'),
+    ('a8e38141-60bc-4d44-8702-74062d52099b', 'Azure')
+  ON CONFLICT (skill_id) DO NOTHING;
+`)
 
     await pool.query(`
     CREATE TABLE IF NOT EXISTS user_skills (

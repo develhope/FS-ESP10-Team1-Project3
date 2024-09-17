@@ -56,5 +56,24 @@ const generateToken = async (dataId, dataToken) => {
     );
     return result.rows[0];
   };
+  const updateLinkPortfolio = async (userId, link) => {
+    const result = await pool.query(
+      `UPDATE users 
+       SET linkportfolio = $1 
+       WHERE user_id = $2 
+       RETURNING *`,
+      [link, userId]
+    );
+    
+    return result.rows[0];
+  };
 
-module.exports = { getUsers, getUserById, createUser, getUserByEmail, generateToken, checkToken, deleteToken, deleteUser };
+  const getUserLink = async (email) => {
+    const result = await pool.query(
+      `SELECT linkportfolio FROM users WHERE email=$1`,
+      [email]
+    );
+    return result.rows[0];
+  };
+
+module.exports = { getUsers, getUserById, createUser, getUserByEmail, generateToken, checkToken, deleteToken, deleteUser, updateLinkPortfolio, getUserLink };

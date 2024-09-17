@@ -39,6 +39,8 @@ router.post('/users', userController.createUser);
 router.post('/users/login', userController.logIn);
 router.post('/users/token', userController.checkIfLoged);
 router.put('/users/logout', userController.logOut);
+router.put('/users/portfolio', userController.updateLink);
+router.post('/users/portfolio', userController.getLink);
 router.delete('/users', userController.deleteUser);
 router.get('/test', (req, res) => {
     res.json({ message: 'Server is running' });
@@ -48,10 +50,7 @@ router.get('/test', (req, res) => {
 
 
 
-//Tabla skills routes
-router.get('/skills', skillsController.getAllSkills);      
-router.post('/skills', skillsController.createSkill);     
-router.delete('/skills/:id', skillsController.deleteSkill); 
+
 
 //rutas protegidas
 //tabla services routes
@@ -69,5 +68,9 @@ router.post('/projects', passport.authenticate('jwt', { session: false }), proje
 router.put('/projects', passport.authenticate('jwt', { session: false }), projectsController.updateProject);
 router.delete('/projects/:id', passport.authenticate('jwt', { session: false }), projectsController.deleteProject);
 
+//Tabla skills routes
+router.post('/skills/getAll', passport.authenticate('jwt', { session: false }), skillsController.getAllSkills);      
+router.post('/skills', passport.authenticate('jwt', { session: false }), skillsController.createSkill);     
+router.delete('/skills', passport.authenticate('jwt', { session: false }), skillsController.deleteSkill); 
 
 module.exports = router;
