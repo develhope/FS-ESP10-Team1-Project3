@@ -1,72 +1,17 @@
-import React, { useEffect, useState } from "react";
-import "./css/Navbar.css";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMessage, faUser, faBell } from "@fortawesome/free-regular-svg-icons";
+import { useAuth0 } from "@auth0/auth0-react";
+import "./css/Navbar.css";
 
-export function Navbar({ children }) {
+export function Navbar() {
+  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
   const navigate = useNavigate();
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const checkToken = async () => {
-      const token = localStorage.getItem('token');
-      
-      if (!token) {
-        throw new Error('No hay token en el localStorage');
-      }
-  
-      try {
-        const response = await fetch('http://localhost:5000/api/users/token', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ token }),
-        });
-    
-        if (!response.ok) {
-          throw new Error('Error al verificar el token');
-        }
-    
-        const data = await response.json();
-        if (data.loggedIn) {
-          setIsAuthenticated(true);
-        } else {
-          setIsAuthenticated(false);
-        }
-      } catch (error) {
-        console.error('Error en la verificación del token:', error);
-      }
-    };
-    checkToken();
-  }, []);
-
   const handleLogout = async () => {
-    const token = localStorage.getItem("token");
-  
-    try {
-      const response = await fetch('http://localhost:5000/api/users/logout', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ token })
-      });
-  
-      if (!response.ok) {
-        throw new Error('Logout failed');
-      }
-      localStorage.removeItem("userInfo");
-      localStorage.removeItem("token");
-      setIsAuthenticated(false);
-      window.location.href = `/`;
-    } catch (error) {
-      console.error('Error during logout:', error);
-    }
+    logout({ returnTo: window.location.origin });
   };
 
   function toggleMobileMenu() {
@@ -118,14 +63,14 @@ export function Navbar({ children }) {
             <>
               <div className="iniciar">
                 <button
-                  onClick={() => navigate("/login", { state: { mode: "login" } })}
+                  onClick={() => loginWithRedirect({ redirectUri: window.location.origin + "/sidebar" })}
                 >
                   Iniciar Sesión
                 </button>
               </div>
               <div className="registrarte">
                 <button
-                  onClick={() => navigate("/login", { state: { mode: "register" } })}
+                  onClick={() => loginWithRedirect({ redirectUri: window.location.origin + "/sidebar" })}
                 >
                   Registrarte
                 </button>

@@ -1,20 +1,19 @@
-import { React } from "react";
-import { useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import "./css/Login.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import anonimo from './sidebar-items-perfil/assets-sidebar/anonimo.jpg';
-import { login, handleRedirect, isAuthenticated, getUser } from '../authO';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export function anonimus() {
   return (
-    <img src={anonimo}></img>
-  )
+    <img src={anonimo} alt="Anónimo" />
+  );
 }
+
 function Login() {
   const [loginCorreo, setLoginCorreo] = useState(false);
   const [emailLoginCorreo, setEmailLoginCorreo] = useState("");
   const [passwordLoginCorreo, setPasswordLoginCorreo] = useState("");
-  //
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,95 +42,28 @@ function Login() {
     initialMode === "register" ? enlaceContent2 : enlaceContent1
   );
 
-  //Auth0 Logic
- 
+  // Auth0 Logic
+  const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
 
-
-
-  const mostrarLoginCorreo = () => {
-    setLoginCorreo(!loginCorreo);
-  };
-
-  useEffect(() => {
-    if (location.state?.mode) {
-      if (location.state.mode === "register") {
-        setH1Content(registerTitle);
-        setP1Content(textoEnlace2);
-        setAcontent(enlaceContent2);
-      } else {
-        setH1Content(loginTitle);
-        setP1Content(textoEnlace1);
-        setAcontent(enlaceContent1);
-      }
+  const iniciarSesionConGoogle = async () => {
+    try {
+      await loginWithRedirect({
+        redirectUri: window.location.origin + "/sidebar",
+      });
+    } catch (error) {
+      console.error('Error al iniciar sesión con Google', error);
     }
-  }, [location]);
-
-  //Async Auth0
-  
-
-  // Ejecutar la inicialización al cargar el componente
-  useEffect(() => {
-    const initAuthFlow = async () => {
-      await handleRedirect(); // Maneja la redirección después del login
-      const authStatus = await isAuthenticated(); // Verifica si el usuario está autenticado
-      setLoggedIn(authStatus);
-
-      if (authStatus) {
-        const userInfo = await getUser(); // Obtén la información del usuario autenticado
-        setUser(userInfo);
-      }
-    };
-
-    initAuthFlow();
-  }, []);
-  
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
+
     if (aContent === "Registrate!") {
       try {
-        const loginDataToBackend = {
-          email: emailLoginCorreo,
-          password_hash: passwordLoginCorreo
-        };
-
-        const response = await fetch('http://localhost:5000/api/users/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(loginDataToBackend)
-        });
-
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || 'Error en el inicio de sesión');
-        }
-        const data = await response.json();
-
-        localStorage.setItem("token", data.token);
-    
-        const userLoginInfo = JSON.stringify({
-          email: emailLoginCorreo,
-          password: passwordLoginCorreo,
-          birthDate: new Date(data.date_of_birth).toISOString().split('T')[0],
-          fullName: (data.full_name != null) ? data.full_name : "Nombre completo",
-          userImage: (data.user_image != null) ? data.user_image : anonimo,
-        });
-        localStorage.setItem("userInfo", userLoginInfo);
-        window.location.href = `/`;
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    } else {
-      try {
         const userDataTobackEnd = {
-          email: email,
+          email,
           password_hash: password,
           full_name: nombre,
           date_of_birth: birthDate
@@ -151,13 +83,12 @@ function Login() {
         const data = await response.json();
         localStorage.setItem("token", data.token);
         const userInfoToStringify = {
-          email: email,
-          password: password,
-          birthDate: birthDate,
+          email,
+          password,
+          birthDate,
           fullName: nombre,
           userImage: anonimo,
-          
-        }
+        };
         const userInfo = JSON.stringify(userInfoToStringify);
         localStorage.setItem("userInfo", userInfo);
         window.location.href = `/`;
@@ -166,7 +97,42 @@ function Login() {
       } finally {
         setLoading(false);
       }
+    } else {
+      try {
+        const loginDataToBackend = {
+          email: emailLoginCorreo,
+          password_hash: passwordLoginCorreo
+        };
 
+        const response = await fetch('http://localhost:5000/api/users/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(loginDataToBackend)
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Error en el inicio de sesión');
+        }
+        const data = await response.json();
+
+        localStorage.setItem("token", data.token);
+        const userLoginInfo = JSON.stringify({
+          email: emailLoginCorreo,
+          password: passwordLoginCorreo,
+          birthDate: new Date(data.date_of_birth).toISOString().split('T')[0],
+          fullName: data.full_name || "Nombre completo",
+          userImage: data.user_image || anonimo,
+        });
+        localStorage.setItem("userInfo", userLoginInfo);
+        window.location.href = `/`;
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -181,30 +147,38 @@ function Login() {
       setAcontent(enlaceContent1);
     }
   };
-  // const sendRegisterData = (event) => {
-  //   event.preventDefault();
-  // };
 
-  //Auth0 Login
-  
+  useEffect(() => {
+    if (location.state?.mode) {
+      if (location.state.mode === "register") {
+        setH1Content(registerTitle);
+        setP1Content(textoEnlace2);
+        setAcontent(enlaceContent2);
+      } else {
+        setH1Content(loginTitle);
+        setP1Content(textoEnlace1);
+        setAcontent(enlaceContent1);
+      }
+    }
+  }, [location]);
 
   return (
     <div className="divLoginGeneral">
-  <div className="loginIzquierda">
-    <div className="textoWrapper">
-      <div className="textoArriba">
-        <h1>¡Únete a FreelanceHub y encuentra centenares de ofertas!</h1>
+      <div className="loginIzquierda">
+        <div className="textoWrapper">
+          <div className="textoArriba">
+            <h1>¡Únete a FreelanceHub y encuentra centenares de ofertas!</h1>
+          </div>
+          <div className="textoIzquierda">
+            <ul>
+              <li>Amplia variedad de oportunidades en diferentes sectores</li>
+              <li>Totalmente gratuito</li>
+              <li>Perfiles verificados con gran experiencia</li>
+              <div className="textoFinal"><strong>No lo pienses más!</strong></div>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div className="textoIzquierda">
-        <ul>
-          <li>Amplia variedad de oportunidades en diferentes sectores</li>
-          <li>Totalmente gratuito</li>
-          <li>Perfiles verificados con gran experiencia</li>
-          <div className="textoFinal"><strong>No lo pienses más!</strong></div>
-        </ul>
-      </div>
-    </div>
-  </div>
       <div className="loginDerecha">
         <h2>{h1Content}</h2>
         <p>
@@ -265,9 +239,8 @@ function Login() {
               </form>
 
               <div className="otraOpcion">
-                <p>O tambien puedes:</p>
-                <button className="google-correo">
-                  
+                <p>O también puedes:</p>
+                <button className="google-correo" onClick={iniciarSesionConGoogle}>
                   <svg
                     width="16"
                     height="16"
@@ -283,130 +256,29 @@ function Login() {
                       fill="#32A753"
                     ></path>
                     <path
-                      d="M3.964 5.456H.956a8.928 8.928 0 0 0 0 8.033l3.008-2.318a5.3 5.3 0 0 1-.283-1.699 5.3 5.3 0 0 1 .283-1.699V5.456Z"
-                      fill="#F9BB00"
+                      d="M3.963 8.464c-.091-.53-.139-1.079-.139-1.635 0-.561.05-1.109.139-1.643V3.86H1.43A8.945 8.945 0 0 0 0 8.63c0 1.343.268 2.645.74 3.794l2.597-2.358Z"
+                      fill="#F4B400"
                     ></path>
                     <path
-                      d="m.956 5.456 3.008 2.317c.708-2.116 2.69-3.69 5.036-3.69 1.32 0 2.508.453 3.438 1.338l2.584-2.569C13.465 1.41 11.427.525 9 .525A9.003 9.003 0 0 0 .956 5.456Z"
-                      fill="#E74133"
+                      d="M9 3.86c-.569 0-1.121.062-1.664.178l-.186.027-.196.069-.162.091-.073.075a2.66 2.66 0 0 0-.38.46c-.098.15-.18.308-.235.477-.095.268-.133.552-.133.834 0 .21.02.418.057.62.05.247.121.488.212.721a2.916 2.916 0 0 0 .368.702c.211.338.44.661.716.957a3.011 3.011 0 0 0 1.088.7c.455.193.945.306 1.446.306 1.317 0 2.479-.825 2.897-1.983h-2.207v-.017c-.191.105-.405.162-.626.162-.674 0-1.286-.33-1.678-.834l-.089-.102-.065-.096-.051-.079a2.365 2.365 0 0 1-.263-.451 2.48 2.48 0 0 1-.12-.451c-.023-.16-.035-.317-.035-.476v-.038c0-.55.167-1.072.483-1.515.35-.432.844-.707 1.372-.707.682 0 1.273.29 1.672.734.063.072.118.151.161.239.048.087.076.182.092.277v.004h2.057a4.252 4.252 0 0 0-.554-2.118A4.355 4.355 0 0 0 9 3.86Z"
+                      fill="#FF5F00"
                     ></path>
-                  </svg>{" "}
-                  Continuar con Google
+                  </svg>
+                  &nbsp; Iniciar sesión con Google
                 </button>
               </div>
             </div>
           ) : (
-            <>
-              <div>
-                <button className="google-correo">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 18 19"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9 7.844v3.463h4.844a4.107 4.107 0 0 1-1.795 2.7v2.246h2.907c1.704-1.558 2.685-3.85 2.685-6.575 0-.633-.056-1.246-.162-1.83H9v-.004Z"
-                      fill="#3E82F1"
-                    ></path>
-                    <path
-                      d="M9 14.861c-2.346 0-4.328-1.573-5.036-3.69H.956v2.323A9.008 9.008 0 0 0 9 18.42c2.432 0 4.47-.8 5.956-2.167l-2.907-2.247c-.804.538-1.835.855-3.049.855Z"
-                      fill="#32A753"
-                    ></path>
-                    <path
-                      d="M3.964 5.456H.956a8.928 8.928 0 0 0 0 8.033l3.008-2.318a5.3 5.3 0 0 1-.283-1.699 5.3 5.3 0 0 1 .283-1.699V5.456Z"
-                      fill="#F9BB00"
-                    ></path>
-                    <path
-                      d="m.956 5.456 3.008 2.317c.708-2.116 2.69-3.69 5.036-3.69 1.32 0 2.508.453 3.438 1.338l2.584-2.569C13.465 1.41 11.427.525 9 .525A9.003 9.003 0 0 0 .956 5.456Z"
-                      fill="#E74133"
-                    ></path>
-                  </svg>{" "}
-                  Continuar con Google
-                </button>
-              </div>
-              <div>
-                <button className="google-correo" onClick={mostrarLoginCorreo}>
-                  <svg
-                    width="16"
-                    height="12"
-                    viewBox="0 0 16 12"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M14.5 0H1.5C0.671562 0 0 0.671562 0 1.5V10.5C0 11.3284 0.671562 12 1.5 12H14.5C15.3284 12 16 11.3284 16 10.5V1.5C16 0.671562 15.3284 0 14.5 0ZM14.5 1.5V2.77516C13.7993 3.34575 12.6823 4.233 10.2942 6.10297C9.76787 6.51694 8.72538 7.51147 8 7.49988C7.27475 7.51159 6.23191 6.51678 5.70584 6.10297C3.31813 4.23328 2.20078 3.34584 1.5 2.77516V1.5H14.5ZM1.5 10.5V4.69994C2.21606 5.27028 3.23153 6.07063 4.77931 7.28263C5.46234 7.82028 6.6585 9.00719 8 8.99997C9.33491 9.00719 10.5159 7.8375 11.2204 7.28288C12.7682 6.07091 13.7839 5.27034 14.5 4.69997V10.5H1.5Z"></path>
-                  </svg>
-                  Continuar con el correo electrónico
-                </button>
-                {loginCorreo && (
-                  <form className="formularioLogin" onSubmit={handleFormSubmit}>
-                    <input
-                      type="email"
-                      placeholder="Correo electrónico"
-                      value={emailLoginCorreo}
-                      onChange={(e) => setEmailLoginCorreo(e.target.value)}
-                    />
-                    <input
-                      type="password"
-                      placeholder="Contraseña"
-                      value={passwordLoginCorreo}
-                      onChange={(e) => setPasswordLoginCorreo(e.target.value)}
-                    />
-                    <button type="submit">Enviar</button>
-                  </form>
-                )}
-              </div>
-            </>
-          )}
-        </div>
-
-        <p className="terminos">
-          Al unirte, aceptas los <a>Términos de servicio</a> de esta web, así
-          como recibir correos electrónicos ocasionales de nuestra parte. Lee
-          nuestra <a>Política de privacidad</a> para saber cómo utilizamos tus
-          datos personales.
-        </p>
-      </div>
-      <div className="loginParaMovil">
-        <div className="divMovil1">
-          <h2>
-            Unete a nosotros y encuentra trabajo cuanto antes!{" "}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#ffff"
-            >
-              <path d="M360-840v-80h240v80H360Zm80 440h80v-240h-80v240Zm40 320q-74 0-139.5-28.5T226-186q-49-49-77.5-114.5T120-440q0-74 28.5-139.5T226-694q49-49 114.5-77.5T480-800q62 0 119 20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5 77.5T480-80Zm0-80q116 0 198-82t82-198q0-116-82-198t-198-82q-116 0-198 82t-82 198q0 116 82 198t198 82Zm0-280Z" />
-            </svg>
-          </h2>
-          <ul>
-            <li>Contacto con empresas de cualquier parte de España</li>
-            <li>La inscripcion es totalmete gratuita, aprovecha ahora!</li>
-            <li>
-              Un monton de categorias entre las que puedes buscar u ofrecer
-              trabajo
-            </li>
-          </ul>
-        </div>
-        <div className="divMovil2">
-          <h2>{h1Content}</h2>
-          <p>
-            {p1Content}
-            <a href="#register">{aContent}</a>
-          </p>
-          <div>
-          </div>
-          <div>
             <form className="formularioLogin" onSubmit={handleFormSubmit}>
               <p>
                 Email:{" "}
                 <input
                   type="email"
-                  placeholder="example@gmail.com"
+                  placeholder="Ejemplo@gmail.com"
                   required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={emailLoginCorreo}
+                  autoComplete="email"
+                  onChange={(e) => setEmailLoginCorreo(e.target.value)}
                 />
               </p>
               <p>
@@ -415,59 +287,18 @@ function Login() {
                   type="password"
                   placeholder="*********"
                   required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </p>
-              <p>
-                Fecha de nacimiento:{" "}
-                <input
-                  type="date"
-                  required
-                  value={birthDate}
-                  onChange={(e) => setBirthDate(e.target.value)}
+                  value={passwordLoginCorreo}
+                  autoComplete="current-password"
+                  onChange={(e) => setPasswordLoginCorreo(e.target.value)}
                 />
               </p>
               <button type="submit" disabled={loading}>
                 Enviar datos
               </button>
             </form>
-            <button className="google-correo">
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 18 19"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M9 7.844v3.463h4.844a4.107 4.107 0 0 1-1.795 2.7v2.246h2.907c1.704-1.558 2.685-3.85 2.685-6.575 0-.633-.056-1.246-.162-1.83H9v-.004Z"
-                  fill="#3E82F1"
-                ></path>
-                <path
-                  d="M9 14.861c-2.346 0-4.328-1.573-5.036-3.69H.956v2.323A9.008 9.008 0 0 0 9 18.42c2.432 0 4.47-.8 5.956-2.167l-2.907-2.247c-.804.538-1.835.855-3.049.855Z"
-                  fill="#32A753"
-                ></path>
-                <path
-                  d="M3.964 5.456H.956a8.928 8.928 0 0 0 0 8.033l3.008-2.318a5.3 5.3 0 0 1-.283-1.699 5.3 5.3 0 0 1 .283-1.699V5.456Z"
-                  fill="#F9BB00"
-                ></path>
-                <path
-                  d="m.956 5.456 3.008 2.317c.708-2.116 2.69-3.69 5.036-3.69 1.32 0 2.508.453 3.438 1.338l2.584-2.569C13.465 1.41 11.427.525 9 .525A9.003 9.003 0 0 0 .956 5.456Z"
-                  fill="#E74133"
-                ></path>
-              </svg>{" "}
-              Continuar con Google
-            </button>
-          </div>
-          <div className="terminos">
-            <p>
-              Al unirte, aceptas los <a>Términos de servicio</a> de esta web,
-              así como recibir correos electrónicos ocasionales de nuestra
-              parte. Lee nuestra <a>Política de privacidad</a> para saber cómo
-              utilizamos tus datos personales.
-            </p>
-          </div>
+          )}
         </div>
+        {error && <div className="error">{error}</div>}
       </div>
     </div>
   );

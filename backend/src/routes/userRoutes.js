@@ -63,7 +63,7 @@ router.delete('/bankInfo', passport.authenticate('jwt', { session: false }), ban
 router.put('/bankInfo/selected', passport.authenticate('jwt', { session: false }), bankController.selectAcc);
 //Tabla Projects routes
 router.get('/projects', passport.authenticate('jwt', { session: false }), projectsController.getProjects);
-router.get('/projects:projectId', passport.authenticate('jwt', { session: false }), projectsController.getProjectById);
+router.get('/projects/:projectId', passport.authenticate('jwt', { session: false }), projectsController.getProjectById);
 router.post('/projects', passport.authenticate('jwt', { session: false }), projectsController.postProject);
 router.put('/projects', passport.authenticate('jwt', { session: false }), projectsController.updateProject);
 router.delete('/projects/:id', passport.authenticate('jwt', { session: false }), projectsController.deleteProject);

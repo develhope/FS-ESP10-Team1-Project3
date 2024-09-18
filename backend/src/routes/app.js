@@ -11,10 +11,10 @@ const { auth } = require('express-openid-connect');
 const config = {
   authRequired: false,
   auth0Logout: true,
-  secret: 'CIz9Kbobqw8rLnaQue5CP-npSp5c_uo19kinIoz04UCifhY5Dgj10LFDFwL5SPag',
+  secret: 'bIHBGZi2mYZP43bxOrK6_0FY55C5buoC1I7XzBAr5t5C5YGMXGr1N2Jfrt8DZpOV',
   baseURL: 'http://localhost:5000',
-  clientID: 'yFef9pGuzjA0JToQEtXhRn5fLXFsCV0a',
-  issuerBaseURL: 'https://dev-o72k56frd2psobgl.us.auth0.com'
+  clientID: 'KpqssnSz2CKBQtk7ZWESKzPdYr1j3hQS',
+  issuerBaseURL: 'https://dev-3erzjdx3zx5m21bh.us.auth0.com'
 };
 
 // auth router attaches /login, /logout, and /callback routes to the baseURL

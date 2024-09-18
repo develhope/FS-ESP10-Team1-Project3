@@ -8,10 +8,21 @@ import Login from "./components/Login";
 import { Footer } from "./components/Footer";
 import SidebarApp from "./components/sidebar-items-perfil/SidebarApp";
 import UserList from "./components/UserList";
+import { Auth0Provider } from "@auth0/auth0-react";
 
+const domain = "dev-3erzjdx3zx5m21bh.us.auth0.com";
+const clientId = "KpqssnSz2CKBQtk7ZWESKzPdYr1j3hQS";
 export function App() {
 
   return (
+    <Auth0Provider
+      domain={domain}
+      clientId={clientId}
+      authorizationParams={{
+        redirect_uri: window.location.origin + "/sidebar", 
+        scope: "openid profile email"  // Añade los scopes necesarios aquí
+      }}
+    >
     <div className="app">
       <Navbar />
       <div className="content">
@@ -26,5 +37,6 @@ export function App() {
       </div>
       <Footer />
     </div>
+    </Auth0Provider>
   );
 }
