@@ -1,0 +1,78 @@
+
+.buscarProyectosDivContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.buscarProyectosDivContainer .texto-input-pago::before {
+    content: '$/h';
+    position: absolute;
+    left: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 22px;
+  }
+
+  .buscarProyectosDivContainer .box2-text {
+    font-size: 22px;
+  }
+  .buscarProyectosDivContainer .categoria-buscarProyectos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    height: 30px;
+    min-width: 100px;
+    width: max-content;
+    padding: 3px;
+    margin-left: 80px;
+    margin-top: 23px;
+    border-radius: 25px;
+  }
+  .buscarProyectosDivContainer .nuevo-proyecto {
+    height: 40px;
+    margin-left: 0;
+    width: 130px;
+    border-radius: 25px;
+    border: 2px solid black;
+    color: white;
+  }
+  .buscarProyectosDivContainer .box2 {
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+  }
+  .buscarProyectosDivContainer h2 {
+    margin-top: 0;
+  }
+  .buscarProyectosDivContainer .titulo-categoria-pago {
+    display: flex;
+    flex-direction: column;
+  }
+  .div-contenedor-de-todos-los-servicios {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .verDescripcion {
+    width: max-content;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+  }
+  .solicitar-verDescripcion {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    gap: 20px;
+    margin-left: 400px;
+    width: min-content;
+  }
+  .descripcionDivBuscarProyectos {
+    display: flex;
+    flex-direction: row;
+  }

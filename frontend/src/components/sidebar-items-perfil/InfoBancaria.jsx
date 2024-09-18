@@ -49,6 +49,7 @@ function InfoBancaria() {
     if (response.ok) {
       const nuevasCuentas = [...cuentasBancarias, nuevaCuenta];
       setCuentasBancarias(nuevasCuentas);
+      console.log("entra:", cuentasBancarias);
       localStorage.setItem('userInfoBancaria', JSON.stringify(nuevasCuentas));
       setNumeroCuenta("");
       setNombreCuentaBancaria("");
@@ -111,7 +112,7 @@ function InfoBancaria() {
         });
         if (response.ok) {
           const data = await response.json();
-          setCuentasBancarias(data);
+          setCuentasBancarias(data);   
           localStorage.setItem("userInfoBancaria", JSON.stringify(data));
           const cuentaSeleccionada = data.find(cuenta => cuenta.seleccionada === true);
           if (cuentaSeleccionada) {

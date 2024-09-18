@@ -6,6 +6,7 @@ import ProEnCurso from "./ProEnCurso";
 import ProFinalizados from "./ProFinalizados";
 import InfoBancaria from "./InfoBancaria";
 import { Anuncio } from "./Anuncio";
+import BuscarProyectos from "./BuscarProyectos";
 
 function SidebarApp() {
   return (
@@ -19,6 +20,7 @@ function SidebarApp() {
         <Route path="3" element={<ProFinalizados />} />
         <Route path="4" element={<InfoBancaria />} />
         <Route path="5" element={<Anuncio/>} />
+        <Route path="6" element={<BuscarProyectos/>} />
       </Routes>
     </div>
   );

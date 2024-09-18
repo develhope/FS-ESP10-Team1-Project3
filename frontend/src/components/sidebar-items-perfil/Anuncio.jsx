@@ -12,10 +12,13 @@ export function Anuncio() {
   const subirNuevaImagen = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setImagen(file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setVistaPrevia(reader.result);
+        // Obtener la cadena completa del resultado
+        const fullString = reader.result;
+        
+        // Guardar la cadena completa en el estado
+        setImagen(fullString);
       };
       reader.readAsDataURL(file);
     }
@@ -42,9 +45,7 @@ export function Anuncio() {
       formData.append("categoria", categoria);
       formData.append("pago", pago);
       formData.append("token", token);
-      if (imagen) {
-        formData.append('imagen', imagen);
-      }
+      formData.append("imagen_path", imagen);
       const response = await fetch("http://localhost:5000/api/services", {
         method: "POST",
         headers: {
@@ -62,7 +63,7 @@ export function Anuncio() {
         descripcion,
         categoria,
         pago,
-        imagen: imagen ? imagen.name : null,
+        imagen_path: imagen,
       };
       localStorage.setItem("offerInfo", JSON.stringify(offerInfo));
       setVistaPrevia("");
@@ -80,9 +81,9 @@ export function Anuncio() {
       <div>
         <div className="box1">
           <div className="imagenItems">
-            {vistaPrevia !== "" ? (
+            {imagen !== "" ? (
               <div>
-                <img className="proyectSelectedImage" src={vistaPrevia}></img>{" "}
+                <img className="proyectSelectedImage" src={imagen}></img>{" "}
                 <label htmlFor="inputFile" className="subirImagenDeProyecto">
                   Cambiar imagen
                 </label>
