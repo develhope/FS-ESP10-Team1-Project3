@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
-import categorias from "../INFOGENERAL/categorias.js";
+import { categorias, otrasSugerencias } from "../INFOGENERAL/categorias.js";
 import { useNavigate } from "react-router-dom";
+import { UseLogin } from './UseLogin'
 
 
 export function Container() {
@@ -8,6 +9,7 @@ export function Container() {
   const [searchTerm, setSearchTerm] = useState(""); // Almacenar lo que el usuario escribe
   const [filteredSuggestions, setFilteredSuggestions] = useState([]); // Almacenar las sugerencias filtradas
   const navigate = useNavigate();
+  const {goToLogin} = UseLogin();
 
   // Efecto para verificar la autenticación al montar el componente
   useEffect(() => {
@@ -55,10 +57,14 @@ export function Container() {
   // Filtrar las sugerencias en base a lo que escribe el usuario
   useEffect(() => {
     if (searchTerm) {
-      const filtered = categorias.filter((categoria) =>
+      const filteredCategorias = categorias.filter((categoria) =>
         categoria.toLowerCase().includes(searchTerm.toLowerCase())
       );
-      setFilteredSuggestions(filtered);
+      const filteredOtrasSugerencias = otrasSugerencias.filter((sugerencia) =>
+        sugerencia.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      // Combinar ambas listas de sugerencias
+      setFilteredSuggestions([...filteredCategorias, ...filteredOtrasSugerencias]);
     } else {
       setFilteredSuggestions([]); // Vacía las sugerencias si no hay búsqueda
     }
@@ -116,7 +122,7 @@ export function Container() {
 
       <div className="categorias">
       {categorias.map((categoria) => (
-        <button key={categoria}>{categoria}</button>
+        <button onClick={goToLogin} key={categoria}>{categoria}</button>
         ))}
 
       </div>

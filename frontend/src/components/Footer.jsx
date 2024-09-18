@@ -18,22 +18,22 @@ export function Footer() {
               Nuestra misión es facilitar el acceso a proyectos para profesionales independientes y <br/> ayudar a las empresas a encontrar el talento que necesitan.</p>
               <ul>
                 <li>
-                <a href="#">Acerca de </a>
+                <a href="/acerca-de">Acerca de </a>
                 </li>
                 <li>
-                  <a href="#">Carreras</a>
+                  <a href="/carreras">Carreras</a>
                 </li>
                 <li>
-                  <a href="#">Historia</a>
+                  <a href="/historia">Historia</a>
                 </li>
                 <li>
-                  <a href="#">Servicios</a>
+                  <a href="/servicios">Servicios</a>
                 </li>
                 <li>
-                  <a href="#">Proyectos</a>
+                  <a href="/proyectos">Proyectos</a>
                 </li>
                 <li>
-                  <a href="#">Blog</a>
+                  <a href="/blog">Blog</a>
                 </li>
               </ul>
               
