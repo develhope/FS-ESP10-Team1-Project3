@@ -38,5 +38,6 @@ export function App() {
       <Footer />
     </div>
     </Auth0Provider>
+    
   );
 }

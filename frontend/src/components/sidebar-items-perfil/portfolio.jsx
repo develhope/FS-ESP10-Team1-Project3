@@ -132,50 +132,79 @@ function Portfolio() {
   useEffect(() => {
     const fetchDataHab = async () => {
       try {
+        // Verificar y mostrar el token en la consola para depuración
         const token = localStorage.getItem("token");
-    const response = await fetch('http://localhost:5000/api/skills/getAll', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({token})
-    });
-    if (response.ok) {
-      const data = await response.json();
-      console.log("data", data);
-      
-      const habilidadesNombres = data.map(habilidad => habilidad.name);
-      console.log("entra", habilidadesNombres);
-      
-      setHabilidades(habilidadesNombres);
-      localStorage.setItem("userHabilidades", JSON.stringify(data));
-    }
-  } catch (error) {
-    console.error("error al cargar las cuentas bancarias", error);
-  }
-  }
-  const fetchDataLink = async () => {
-    try {
-      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const response = await fetch('http://localhost:5000/api/users/portfolio', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ email: userInfo.email })
-  });
-  if (response.ok) {
-    const data = await response.json();
-    setPortfolio(data.linkportfolio);
-    localStorage.setItem("userLinkPortfolio", JSON.stringify(data.linkportfolio));
-  }
-} catch (error) {
-  console.error("error al cargar el link al portfolio", error);
-}
-}
-  fetchDataHab();
+        console.log("Token obtenido:", token);
+    
+        if (!token) {
+          throw new Error("Token no encontrado en localStorage.");
+        }
+    
+        const response = await fetch('http://localhost:5000/api/skills/getAll', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ token })
+        });
+    
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Data de habilidades:", data);
+    
+          const habilidadesNombres = data.map(habilidad => habilidad.name);
+          console.log("Habilidades:", habilidadesNombres);
+    
+          setHabilidades(habilidadesNombres);
+          localStorage.setItem("userHabilidades", JSON.stringify(data));
+        } else {
+          console.error(`Error al cargar habilidades: ${response.status} ${response.statusText}`);
+        }
+      } catch (error) {
+        console.error("Error al cargar habilidades:", error);
+      }
+    };
+    
+    const fetchDataLink = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    
+        // Verificar y mostrar el token y la información del usuario en la consola para depuración
+        console.log("Token obtenido:", token);
+        console.log("Información del usuario:", userInfo);
+    
+        if (!token) {
+          throw new Error("Token no encontrado en localStorage.");
+        }
+    
+        if (!userInfo || !userInfo.email) {
+          throw new Error("Información del usuario no encontrada en localStorage.");
+        }
+    
+        const response = await fetch('http://localhost:5000/api/users/portfolio', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email: userInfo.email })
+        });
+    
+        if (response.ok) {
+          const data = await response.json();
+          setPortfolio(data.linkportfolio);
+          localStorage.setItem("userLinkPortfolio", JSON.stringify(data.linkportfolio));
+        } else {
+          console.error(`Error al cargar el enlace del portfolio: ${response.status} ${response.statusText}`);
+        }
+      } catch (error) {
+        console.error("Error al cargar el enlace del portfolio:", error);
+      }
+    };
+    
+    fetchDataHab();
   fetchDataLink();
   }, []);
     return (
