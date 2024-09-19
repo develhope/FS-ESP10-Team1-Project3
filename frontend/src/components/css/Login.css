@@ -69,7 +69,8 @@
     width: auto;
     height: max-content;
     font-size: larger;
-    margin-top: 52px;
+    margin-top: 12px;
+    margin-bottom: 70px;
 }
 
 .terminos {
@@ -85,7 +86,7 @@
 .loginDerecha {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
     justify-content: space-between;
     align-items: center;
     text-align: center;
@@ -96,11 +97,13 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra del contenedor */
 }
 
 .formularioLogin input {
-    border-radius: 5px;
+    border-radius: 11px;
     background-color: #f0f0f0;
     font-family: "Montserrat", sans-serif;
 }
@@ -111,15 +114,23 @@
 }
 
 .formularioLogin button {
-    border-radius: 5px;
+    border-radius: 11px;
     font-family: "Montserrat", sans-serif;
-    background-color: #f0f0f0;
+    background-color: #00FFBE;
+    color: white;
+    font-weight: bold;
+    height: 30px;
 }
 
 .formularioLogin {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-bottom: 100px;
+}
+
+.textoEnlace2{
+    color: red;
 }
 
 .google-correo {

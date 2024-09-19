@@ -25,6 +25,11 @@
     background-color: transparent;
     text-align: center;
 }
+
+.textoBanco{
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+}
 .div-sidebar-element-infoBancaria .cuentasBancarias ul {
     width: 100%;
     display: flex;
@@ -40,6 +45,8 @@
 #moneda {
     width: 70%;
 }
+
+
 .no-mostrar-form {
     display: none;
 }

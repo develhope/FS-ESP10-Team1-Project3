@@ -188,7 +188,7 @@ function InfoBancaria() {
                 ))}
               </ul>
             </div>
-          {cuentaSeleccionada != null ? <h3 className="cuentaActual">Cuenta seleccionada actualmente: {cuentaSeleccionada.titular}</h3> : <h3>no tienes ninguna cuenta seleccionada, por favor, elige una de tus cuentas como cuenta de pago por defecto</h3>}
+          {cuentaSeleccionada != null ? <h3 className="cuentaActual">Cuenta seleccionada actualmente: {cuentaSeleccionada.titular}</h3> : <div className="textoBanco"> <h3>No tienes ninguna cuenta seleccionada, por favor, elige una de tus cuentas como cuenta de pago por defecto</h3></div>}
             
         </div>
       );

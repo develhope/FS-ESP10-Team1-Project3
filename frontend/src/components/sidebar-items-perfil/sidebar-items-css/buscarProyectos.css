@@ -38,6 +38,7 @@
     border-radius: 25px;
     border: 2px solid black;
     color: white;
+    
   }
   .buscarProyectosDivContainer .box2 {
     height: 100px;
@@ -77,11 +78,15 @@
     flex-direction: row;
   }
   .selectCategoriaBuscar {
-   width: 500px;
+   width: 600px;
     margin-top: 90px;
     margin-left: 530px;
+    font-family: "Montserrat", sans-serif;
   }
   .select-Categoria-Buscar {
     background-color: black;
     color: white;
+    border-radius: 20px;
+    height: 25px;
+    font-family: "Montserrat", sans-serif;
   }

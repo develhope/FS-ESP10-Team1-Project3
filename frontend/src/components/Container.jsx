@@ -120,7 +120,7 @@ export function Container() {
       
       <div className="frase-categoria">
       {isAuthenticated ? (
-        <span>Ver mas...</span>
+        <span>Algunas categorias..</span>
       ) : (
         <span>O también puedes buscar por categoria.</span>
         )}

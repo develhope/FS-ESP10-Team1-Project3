@@ -101,7 +101,7 @@ function Info() {
           ></input>
         </div>
         <div className="texto-input">
-          <p className="texto-campos-perfil">correo electrónico</p>
+          <p className="texto-campos-perfil">Correo electrónico</p>
           <input
             type="email"
             className="inputs-perfil"
