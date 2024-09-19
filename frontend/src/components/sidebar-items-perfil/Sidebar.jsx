@@ -27,10 +27,7 @@ function Sidebar() {
     setSelected(index);
   }, []);
  
-  if (!isAuthenticated) {
-    navigate('/login');
-    return null; // Evita que el componente Sidebar se renderice si no está autenticado
-  }
+
 
   console.log(userInfo);
 

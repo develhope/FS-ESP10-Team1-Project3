@@ -3,8 +3,10 @@ import Sidebar from "./Sidebar";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./sidebar-items-css/info.css";
 import anonimo from './assets-sidebar/anonimo.jpg';
+import { useCustomAuth } from '../UseCustomAuth';
 function Info() {
   const { user, isAuthenticated } = useAuth0(); // Obtener información del usuario desde Auth0
+  console.log("auth:" ,isAuthenticated);
   const userDataObject = localStorage.getItem("userInfo");
   const userDataObjectJson = JSON.parse(userDataObject);
   const [nombreCompleto, setNombreCompleto] = useState("Nombre completo");
@@ -41,6 +43,8 @@ function Info() {
     if (userDataObject) {
       const userDataObjectJson = JSON.parse(userDataObject);
       setNombreCompleto(userDataObjectJson.fullName);
+      console.log(nombreCompleto);
+      
       setFechaNacimiento(userDataObjectJson.birthDate);
       setCorreo(userDataObjectJson.email);
       setContraseña(userDataObjectJson.password);

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMessage, faUser, faBell } from "@fortawesome/free-regular-svg-icons";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useCustomAuth } from './UseCustomAuth';
 import "./css/Navbar.css";
 
 export function Navbar() {
@@ -86,7 +87,7 @@ export function Navbar() {
             </a>
           </div>
         </div>
-        {!isAuthenticated && (
+        {!isAuthenticated && !tokenChecked && (
           <ul
             className={`navbar-links ${
               isMobileMenuOpen ? "navbar-links-mobile" : ""
