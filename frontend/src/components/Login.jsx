@@ -161,6 +161,18 @@ function Login() {
     }
   }, [location]);
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      const userInfoToStringify = {
+        email: user.email,
+        fullName: user.name,
+        userImage: user.picture || anonimo,
+      };
+      localStorage.setItem("userInfo", JSON.stringify(userInfoToStringify));
+      navigate('/sidebar'); // Redirige a la página del sidebar después de iniciar sesión
+    }
+  }, [isAuthenticated, user, navigate]);
+
   return (
     <div className="divLoginGeneral">
       <div className="loginIzquierda">

@@ -46,7 +46,8 @@ export function Navbar() {
       const token = localStorage.getItem('token');
 
       if (!token) {
-        throw new Error('No hay token en el localStorage');
+        setTokenChecked(false);
+        return;
       }
 
       try {
@@ -63,16 +64,13 @@ export function Navbar() {
         }
 
         const data = await response.json();
-        if (data.loggedIn) {
-          setTokenChecked(true);
-        } else {
-          setTokenChecked(false);
-        }
-        console.log(tokenChecked);
+        setTokenChecked(data.loggedIn);
       } catch (error) {
         console.error('Error en la verificación del token:', error);
+        setTokenChecked(false);
       }
     };
+
     checkToken();
   }, []);
   return (

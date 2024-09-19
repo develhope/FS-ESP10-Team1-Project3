@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./sidebar-items-css/info.css";
 import anonimo from './assets-sidebar/anonimo.jpg';
 function Info() {
+  const { user, isAuthenticated } = useAuth0(); // Obtener información del usuario desde Auth0
   const userDataObject = localStorage.getItem("userInfo");
   const userDataObjectJson = JSON.parse(userDataObject);
   const [nombreCompleto, setNombreCompleto] = useState("Nombre completo");
@@ -33,15 +35,34 @@ function Info() {
       reader.readAsDataURL(file);
     }
   };
+  
   useEffect(() => {
-  if (userDataObject) {
-        setNombreCompleto(userDataObjectJson.fullName);
-        setFechaNacimiento(userDataObjectJson.birthDate);
-        setCorreo(userDataObjectJson.email);
-        setContraseña(userDataObjectJson.password);
-        setImagenPerfil(userDataObjectJson.userImage);
+    const userDataObject = localStorage.getItem("userInfo");
+    if (userDataObject) {
+      const userDataObjectJson = JSON.parse(userDataObject);
+      setNombreCompleto(userDataObjectJson.fullName);
+      setFechaNacimiento(userDataObjectJson.birthDate);
+      setCorreo(userDataObjectJson.email);
+      setContraseña(userDataObjectJson.password);
+      setImagenPerfil(userDataObjectJson.userImage);
     }
-  }, []);
+
+    if (isAuthenticated && user) {
+      setNombreCompleto(user.name || "Nombre completo");
+      setCorreo(user.email || "correo electrónico");
+      setImagenPerfil(user.picture || anonimo);
+
+      const auth0UserData = {
+        fullName: user.name || "Nombre completo",
+        birthDate: fechaNacimiento,
+        email: user.email || "correo electrónico",
+        password: contraseña,
+        userImage: user.picture || anonimo,
+      };
+      localStorage.setItem("userInfo", JSON.stringify(auth0UserData));
+    }
+  }, [isAuthenticated, user, fechaNacimiento, contraseña]);
+
   return (
     <div className="div-sidebar-element">
       <form onSubmit={actualizarPerfil}>
