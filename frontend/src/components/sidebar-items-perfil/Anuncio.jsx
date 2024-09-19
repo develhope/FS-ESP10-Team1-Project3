@@ -140,15 +140,28 @@ export function Anuncio() {
           <div className="texto-input">
             <p>Añade una categoria aqui: </p>
             <select value={categoria} onChange={seleccionarCategoria}>
-              <option value="Desarrollo web">Desarrollo web</option>
-              <option value="Comunicacion">Comunicacion</option>
-              <option value="Redes sociales">Redes sociales</option>
-              <option value="Diseño grafico">Diseño grafico</option>
-              <option value="Marketing">Marketing</option>
-              <option value="Desarrollo audiovisual">
-                Desarrollo audiovisual
-              </option>
-              <option value="otros">Otros</option>
+            <option value="Desarrollo web">Desarrollo web</option>
+            <option value="Comunicacion">Comunicacion</option>
+            <option value="Redes sociales">Redes sociales</option>
+            <option value="Diseño grafico">Diseño grafico</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Desarrollo audiovisual">Desarrollo audiovisual</option>
+            <option value="Otros">Otros</option>
+            <option value="Consultoría IT">Consultoría IT</option>
+            <option value="Ciberseguridad">Ciberseguridad</option>
+            <option value="SEO y SEM">SEO y SEM</option>
+            <option value="Administración de Sistemas">Administración de Sistemas</option>
+            <option value="Desarrollo de Aplicaciones Móviles">Desarrollo de Aplicaciones Móviles</option>
+            <option value="E-commerce">E-commerce</option>
+            <option value="Data Science">Data Science</option>
+            <option value="Inteligencia Artificial">Inteligencia Artificial</option>
+            <option value="Gestión de Proyectos">Gestión de Proyectos</option>
+            <option value="Producción de Video">Producción de Video</option>
+            <option value="Copywriting">Copywriting</option>
+            <option value="Fotografía">Fotografía</option>
+            <option value="Relaciones Públicas">Relaciones Públicas</option>
+            <option value="Branding">Branding</option>
+            <option value="Traducción e Interpretación">Traducción e Interpretación</option>
             </select>
           </div>
         </div>

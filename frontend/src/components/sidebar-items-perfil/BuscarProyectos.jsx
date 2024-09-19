@@ -5,7 +5,7 @@ import DescripcionOverlay from "./OverlayServices";
 
 function BuscarProyectos() {
   const [descripcion, setDescripcion] = useState("");
-  const [categoria, setCategoria] = useState("");
+  const [categoria, setCategoria] = useState("Todos");
   const [serviciosActivos, setServiciosActivos] = useState([]);
   const [servicioSeleccionado, setServicioSeleccionado] = useState(null);
 
@@ -17,6 +17,9 @@ function BuscarProyectos() {
     setServicioSeleccionado(null);
     setDescripcion("");
   }
+  const seleccionarCategoria = (event) => {
+    setCategoria(event.target.value);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,8 +44,38 @@ function BuscarProyectos() {
   }, []);
   return (
     <div className="div-contenedor-de-todos-los-servicios">
-    {serviciosActivos.map((servicio, index) => (
-    <div key={index} className="buscarProyectosDivContainer">
+    <div className="selectCategoriaBuscar">
+    <h2>Selecciona aqui para buscar por categoria:</h2>
+    <select value={categoria} onChange={seleccionarCategoria} className="select-Categoria-Buscar">
+              <option value="Desarrollo web">Desarrollo web</option>
+              <option value="Comunicacion">Comunicacion</option>
+              <option value="Redes sociales">Redes sociales</option>
+              <option value="Diseño grafico">Diseño grafico</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Desarrollo audiovisual">Desarrollo audiovisual</option>
+              <option value="Otros">Otros</option>
+              <option value="Todos">Todos</option>
+              <option value="Consultoría IT">Consultoría IT</option>
+              <option value="Ciberseguridad">Ciberseguridad</option>
+              <option value="SEO y SEM">SEO y SEM</option>
+              <option value="Administración de Sistemas">Administración de Sistemas</option>
+              <option value="Desarrollo de Aplicaciones Móviles">Desarrollo de Aplicaciones Móviles</option>
+              <option value="E-commerce">E-commerce</option>
+              <option value="Data Science">Data Science</option>
+              <option value="Inteligencia Artificial">Inteligencia Artificial</option>
+              <option value="Gestión de Proyectos">Gestión de Proyectos</option>
+              <option value="Producción de Video">Producción de Video</option>
+              <option value="Copywriting">Copywriting</option>
+              <option value="Fotografía">Fotografía</option>
+              <option value="Relaciones Públicas">Relaciones Públicas</option>
+              <option value="Branding">Branding</option>
+              <option value="Traducción e Interpretación">Traducción e Interpretación</option>
+            </select>
+            </div>
+            {serviciosActivos
+              .filter(servicio => categoria === "Todos" || servicio.categoria === categoria)
+              .map((servicio, index) => (
+                <div key={index} className="buscarProyectosDivContainer">
         <div className="cont-anuncio">
           <div>
             <div className="box1">

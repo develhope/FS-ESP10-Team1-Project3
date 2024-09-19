@@ -76,3 +76,12 @@
     display: flex;
     flex-direction: row;
   }
+  .selectCategoriaBuscar {
+   width: 500px;
+    margin-top: 90px;
+    margin-left: 530px;
+  }
+  .select-Categoria-Buscar {
+    background-color: black;
+    color: white;
+  }

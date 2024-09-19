@@ -18,6 +18,9 @@ export const otrasSugerencias = [
 ];
 
 
+
+
+
 export const categorias = [
   "Desarrollo Web",
   "Comunicación",
