@@ -45,8 +45,11 @@ export function Container() {
     };
     checkToken();
   }, []);
-
-
+// completar la busqueda
+  const completarBusqueda = (sugerencia) => {
+    setSearchTerm(sugerencia);
+    setFilteredSuggestions([]); // Limpia las sugerencias después de seleccionar una
+  };
   // Manejar el cierre de sesión
   const handleLogout = () => {
     localStorage.removeItem("userInfo");
@@ -101,12 +104,15 @@ export function Container() {
              value={searchTerm}
              onChange={(e) => setSearchTerm(e.target.value)} />
       
-      <button>Buscar</button>
+             <button onClick={() => navigate("/sidebar/6", { state: { selectedCategory: searchTerm } })}>Buscar</button>
         {/* Mostrar las sugerencias solo si hay coincidencias */}
         {filteredSuggestions.length > 0 && (
           <ul className="sugerencias">
             {filteredSuggestions.map((suggestion, index) => (
-              <li key={index}>{suggestion}</li>
+              <li key={index}
+              onClick={() => completarBusqueda(suggestion)}
+                style={{ cursor: 'pointer' }}
+              >{suggestion}</li>
             ))}
           </ul>
         )}
@@ -122,7 +128,18 @@ export function Container() {
 
       <div className="categorias">
       {categorias.map((categoria) => (
-        <button onClick={goToLogin} key={categoria}>{categoria}</button>
+        <button
+        onClick={() => {
+          if (isAuthenticated) {
+            navigate("/sidebar/6", { state: { selectedCategory: categoria } });
+          } else {
+            goToLogin();
+          }
+        }}
+        key={categoria}
+      >
+        {categoria}
+      </button>
         ))}
 
       </div>

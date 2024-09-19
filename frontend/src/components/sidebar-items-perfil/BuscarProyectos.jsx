@@ -2,12 +2,15 @@ import React from "react";
 import "./sidebar-items-css/buscarProyectos.css";
 import { useEffect, useState } from "react";
 import DescripcionOverlay from "./OverlayServices";
+import { useLocation } from "react-router-dom";
 
 function BuscarProyectos() {
   const [descripcion, setDescripcion] = useState("");
   const [categoria, setCategoria] = useState("Todos");
   const [serviciosActivos, setServiciosActivos] = useState([]);
   const [servicioSeleccionado, setServicioSeleccionado] = useState(null);
+  const location = useLocation();
+  const selectedCategory = location.state?.selectedCategory;
 
   const mostrarDescripcion = (index) => {
       setServicioSeleccionado(index);
@@ -20,8 +23,14 @@ function BuscarProyectos() {
   const seleccionarCategoria = (event) => {
     setCategoria(event.target.value);
   };
+  const handleSolicitar = () => {
+    alert("Oferta solicitada");
+  };
 
   useEffect(() => {
+    if (selectedCategory) {
+      setCategoria(selectedCategory);
+    }
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -47,12 +56,12 @@ function BuscarProyectos() {
     <div className="selectCategoriaBuscar">
     <h2>Selecciona aqui para buscar por categoria:</h2>
     <select value={categoria} onChange={seleccionarCategoria} className="select-Categoria-Buscar">
-              <option value="Desarrollo web">Desarrollo web</option>
-              <option value="Comunicacion">Comunicacion</option>
+              <option value="Desarrollo Web">Desarrollo web</option>
+              <option value="Comunicación">Comunicacion</option>
               <option value="Redes sociales">Redes sociales</option>
-              <option value="Diseño grafico">Diseño grafico</option>
+              <option value="Diseño Gráfico">Diseño grafico</option>
               <option value="Marketing">Marketing</option>
-              <option value="Desarrollo audiovisual">Desarrollo audiovisual</option>
+              <option value="Desarrollo Audiovisual">Desarrollo audiovisual</option>
               <option value="Otros">Otros</option>
               <option value="Todos">Todos</option>
               <option value="Consultoría IT">Consultoría IT</option>
@@ -107,7 +116,7 @@ function BuscarProyectos() {
               <button className="verDescripcion" onClick={() => mostrarDescripcion(index)}>
               Ver descripcion
               </button>
-              <button type="button" className="nuevo-proyecto">
+              <button type="button" className="nuevo-proyecto" onClick={handleSolicitar}>
                 Solicitar
               </button>
               </div>
