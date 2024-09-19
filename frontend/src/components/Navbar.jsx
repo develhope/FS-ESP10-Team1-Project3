@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMessage, faUser, faBell } from "@fortawesome/free-regular-svg-icons";
@@ -7,10 +7,33 @@ import "./css/Navbar.css";
 
 export function Navbar() {
   const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
+  const [ tokenChecked, setTokenChecked] = useState(false);
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLogout = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await fetch('http://localhost:5000/api/users/logout', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ token })
+      });
+
+      if (!response.ok) {
+        throw new Error('Logout failed');
+      }
+      localStorage.removeItem("userInfo");
+      localStorage.removeItem("token");
+      setIsAuthenticated(false);
+      window.location.href = `/`;
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
     logout({ returnTo: window.location.origin });
   };
 
@@ -18,6 +41,40 @@ export function Navbar() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   }
 
+  useEffect(() => {
+    const checkToken = async () => {
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        throw new Error('No hay token en el localStorage');
+      }
+
+      try {
+        const response = await fetch('http://localhost:5000/api/users/token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ token }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Error al verificar el token');
+        }
+
+        const data = await response.json();
+        if (data.loggedIn) {
+          setTokenChecked(true);
+        } else {
+          setTokenChecked(false);
+        }
+        console.log(tokenChecked);
+      } catch (error) {
+        console.error('Error en la verificación del token:', error);
+      }
+    };
+    checkToken();
+  }, []);
   return (
     <div className="navbar">
       <nav>
@@ -46,7 +103,7 @@ export function Navbar() {
           </ul>
         )}
         <div className="navbar-button">
-          {isAuthenticated ? (
+        {(isAuthenticated || tokenChecked) ? (
             <div className="icon-navbar">
               <FontAwesomeIcon icon={faBell} className="icon" />
               <FontAwesomeIcon icon={faMessage} className="icon" />
@@ -63,14 +120,15 @@ export function Navbar() {
             <>
               <div className="iniciar">
                 <button
-                  onClick={() => loginWithRedirect({ redirectUri: window.location.origin + "/sidebar" })}
+                onClick={() => navigate("/login", { state: { mode: "login" } })}
                 >
+                
                   Iniciar Sesión
                 </button>
               </div>
               <div className="registrarte">
                 <button
-                  onClick={() => loginWithRedirect({ redirectUri: window.location.origin + "/sidebar" })}
+                onClick={() => navigate("/login", { state: { mode: "register" } })}
                 >
                   Registrarte
                 </button>
