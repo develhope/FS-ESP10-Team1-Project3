@@ -72,8 +72,10 @@
     padding: 7px;
     margin-right: 1170px;
 }
-.div-sidebar-element-infoBancaria .cuentasBancarias ul li button svg {
+.div-sidebar-element-infoBancaria .cuentasBancarias ul li button {
     cursor: pointer;
+    font-weight: bold;
+    color: red;
 } 
 .div-sidebar-element-infoBancaria .cuentasBancarias ul li input {
     cursor: context-menu;

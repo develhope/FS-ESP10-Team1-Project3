@@ -36,8 +36,8 @@
   margin: 0; /* Asegura que no haya márgenes alrededor de la lista */
   padding: 0; /* Asegura que no haya relleno alrededor de la lista */
   font-family: "Montserrat", sans-serif;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 15x;
+  font-weight: bold;
 }
 
 .navbar-links li a {
@@ -63,9 +63,10 @@
   color: white;
   border: none;
   font-size: 12px;
-  border-radius: 5px;
+  border-radius: 30px;
   cursor: pointer;
   font-family: "Montserrat", sans-serif;
+  font-weight: 600;
 }
 
 .navbar-button .button-logout {
