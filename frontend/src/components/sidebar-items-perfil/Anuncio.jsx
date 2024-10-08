@@ -46,7 +46,7 @@ export function Anuncio() {
       formData.append("pago", pago);
       formData.append("token", token);
       formData.append("imagen_path", imagen);
-      const response = await fetch("http://localhost:5000/api/services", {
+      const response = await fetch("https://freelancehub-4tr0.onrender.com/api/services", {
         method: "POST",
         headers: {
           'Authorization': `Bearer ${token}`,

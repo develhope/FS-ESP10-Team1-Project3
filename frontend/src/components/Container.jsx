@@ -21,7 +21,7 @@ export function Container() {
       }
   
       try {
-        const response = await fetch('http://localhost:5000/api/users/token', {
+        const response = await fetch('https://freelancehub-4tr0.onrender.com/api/users/token', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
