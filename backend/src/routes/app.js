@@ -48,7 +48,7 @@ app.get('/profile', requiresAuth(), (req, res) => {
 // Configura CORS
 app.use(
   cors({
-    origin: "https://freelancehub-4tr0.onrender.com",
+    origin: "https://freelancehub-6hoy.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
