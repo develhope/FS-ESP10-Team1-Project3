@@ -29,7 +29,8 @@ const getUser = async (req, res) => {
 const createUser = async (req, res) => {
   try {
     const { email, password_hash } = req.body;
-    const user = await userModel.getUserByEmail(req.body);
+    const user = await userModel.getUserByEmail(req.body.email);
+;
     if (user) {
       res.status(400).json({ msg: "el usuario ya existe en la base de datos" });
     } else {

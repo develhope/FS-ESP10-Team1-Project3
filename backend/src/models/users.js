@@ -14,13 +14,20 @@ const getUserById = async (userId) => {
 };
 
 const createUser = async (user) => {
-  const { email, password_hash, full_name, date_of_birth } = user;
-  const result = await pool.query(
-    "INSERT INTO users ( email, password_hash, full_name, date_of_birth) VALUES ($1, $2, $3, $4) RETURNING *",
-    [ email, password_hash, full_name, date_of_birth ]
-  );
-  return result.rows[0];
+  try {
+    const { email, password_hash, full_name, date_of_birth } = user;
+    const result = await pool.query(
+      "INSERT INTO users (email, password_hash, full_name, date_of_birth) VALUES ($1, $2, $3, $4) RETURNING *",
+      [email, password_hash, full_name, date_of_birth]
+    );
+    return result.rows[0];
+  } catch (error) {
+    console.error("Error creating user in database:", error);
+    throw new Error("Database error");
+  }
 };
+
+
 const getUserByEmail = async (userDataTry) => {
     const result = await pool.query(
       `SELECT * FROM users WHERE email=$1`,
