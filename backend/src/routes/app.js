@@ -58,7 +58,7 @@ app.use(
 // Luego, configura otros middleware
 app.use(express.json());
 app.use(passport.initialize());
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.use(express.static(path.join(__dirname, './frontend/dist')));
 
 // Importa las rutas
 const userRoutes = require("../routes/userRoutes");
