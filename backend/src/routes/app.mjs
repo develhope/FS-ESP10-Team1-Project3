@@ -5,8 +5,6 @@ import { auth, requiresAuth } from 'express-openid-connect';
 import pool from "../config/db.js"; // Asegúrate de tener la extensión .js
 import passport from '../config/passport.js'; // Asegúrate de tener la extensión .js
 import dotenv from "dotenv"; // Si usas dotenv, cámbialo a import
-dotenv.config();
-
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -16,13 +14,13 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-//Use the frontend app
-app.use(express.static(path.join(_dirname, '/frontend/dist')));
+const app = express(); // Asegúrate de inicializar express antes de usarlo
+
+// Use the frontend app
+app.use(express.static(path.join(__dirname, '/frontend/dist')));
 
 //Render frontend for any path
-app.get('*', (req, res) => res.sendFile(path.join(_dirname, '/frontend/dist/index.html')));
-
-const app = express();
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, '/frontend/dist/index.html')));
 
 // Configuración de Auth0
 const config = {
@@ -211,21 +209,22 @@ const createTableFunction = async () => {
     console.log("Tabla de servicios verificada o creada");
   } catch (error) {
     console.error("Error al crear las tablas o la extensión:", error);
+    process.exit(1); // Salir del proceso en caso de error
   }
 };
 
-// Iniciar el servidor
-const PORT = process.env.PORT || 5000;
-
+// Inicia el servidor
 const startServer = async () => {
   try {
-    await createTableFunction();
+    await createTableFunction(); // Llama a la función de creación de tablas
+    const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
+      console.log(`Servidor escuchando en el puerto ${PORT}`);
     });
   } catch (error) {
-    console.error("Error al iniciar el servidor:", error);
-    process.exit(1);
+    console.error("Error starting server:", error);
+    process.exit(1); // Salir del proceso en caso de error
   }
 };
+
 startServer();
