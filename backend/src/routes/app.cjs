@@ -72,7 +72,7 @@ app.use(express.json());
 app.use(passport.initialize());
 
 // Importa las rutas
-const userRoutes = require("../routes/userRoutes");
+const userRoutes = require("./userRoutes");
 
 // Usa las rutas
 app.use("/api", userRoutes);

@@ -1,10 +1,10 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "type": "module",
-  "main": "src/routes/app.js",
+ 
+  "main": "src/routes/app.cjs",
   "scripts": {
-    "start": "node src/routes/app.js",
+    "start": "node src/routes/app.cjs",
     "dev": "nodemon --legacy-watch src/routes/app.js",
     "build": "npm install --prefix backend/frontend && npm run build --prefix backend/frontend",
     "test": "echo \"Error: no test specified\" && exit 1",
