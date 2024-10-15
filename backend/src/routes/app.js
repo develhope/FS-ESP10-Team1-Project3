@@ -58,7 +58,7 @@ app.use(
 // Luego, configura otros middleware
 app.use(express.json());
 app.use(passport.initialize());
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.use(express.static(path.join(__dirname, '/frontend/dist')));
 
 // Importa las rutas
 const userRoutes = require("../routes/userRoutes");
@@ -68,7 +68,7 @@ app.use("/api", userRoutes);
 
 // Para todas las demás rutas, devolver el index.html del frontend
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  res.sendFile(path.join(__dirname, '/frontend/dist/index.html'));
 });
 
 // Añade un manejador de errores
