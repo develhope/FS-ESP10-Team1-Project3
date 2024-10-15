@@ -1,13 +1,16 @@
 // src/app.js
-const express = require("express");
-const cors = require("cors");
-const { auth, requiresAuth } = require('express-openid-connect');
-const pool = require("../config/db");
-const passport = require('../config/passport');
+import express from "express";
+import cors from "cors";
+import { auth, requiresAuth } from 'express-openid-connect';
+import pool from "../config/db.js"; // Asegúrate de tener la extensión .js
+import passport from '../config/passport.js'; // Asegúrate de tener la extensión .js
+import dotenv from "dotenv"; // Si usas dotenv, cámbialo a import
 require("dotenv").config();
 
 import path from 'path';
 import { fileURLToPath } from 'url';
+
+dotenv.config();
 
 //Resolving dirname for ES module
 const __filename = fileURLToPath(import.meta.url);
@@ -72,7 +75,7 @@ app.use(express.json());
 app.use(passport.initialize());
 
 // Importa las rutas
-const userRoutes = require("./userRoutes");
+import userRoutes from "./userRoutes.js";
 
 // Usa las rutas
 app.use("/api", userRoutes);
