@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
  
-  "main": "src/routes/app.cjs",
+  "main": "src/routes/app.mjs",
   "scripts": {
-    "start": "node src/routes/app.cjs",
-    "dev": "nodemon --legacy-watch src/routes/app.js",
+    "start": "node src/routes/app.mjs",
+    "dev": "nodemon --legacy-watch src/routes/app.mjs",
     "build": "npm install --prefix backend/frontend && npm run build --prefix backend/frontend",
     "test": "echo \"Error: no test specified\" && exit 1",
     "kill-port": "npx kill-port 5000 5001"
