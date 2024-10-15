@@ -1,7 +1,7 @@
 // src/controllers/userController.js
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/users");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const getAllUsers = async (req, res) => {
   try {
