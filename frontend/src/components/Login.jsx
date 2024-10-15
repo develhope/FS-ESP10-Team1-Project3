@@ -104,7 +104,7 @@ function Login() {
           full_name: nombre,
           date_of_birth: birthDate
         };
-    
+
         const response = await fetch('http://localhost:5000/api/users', {
           method: 'POST',
           headers: {
@@ -112,7 +112,7 @@ function Login() {
           },
           body: JSON.stringify(userDataTobackEnd)
         });
-    
+
         if (!response.ok) {
           throw new Error('Error en el registro');
         }
@@ -162,6 +162,9 @@ function Login() {
   }, [location]);
 
   useEffect(() => {
+    console.log("isAuthenticated:", isAuthenticated);  // Muestra si el usuario está autenticado
+    console.log("user:", user);  // Muestra los datos del usuario
+
     if (isAuthenticated) {
       const userInfoToStringify = {
         email: user.email,
@@ -251,34 +254,34 @@ function Login() {
             </div>
           ) : (
             <div>
-            <form className="formularioLogin" onSubmit={handleFormSubmit}>
-              <p>
-                Email:{" "}
-                <input
-                  type="email"
-                  placeholder="Ejemplo@gmail.com"
-                  required
-                  value={emailLoginCorreo}
-                  autoComplete="email"
-                  onChange={(e) => setEmailLoginCorreo(e.target.value)}
-                />
-              </p>
-              <p>
-                Contraseña:{" "}
-                <input
-                  type="password"
-                  placeholder="*********"
-                  required
-                  value={passwordLoginCorreo}
-                  autoComplete="current-password"
-                  onChange={(e) => setPasswordLoginCorreo(e.target.value)}
-                />
-              </p>
-              <button type="submit" disabled={loading}>
-                Enviar datos
-              </button>
-            </form>
-            <div className="otraOpcion">
+              <form className="formularioLogin" onSubmit={handleFormSubmit}>
+                <p>
+                  Email:{" "}
+                  <input
+                    type="email"
+                    placeholder="Ejemplo@gmail.com"
+                    required
+                    value={emailLoginCorreo}
+                    autoComplete="email"
+                    onChange={(e) => setEmailLoginCorreo(e.target.value)}
+                  />
+                </p>
+                <p>
+                  Contraseña:{" "}
+                  <input
+                    type="password"
+                    placeholder="*********"
+                    required
+                    value={passwordLoginCorreo}
+                    autoComplete="current-password"
+                    onChange={(e) => setPasswordLoginCorreo(e.target.value)}
+                  />
+                </p>
+                <button type="submit" disabled={loading}>
+                  Enviar datos
+                </button>
+              </form>
+              <div className="otraOpcion">
                 <p>O también puedes:</p>
                 <button className="google-correo" onClick={iniciarSesionConGoogle}>
                   <svg
@@ -308,45 +311,45 @@ function Login() {
                 </button>
               </div>
             </div>
-            )}
+          )}
         </div>
         {error && <div className="error">{error}</div>}
       </div>
       <div className="loginParaMovil">
-      <div className="divMovil1">
-        <h2>
-          Unete a nosotros y encuentra trabajo cuanto antes!{" "}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24px"
-            viewBox="0 -960 960 960"
-            width="24px"
-            fill="#ffff"
-          >
-            <path d="M360-840v-80h240v80H360Zm80 440h80v-240h-80v240Zm40 320q-74 0-139.5-28.5T226-186q-49-49-77.5-114.5T120-440q0-74 28.5-139.5T226-694q49-49 114.5-77.5T480-800q62 0 119 20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5 77.5T480-80Zm0-80q116 0 198-82t82-198q0-116-82-198t-198-82q-116 0-198 82t-82 198q0 116 82 198t198 82Zm0-280Z" />
-          </svg>
-        </h2>
-        <ul>
-          <li>Contacto con empresas de cualquier parte de España</li>
-          <li>La inscripcion es totalmete gratuita, aprovecha ahora!</li>
-          <li>
-            Un monton de categorias entre las que puedes buscar u ofrecer
-            trabajo
-          </li>
-        </ul>
-      </div>
-      <div className="divMovil2">
-        <h2>{h1Content}</h2>
-        <p>
-          {p1Content}
-          <a href="#register">{aContent}</a>
-        </p>
-        <div>
+        <div className="divMovil1">
+          <h2>
+            Unete a nosotros y encuentra trabajo cuanto antes!{" "}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#ffff"
+            >
+              <path d="M360-840v-80h240v80H360Zm80 440h80v-240h-80v240Zm40 320q-74 0-139.5-28.5T226-186q-49-49-77.5-114.5T120-440q0-74 28.5-139.5T226-694q49-49 114.5-77.5T480-800q62 0 119 20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5 77.5T480-80Zm0-80q116 0 198-82t82-198q0-116-82-198t-198-82q-116 0-198 82t-82 198q0 116 82 198t198 82Zm0-280Z" />
+            </svg>
+          </h2>
+          <ul>
+            <li>Contacto con empresas de cualquier parte de España</li>
+            <li>La inscripcion es totalmete gratuita, aprovecha ahora!</li>
+            <li>
+              Un monton de categorias entre las que puedes buscar u ofrecer
+              trabajo
+            </li>
+          </ul>
         </div>
-        <div>
-    </div>
-    </div>
-    </div>
+        <div className="divMovil2">
+          <h2>{h1Content}</h2>
+          <p>
+            {p1Content}
+            <a href="#register">{aContent}</a>
+          </p>
+          <div>
+          </div>
+          <div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
