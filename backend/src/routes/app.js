@@ -67,8 +67,12 @@ const userRoutes = require("../routes/userRoutes");
 app.use("/api", userRoutes);
 
 // Para todas las demás rutas, devolver el index.html del frontend
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+// });
+
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  res.sendFile(path.join('index.html', {root: 'frontend/dist'}));
 });
 
 // Añade un manejador de errores
