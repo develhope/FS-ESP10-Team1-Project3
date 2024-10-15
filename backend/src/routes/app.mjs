@@ -5,7 +5,7 @@ import { auth, requiresAuth } from 'express-openid-connect';
 import pool from "../config/db.js"; // Asegúrate de tener la extensión .js
 import passport from '../config/passport.js'; // Asegúrate de tener la extensión .js
 import dotenv from "dotenv"; // Si usas dotenv, cámbialo a import
-require("dotenv").config();
+dotenv.config();
 
 import path from 'path';
 import { fileURLToPath } from 'url';
