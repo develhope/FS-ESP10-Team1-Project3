@@ -6,6 +6,19 @@ const pool = require("../config/db");
 const passport = require('../config/passport');
 require("dotenv").config();
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+//Resolving dirname for ES module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+//Use the frontend app
+app.use(express.static(path.join(_dirname, '/frontend/dist')));
+
+//Render frontend for any path
+app.get('*', (req, res) => res.sendFile(path.join(_dirname, '/frontend/dist/index.html')));
+
 const app = express();
 
 // Configuración de Auth0

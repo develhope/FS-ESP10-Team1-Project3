@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node src/routes/app.js",
     "dev": "nodemon --legacy-watch src/routes/app.js",
+    "build": "npm install --prefix frontend && npm run build --prefix ./frontend && npm install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "kill-port": "npx kill-port 5000 5001"
   },
