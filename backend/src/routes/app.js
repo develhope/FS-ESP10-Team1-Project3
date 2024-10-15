@@ -5,6 +5,7 @@ const { auth, requiresAuth } = require('express-openid-connect');
 const pool = require("../config/db");
 const passport = require('../config/passport');
 require("dotenv").config();
+const path = require('path'); // Importa path
 
 const app = express();
 
@@ -57,12 +58,18 @@ app.use(
 // Luego, configura otros middleware
 app.use(express.json());
 app.use(passport.initialize());
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // Importa las rutas
 const userRoutes = require("../routes/userRoutes");
 
 // Usa las rutas
 app.use("/api", userRoutes);
+
+// Para todas las demás rutas, devolver el index.html del frontend
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
 
 // Añade un manejador de errores
 app.use((err, req, res, next) => {
