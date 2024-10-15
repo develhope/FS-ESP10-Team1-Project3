@@ -72,8 +72,9 @@ app.use("/api", userRoutes);
 // });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join('index.html', {root: 'frontend/dist'}));
+  res.sendFile(path.resolve(__dirname, '../frontend/dist/index.html'));
 });
+
 
 // Añade un manejador de errores
 app.use((err, req, res, next) => {
