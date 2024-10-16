@@ -14,7 +14,7 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: process.env.SECRET || 'bIHBGZi2mYZP43bxOrK6_0FY55C5buoC1I7XzBAr5t5C5YGMXGr1N2Jfrt8DZpOV',
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://freelancehub-4tr0.onrender.com',
   clientID: 'KpqssnSz2CKBQtk7ZWESKzPdYr1j3hQS',
   issuerBaseURL: 'https://dev-3erzjdx3zx5m21bh.us.auth0.com'
 };
@@ -49,7 +49,7 @@ app.get('/profile', requiresAuth(), (req, res) => {
 // Configura CORS
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://freelancehub-4tr0.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
