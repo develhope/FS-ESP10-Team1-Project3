@@ -38,7 +38,7 @@ function InfoBancaria() {
           token: token,
         };
        
-    const response = await fetch('http://localhost:5000/api/bankInfo', {
+    const response = await fetch('https://freelancehub-4tr0.onrender.com/api/bankInfo', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -63,7 +63,7 @@ function InfoBancaria() {
     }
     const eliminarCuentaBancaria = async (numero_cuenta) => {
       try {
-        const response = await fetch('http://localhost:5000/api/bankInfo', {
+        const response = await fetch('https://freelancehub-4tr0.onrender.com/api/bankInfo', {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -82,7 +82,7 @@ function InfoBancaria() {
     }
     const seleccionarCuentaBancaria = async (cuenta) => {
       try {
-        const response = await fetch('http://localhost:5000/api/bankInfo/selected', {
+        const response = await fetch('https://freelancehub-4tr0.onrender.com/api/bankInfo/selected', {
           method: 'PUT',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -102,7 +102,7 @@ function InfoBancaria() {
         const fetchData = async () => {
           try {
             const token = localStorage.getItem("token");
-        const response = await fetch('http://localhost:5000/api/bankInfo/filterByToken', {
+        const response = await fetch('https://freelancehub-4tr0.onrender.com/api/bankInfo/filterByToken', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,

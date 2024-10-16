@@ -31,7 +31,7 @@ function ProEnCurso() {
         throw new Error("Token no disponible. Debes iniciar sesión.");
       }
 
-      const response = await fetch("http://localhost:5000/api/projects", {
+      const response = await fetch("https://freelancehub-4tr0.onrender.com/api/projects", {
         method: "POST",
         headers: {
            'Authorization': `Bearer ${token}`,

@@ -47,7 +47,7 @@ function Portfolio() {
             name: habilidad,
           };
     
-          const response = await fetch('http://localhost:5000/api/skills', {
+          const response = await fetch('https://freelancehub-4tr0.onrender.com/api/skills', {
             method: 'POST',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -70,7 +70,7 @@ function Portfolio() {
     }
     try {
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-      const response = await fetch('http://localhost:5000/api/users/portfolio', {
+      const response = await fetch('https://freelancehub-4tr0.onrender.com/api/users/portfolio', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ function Portfolio() {
   };
   const eliminarHabilidad = async (habilidad) => {
     try {
-      const response = await fetch('http://localhost:5000/api/skills', {
+      const response = await fetch('https://freelancehub-4tr0.onrender.com/api/skills', {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -133,7 +133,7 @@ function Portfolio() {
     const fetchDataHab = async () => {
       try {
         const token = localStorage.getItem("token");
-    const response = await fetch('http://localhost:5000/api/skills/getAll', {
+    const response = await fetch('https://freelancehub-4tr0.onrender.com/api/skills/getAll', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -158,7 +158,7 @@ function Portfolio() {
   const fetchDataLink = async () => {
     try {
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const response = await fetch('http://localhost:5000/api/users/portfolio', {
+  const response = await fetch('https://freelancehub-4tr0.onrender.com/api/users/portfolio', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${token}`,
