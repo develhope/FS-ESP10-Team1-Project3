@@ -23,9 +23,9 @@ const config = {
 app.use(auth(config));
 
 // Ruta para verificar si el usuario está autenticado
-app.get('/', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-});
+// app.get('/', (req, res) => {
+//   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+// });
 
 // Ruta para obtener el perfil del usuario autenticado con Auth0 y el token JWT
 app.get('/profile', requiresAuth(), (req, res) => {
